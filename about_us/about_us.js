@@ -3,7 +3,7 @@ const circles = document.querySelectorAll('.outer-circle');
 
 const radius = 300; // Distance from center
 let angleStep = (2 * Math.PI) / circles.length;
-let currentRotation = Math.PI; // Start so that visible circles are on the LEFT side
+let currentRotation = Math.PI;
 let targetRotation = currentRotation;
 let isAnimating = false;
 let rotationSpeed = 0.05;
