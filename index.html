@@ -1,30 +1,104 @@
-<!DOCTYPE html> <html lang="id"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Nana Cake Navbar</title> <link rel="stylesheet" href="style.css"> </head> <body> <button class="toggle-btn">☰ Menu</button> <button class="mobile-toggle" aria-label="Open Menu"> <div class="bar"></div> <div class="bar"></div> <div class="bar"></div> </button> <button id="theme-switch">☀</button> <div class="nav-container"> <nav class="navbar"> <div class="menu-grid"> <div class="nav-item home"> <span class="icon">🏠</span> <h3>Home</h3> <p>Temukan manisnya kue di sini</p> </div> <div class="nav-item about"> <span class="icon">👤</span> <h3>About</h3> <p>Ketahui lebih dalam tentang Pomegranate</p> </div> <div class="nav-item paket"> <span class="icon">🎁</span> <h3>Paket</h3> <p>Satu paket, sejuta rasa manis</p> </div> <div class="nav-item sajian"> <span class="icon">🍰</span> <h3>Sajian</h3> <p>Pilihan kue spesial untukmu</p> </div> <div class="nav-item album"> <span class="icon">📷</span> <h3>Album</h3> <p>Koleksi manis dari dapur kami</p> </div> <div class="nav-item meet"> <span class="icon">📞</span> <h3>Meet Us At</h3> <p>Koleksi manis dari dapur kami</p> </div> </div> </nav> </div>
-<div class="homebg">
-    <div class="clouds">
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
-        <div class="cloud cloud3"></div>
-        <div class="cloud cloud4"></div>
-        <div class="cloud cloud5"></div>
-    </div>
+<!DOCTYPE html>
+<html lang="id">
 
-    <div class="floating-elements">
-        <div class="floating-item">🧁</div>
-        <div class="floating-item">🍰</div>
-        <div class="floating-item">🐰</div>
-        <div class="floating-item">🌸</div>
-        <div class="floating-item">🍪</div>
-        <div class="floating-item">💕</div>
-    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nana Cake Navbar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-    <div class="home-container">
-        <div class="home-header">
-            <h1 class="logo">SweetCharm</h1>
-            <p class="tagline">The first Asian pastry shop in<br>the Netherlands</p>
-            <button class="cta-button">ORDER NOW</button>
+<body>
+    <!-- Homepage Animation -->
+    <div class="homepage" id="homepage">
+        <header class="intro-header" id="teksHeader">
+            <h1>Nana Cake</h1>
+        </header>
+
+        <!-- Awan (akan muncul dari bawah) -->
+        <div class="cloud-base" id="cloudBase">
+            <img src="gambar/Header (5).png" alt="Cloud Base">
+        </div>
+
+        <!-- Cupcake (pakai gambar) -->
+        <div class="cupcake" id="cupcake">
+            <img src="gambar/cake.png" alt="Cupcake">
         </div>
     </div>
-</div>
 
+    <!-- Main Content (Hidden initially) -->
+    <button class="toggle-btn" id="toggleBtn">☰ Menu</button>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Open Menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </button>
+    <button id="theme-switch">☀</button>
+    
+    <div class="nav-container" id="navContainer">
+        <nav class="navbar" id="navbar">
+            <div class="menu-grid">
+                <div class="nav-item home">
+                    <span class="icon">🏠</span>
+                    <h3>Home</h3>
+                    <p>Temukan manisnya kue di sini</p>
+                </div>
+                <div class="nav-item about">
+                    <span class="icon">👤</span>
+                    <h3>About</h3>
+                    <p>Ketahui lebih dalam tentang Pomegranate</p>
+                </div>
+                <div class="nav-item paket">
+                    <span class="icon">🎁</span>
+                    <h3>Paket</h3>
+                    <p>Satu paket, sejuta rasa manis</p>
+                </div>
+                <div class="nav-item sajian">
+                    <span class="icon">🍰</span>
+                    <h3>Sajian</h3>
+                    <p>Pilihan kue spesial untukmu</p>
+                </div>
+                <div class="nav-item album">
+                    <span class="icon">📷</span>
+                    <h3>Album</h3>
+                    <p>Koleksi manis dari dapur kami</p>
+                </div>
+                <div class="nav-item meet">
+                    <span class="icon">📞</span>
+                    <h3>Meet Us At</h3>
+                    <p>Koleksi manis dari dapur kami</p>
+                </div>
+            </div>
+        </nav>
+    </div>
+    
+    <div class="homebg" id="homebg">
+        <div class="clouds">
+            <div class="cloud cloud1"></div>
+            <div class="cloud cloud2"></div>
+            <div class="cloud cloud3"></div>
+            <div class="cloud cloud4"></div>
+            <div class="cloud cloud5"></div>
+        </div>
+
+        <div class="floating-elements">
+            <div class="floating-item">🧁</div>
+            <div class="floating-item">🍰</div>
+            <div class="floating-item">🐰</div>
+            <div class="floating-item">🌸</div>
+            <div class="floating-item">🍪</div>
+            <div class="floating-item">💕</div>
+        </div>
+
+        <div class="home-container">
+            <div class="home-header">
+                <h1 class="logo">SweetCharm</h1>
+                <p class="tagline">The first Asian pastry shop in<br>the Netherlands</p>
+                <button class="cta-button">ORDER NOW</button>
+            </div>
+        </div>
+    </div>
+
+</body>
 <script src="script.js"></script>
-</body> </html>
+</html>
