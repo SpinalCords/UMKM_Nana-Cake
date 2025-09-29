@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    perspective: 1000px;
+}
+
+.card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    transition: all 0.5s ease;
+}
+
+.card1 {
+    z-index: 1;
+    transform: translate(0, 0);
+}
+
+.card1 img {
+    width: 100%;
+    height: 75%; /* 3/4 */
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.card1 h2 {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+.card1 p {
+    font-size: 1em;
+    color: #333;
+}
+
+.card2 {
+    z-index: 0;
+    transform: translate(20px, -20px);
+    background-color: #fff;
+    justify-content: center;
+    text-align: center;
+    transform-style: preserve-3d;
+}
+
+.card2 h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.card2 p {
+    margin: 10px 0;
+    font-size: 1em;
+}
+
+.card2 button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.card2 button:hover {
+    background-color: #45a049;
+}
+
+@keyframes riseAndFall {
+    0% {
+        transform: translate(20px, -20px) rotateX(0deg);
+        z-index: 0;
+    }
+    50% {
+        transform: translate(0, -160px) rotateX(15deg) scale(1.05);
+        z-index: 2;
+    }
+    100% {
+        transform: translate(0, 0) rotateX(0deg) scale(1);
+        z-index: 2;
+    }
+}
+
+@keyframes fallAndRise {
+    0% {
+        transform: translate(0, 0) rotateX(0deg) scale(1);
+        z-index: 2;
+    }
+    50% {
+        transform: translate(0, -160px) rotateX(15deg) scale(1.05);
+        z-index: 0;
+    }
+    100% {
+        transform: translate(20px, -20px) rotateX(0deg) scale(1);
+        z-index: 0;
+    }
+}
+
+.container:hover .card2 {
+    animation: riseAndFall 1.2s ease-in-out forwards;
+}
+
+.container:not(:hover) .card2 {
+    animation: fallAndRise 1.2s ease-in-out forwards;
+}
