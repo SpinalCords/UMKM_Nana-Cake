@@ -1,47 +1,58 @@
-<section class="about-container">
-  <!-- Left side text/content -->
-  <div class="text-container">
-    <div id="welcome-text">
-      <h1>Selamat Datang y</h1>
-      <p>Jalan blaanhnhnahdbf shbwsbwydw hwjd</p>
-      <p>
-        hsjxsd iijejedjnjs...
-      </p>
-      <button class="more-btn">MORE</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="about_us.css">
+</head>
+<body>
+  <section class="about-container">
+    <!-- Left side text/content -->
+    <div class="text-container">
+      <div id="welcome-text">
+        <h1>Selamat Datang y</h1>
+        <p>Jalan blaanhnhnahdbf shbwsbwydw hwjd</p>
+        <p>
+          hsjxsd iijejedjnjs...
+        </p>
+        <button class="more-btn">MORE</button>
+      </div>
+
+      <!-- Dynamic content that appears when a circle is clicked -->
+      <div id="circle-info" class="hidden">
+        <h2 id="circle-title"></h2>
+        <p id="circle-description"></p>
+        <button id="back-btn">Back</button>
+      </div>
     </div>
 
-    <!-- Dynamic content that appears when a circle is clicked -->
-    <div id="circle-info" class="hidden">
-      <h2 id="circle-title"></h2>
-      <p id="circle-description"></p>
-      <button id="back-btn">Back</button>
+    <!-- Right side circles -->
+    <div class="center-circle">
+      <img src="../images/logo.png" alt="logo">
     </div>
-  </div>
 
-  <!-- Right side circles -->
-  <div class="center-circle">
-    <img src="../images/logo.png" alt="logo">
-  </div>
-
-  <div class="circle-carousel">
-    <div class="outer-circle" data-title="Circle 1" data-description="This is info for circle 1">
-      <img src="../images/placeholder.jpg" alt="test">
+    <div class="circle-carousel">
+      <div class="outer-circle" data-title="Circle 1" data-description="This is info for circle 1">
+        <img src="../images/placeholder.jpg" alt="test">
+      </div>
+      <div class="outer-circle" data-title="Circle 2" data-description="Circle 2 has its own description">
+        <img src="../images/placeholder.jpg" alt="test">
+      </div>
+      <div class="outer-circle" data-title="Circle 3" data-description="Circle 3 description here">
+        <img src="../images/placeholder.jpg" alt="test">
+      <div class="outer-circle" data-title="Circle 4" data-description="This is info for circle 1">
+        <img src="../images/placeholder.jpg" alt="test">
+      </div>
+      <div class="outer-circle" data-title="Circle 5" data-description="Circle 2 has its own description">
+        <img src="../images/placeholder.jpg" alt="test">
+      </div>
+      <div class="outer-circle" data-title="Circle 6" data-description="Circle 3 description here">
+        <img src="../images/placeholder.jpg" alt="test">
+      </div>
+      
     </div>
-    <div class="outer-circle" data-title="Circle 2" data-description="Circle 2 has its own description">
-      <img src="../images/placeholder.jpg" alt="test">
-    </div>
-    <div class="outer-circle" data-title="Circle 3" data-description="Circle 3 description here">
-      <img src="../images/placeholder.jpg" alt="test">
-    <div class="outer-circle" data-title="Circle 4" data-description="This is info for circle 1">
-      <img src="../images/placeholder.jpg" alt="test">
-    </div>
-    <div class="outer-circle" data-title="Circle 5" data-description="Circle 2 has its own description">
-      <img src="../images/placeholder.jpg" alt="test">
-    </div>
-    <div class="outer-circle" data-title="Circle 6" data-description="Circle 3 description here">
-      <img src="../images/placeholder.jpg" alt="test">
-    </div>
-    
-  </div>
-</section>
+  </section>
+</body>
+</html>
 <script src="about_us.js"></script>
