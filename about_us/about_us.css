@@ -14,7 +14,7 @@
 }
 
 .darkmode .about-page {
-  background: #FFB866;
+  background: #c9d4da;
   color: #F5F5F5;
 }
 
@@ -113,11 +113,21 @@
 .darkmode .center-circle::before {
   border-color: rgba(255, 255, 255, 0.7);
 }
-
+.lingk{
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  left: 67%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  clip-path: inset(0 45% 0 0);
+  overflow: hidden;
+}
 .circle-carousel {
   position: absolute;
   top: 50%;
-  left: 69%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 500px;
   height: 500px;
