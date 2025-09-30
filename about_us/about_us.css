@@ -10,31 +10,51 @@ body {
 
 .about-container {
   position: relative;
-  width: 500px;
+  width: 900px;
   height: 500px;
+  display: flex;
+  align-items: center;
+}
+
+.text-container {
+  position: relative;
+  width: 40%;
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.center-circle img,
+.outer-circle img {
+  width: 70%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .center-circle {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 150%;
   transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
   background: #ddd;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 5;
 }
 
 .circle-carousel {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 125%;
   width: 100%;
   height: 100%;
   transform: translate(-50%, -50%);
@@ -42,13 +62,29 @@ body {
 
 .outer-circle {
   position: absolute;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   background: #c2bebe;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  transition: transform 0.6s ease, opacity 0.6s ease;
+  cursor: pointer;
+  transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease;
+}
+
+.outer-circle.active {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  transform: scale(1.5) !important;
+}
+
+.more-btn, #back-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  background-color: #6d8cff;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }

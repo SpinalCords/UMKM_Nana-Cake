@@ -1,158 +1,59 @@
-<!DOCTYPE html>
-<html lang="id">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nana Cake Navbar</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link rel="stylesheet" href="about_us.css">
 </head>
-
 <body>
-    <!-- Homepage Animation -->
-    <div class="homepage" id="homepage">
-        <header class="intro-header" id="teksHeader">
-            <h1>Nana Cake</h1>
-        </header>
+  <section class="about-container">
+    <!-- LEFT SIDE: Text / Info -->
+    <div class="text-container">
+      <div id="welcome-text">
+        <h1>Selamat Datang y</h1>
+        <p>Jalan blaanhnhnahdbf shbwsbwydw hwjd</p>
+        <p>
+          hsjxsd iijejedjnjs lejdnknejeid eidkswmsalndoiwend djbewjndnjdjddb
+          nidheidnksna ndnsheubdjcjccjncjcbhr nidnkenrifiirjnrudhcjncksbh
+          dundjcnkdniduhjed edjneihfreunind iefjnieinen nedifjnejuedudednuefninei shbxh
+        </p>
+        <button class="more-btn">MORE</button>
+      </div>
 
-        <!-- Awan (akan muncul dari bawah) -->
-        <div class="cloud-base" id="cloudBase">
-            <img src="gambar/Header (5).png" alt="Cloud Base">
-        </div>
-
-        <!-- Cupcake (pakai gambar) -->
-        <div class="cupcake" id="cupcake">
-            <img src="gambar/cake.png" alt="Cupcake">
-        </div>
+      <div id="circle-info" class="hidden">
+        <h2 id="circle-title"></h2>
+        <p id="circle-description"></p>
+        <button id="back-btn">Back</button>
+      </div>
     </div>
 
-    <!-- Main Content (Hidden initially) -->
-    <button class="toggle-btn" id="toggleBtn">☰ Menu</button>
-    <button class="mobile-toggle" id="mobileToggle" aria-label="Open Menu">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-    </button>
-    <button id="theme-switch">☀</button>
-    
-    <div class="nav-container" id="navContainer">
-        <nav class="navbar" id="navbar">
-            <div class="menu-grid">
-                <div class="nav-item home">
-                    <span class="icon">🏠</span>
-                    <h3>Home</h3>
-                    <p>Temukan manisnya kue di sini</p>
-                </div>
-                <div class="nav-item about">
-                    <span class="icon">👤</span>
-                    <h3>About</h3>
-                    <p>Ketahui lebih dalam tentang Pomegranate</p>
-                </div>
-                <div class="nav-item paket">
-                    <span class="icon">🎁</span>
-                    <h3>Paket</h3>
-                    <p>Satu paket, sejuta rasa manis</p>
-                </div>
-                <div class="nav-item sajian">
-                    <span class="icon">🍰</span>
-                    <h3>Sajian</h3>
-                    <p>Pilihan kue spesial untukmu</p>
-                </div>
-                <div class="nav-item album">
-                    <span class="icon">📷</span>
-                    <h3>Album</h3>
-                    <p>Koleksi manis dari dapur kami</p>
-                </div>
-                <div class="nav-item meet">
-                    <span class="icon">📞</span>
-                    <h3>Meet Us At</h3>
-                    <p>Koleksi manis dari dapur kami</p>
-                </div>
-            </div>
-        </nav>
-    </div>
-    
-    <div class="homebg" id="homebg">
-        <div class="clouds">
-            <div class="cloud cloud1"></div>
-            <div class="cloud cloud2"></div>
-            <div class="cloud cloud3"></div>
-            <div class="cloud cloud4"></div>
-            <div class="cloud cloud5"></div>
-        </div>
-
-        <div class="floating-elements">
-            <div class="floating-item">🧁</div>
-            <div class="floating-item">🍰</div>
-            <div class="floating-item">🐰</div>
-            <div class="floating-item">🌸</div>
-            <div class="floating-item">🍪</div>
-            <div class="floating-item">💕</div>
-        </div>
-
-        <div class="home-container">
-            <div class="home-header">
-                <h1 class="logo">SweetCharm</h1>
-                <p class="tagline">The first Asian pastry shop in<br>the Netherlands</p>
-                <button class="cta-button">ORDER NOW</button>
-            </div>
-        </div>
+    <!-- RIGHT SIDE: Circles -->
+    <div class="center-circle">
+      <img src="../images/logo.png" alt="logo">
     </div>
 
-    <!-- Second Section: Cards -->
-    <section class="cards-section">
-        <div class="cards-row">
-            <div class="container">
-                <div class="card card1">
-                    <img src="gambar/cake.png" alt="Cake">
-                    <h2>Cake</h2>
-                    <p>Rp 50.000</p>
-                </div>
-                <div class="card card2">
-                    <h2>Cake</h2>
-                    <p>Delicious homemade cake made with fresh ingredients.</p>
-                    <button>Pesan</button>
-                </div>
-            </div>
-            <div class="container">
-                <div class="card card1">
-                    <img src="gambar/cake.png" alt="Cupcake">
-                    <h2>Cupcake</h2>
-                    <p>Rp 30.000</p>
-                </div>
-                <div class="card card2">
-                    <h2>Cupcake</h2>
-                    <p>Sweet and fluffy cupcakes perfect for any occasion.</p>
-                    <button>Pesan</button>
-                </div>
-            </div>
-            <div class="container">
-                <div class="card card1">
-                    <img src="gambar/cake.png" alt="Brownie">
-                    <h2>Brownie</h2>
-                    <p>Rp 40.000</p>
-                </div>
-                <div class="card card2">
-                    <h2>Brownie</h2>
-                    <p>Rich chocolate brownies that melt in your mouth.</p>
-                    <button>Pesan</button>
-                </div>
-            </div>
-            <div class="container">
-                <div class="card card1">
-                    <img src="gambar/cake.png" alt="Cookie">
-                    <h2>Cookie</h2>
-                    <p>Rp 20.000</p>
-                </div>
-                <div class="card card2">
-                    <h2>Cookie</h2>
-                    <p>Crispy on the outside, chewy on the inside cookies.</p>
-                    <button>Pesan</button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="circle-carousel">
+      <div class="outer-circle" data-title="Circle 1" data-description="This is info for circle 1">
+        <img src="../images/placeholder.jpg" alt="test">
+      </div>
+      <div class="outer-circle" data-title="Circle 2" data-description="Circle 2 has its own description">
+        <img src="../images/placeholder.jpg" alt="test">
+      </div>
+      <div class="outer-circle" data-title="Circle 3" data-description="Circle 3 description here">
+        <img src="../images/placeholder.jpg" alt="test">
+      </div>
+      <div class="outer-circle" data-title="Circle 4" data-description="Circle 4 description here">
+        <img src="../images/placeholder.jpg" alt="test">
+      </div>
+      <div class="outer-circle" data-title="Circle 5" data-description="Circle 5 description here">
+        <img src="../images/placeholder.jpg" alt="test">
+      </div>
+      <div class="outer-circle" data-title="Circle 6" data-description="Circle 6 description here">
+        <img src="../images/placeholder.jpg" alt="test">
+      </div>
+    </div>
+  </section>
 
+  <script src="about_us.js"></script>
 </body>
-<script src="script.js"></script>
 </html>

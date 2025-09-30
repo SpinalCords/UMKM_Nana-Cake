@@ -1,12 +1,16 @@
-const carousel = document.querySelector('.circle-carousel');
+const carousel = document.querySelector('.circle-carousel'); 
 const circles = document.querySelectorAll('.outer-circle');
 
-const radius = 300; // Distance from center
+const radius = 300;
 let angleStep = (2 * Math.PI) / circles.length;
 let currentRotation = Math.PI;
 let targetRotation = currentRotation;
 let isAnimating = false;
 let rotationSpeed = 0.05;
+
+function smoothstep(x) {
+  return x * x * (3 - 2 * x);
+}
 
 function positionCircles() {
   circles.forEach((circle, index) => {
@@ -18,14 +22,17 @@ function positionCircles() {
     circle.style.top = `${50 + (y / radius) * 50}%`;
 
     let normalizedAngle = (angle % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
-
     const diffFromLeft = Math.abs(normalizedAngle - Math.PI);
-    const maxScale = 1.6; // largest at center
-    const minScale = 0.6; // smallest at back
-    const scaleFactor = minScale + (maxScale - minScale) * Math.cos(diffFromLeft) ** 2;
 
-    circle.style.transform = `scale(${scaleFactor})`;
-    circle.style.opacity = diffFromLeft > Math.PI / 2 ? 0 : 1;
+    const maxScale = 1.4;
+    const minScale = 0.6;
+    const t = Math.min(diffFromLeft / (Math.PI / 2), 1);
+    const smooth = 1 - smoothstep(t);
+
+    const scaleFactor = minScale + (maxScale - minScale) * smooth;
+
+    circle.style.transform = `translate(-50%, -50%) scale(${scaleFactor})`;
+    circle.style.opacity = t >= 1 ? 0 : 1;
   });
 }
 
@@ -34,14 +41,13 @@ function animateRotation() {
 
   const distance = targetRotation - currentRotation;
   if (Math.abs(distance) < 0.01) {
-    currentRotation = targetRotation; // snap to exact target
+    currentRotation = targetRotation;
     isAnimating = false;
     positionCircles();
 
-    // Wait before rotating again
     setTimeout(() => {
       startNextRotation();
-    }, 3000); // Wait 3 seconds before next step
+    }, 3000);
     return;
   }
 
@@ -51,13 +57,40 @@ function animateRotation() {
 }
 
 function startNextRotation() {
-  targetRotation += angleStep; // move to next step clockwise
+  targetRotation += angleStep;
   isAnimating = true;
   requestAnimationFrame(animateRotation);
 }
 
-// Initial positioning
-positionCircles();
+circles.forEach(circle => {
+  circle.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+});
 
-// Start first rotation after a short delay
+positionCircles();
 setTimeout(startNextRotation, 1000);
+
+// ----- NEW CLICK HANDLING -----
+const welcomeText = document.getElementById("welcome-text");
+const circleInfo = document.getElementById("circle-info");
+const circleTitle = document.getElementById("circle-title");
+const circleDescription = document.getElementById("circle-description");
+const backBtn = document.getElementById("back-btn");
+
+circles.forEach(circle => {
+  circle.addEventListener("click", () => {
+    circles.forEach(c => c.classList.remove("active"));
+    circle.classList.add("active");
+
+    circleTitle.textContent = circle.dataset.title;
+    circleDescription.textContent = circle.dataset.description;
+
+    welcomeText.classList.add("hidden");
+    circleInfo.classList.remove("hidden");
+  });
+});
+
+backBtn.addEventListener("click", () => {
+  circles.forEach(c => c.classList.remove("active"));
+  circleInfo.classList.add("hidden");
+  welcomeText.classList.remove("hidden");
+});
