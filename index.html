@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nana Cake Navbar</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="about_us/about_us.css">
 </head>
-
 <body>
     <!-- Homepage Animation -->
     <div class="homepage" id="homepage">
@@ -98,7 +97,60 @@
         </div>
     </div>
 
-    
+        <div class="about-page">
+      <section class="about-container">
+        <!-- Left side text/content -->
+        <div class="text-container">
+          <div id="welcome-text">
+            <h1>Selamat Datang y</h1>
+            <p>Jalan blaanhnhnahdbf shbwsbwydw hwjd</p>
+            <p>
+              hsjxsd iijejedjnjs...
+            </p>
+            <button class="more-btn">MORE</button>
+          </div>
+
+
+        </div>
+
+        <!-- Right side circles -->
+        <div class="center-circle">
+          <img src="images/logo.png" alt="logo">
+        </div>
+
+        <!-- Circle Carousel -->
+        <div class="circle-carousel">
+          <div class="outer-circle" data-title="Image 1" data-description="Description 1">
+            <img src="images/placeholder.jpg" alt="Image 1">
+          </div>
+          <div class="outer-circle" data-title="Image 2" data-description="Description 2">
+            <img src="images/placeholder.jpg" alt="Image 2">
+          </div>
+          <div class="outer-circle" data-title="Image 3" data-description="Description 3">
+            <img src="images/placeholder.jpg" alt="Image 3">
+          </div>
+          <div class="outer-circle" data-title="Image 4" data-description="Description 4">
+            <img src="images/placeholder.jpg" alt="Image 4">
+          </div>
+          <div class="outer-circle" data-title="Image 5" data-description="Description 5">
+            <img src="images/placeholder.jpg" alt="Image 5">
+          </div>
+          <div class="outer-circle" data-title="Image 6" data-description="Description 6">
+            <img src="images/placeholder.jpg" alt="Image 6">
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Modal for Image Information -->
+      <div id="image-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2 id="modal-title"></h2>
+          <p id="modal-description"></p>
+        </div>
+      </div>
+    </div>
     <!-- Second Section: Cards -->
     <section class="cards-section">
         <div class="cards-row">
@@ -152,6 +204,11 @@
             </div>
         </div>
     </section>
+
+    <!-- About Section -->
+
+
 </body>
+<script src="about_us/about_us.js"></script>
 <script src="script.js"></script>
 </html>

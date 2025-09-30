@@ -1,12 +1,12 @@
-const carousel = document.querySelector('.circle-carousel'); 
+console.log('JS loaded');
+const carousel = document.querySelector('.circle-carousel');
 const circles = document.querySelectorAll('.outer-circle');
+console.log('Carousel:', carousel);
+console.log('Circles:', circles);
 
-const radius = 300;
+const radius = 250;
 let angleStep = (2 * Math.PI) / circles.length;
 let currentRotation = Math.PI;
-let targetRotation = currentRotation;
-let isAnimating = false;
-let rotationSpeed = 0.05;
 
 function smoothstep(x) {
   return x * x * (3 - 2 * x);
@@ -21,76 +21,97 @@ function positionCircles() {
     circle.style.left = `${50 + (x / radius) * 50}%`;
     circle.style.top = `${50 + (y / radius) * 50}%`;
 
+    // Reset to normal scale
+    circle.style.transform = `translate(-50%, -50%) scale(1)`;
+  });
+}
+
+
+
+
+
+circles.forEach(circle => {
+  circle.style.transition = "all 1s ease";
+});
+
+positionCircles();
+
+let isAnimating = false;
+
+function highlightLeftCircle() {
+  circles.forEach((circle, index) => {
+    const angle = index * angleStep + currentRotation;
     let normalizedAngle = (angle % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
     const diffFromLeft = Math.abs(normalizedAngle - Math.PI);
 
-    const maxScale = 1.4;
-    const minScale = 0.6;
-    const t = Math.min(diffFromLeft / (Math.PI / 2), 1);
-    const smooth = 1 - smoothstep(t);
-
-    const scaleFactor = minScale + (maxScale - minScale) * smooth;
-
-    circle.style.transform = `translate(-50%, -50%) scale(${scaleFactor})`;
-    circle.style.opacity = t >= 1 ? 0 : 1;
+    if (diffFromLeft < Math.PI / 6) { // If close to left position, highlight
+      circle.style.transform = `translate(-50%, -50%) scale(1.5)`;
+    } else {
+      circle.style.transform = `translate(-50%, -50%) scale(1)`;
+    }
   });
 }
 
 function animateRotation() {
-  if (!isAnimating) return;
-
-  const distance = targetRotation - currentRotation;
-  if (Math.abs(distance) < 0.01) {
-    currentRotation = targetRotation;
-    isAnimating = false;
-    positionCircles();
-
-    setTimeout(() => {
-      startNextRotation();
-    }, 3000);
-    return;
-  }
-
-  currentRotation += distance * rotationSpeed;
-  positionCircles();
-  requestAnimationFrame(animateRotation);
-}
-
-function startNextRotation() {
-  targetRotation += angleStep;
+  console.log('Animating rotation');
+  if (isAnimating) return;
   isAnimating = true;
-  requestAnimationFrame(animateRotation);
+
+  // Rotate by one step
+  currentRotation += angleStep;
+
+  // Position circles to new positions
+  positionCircles();
+
+  // After animation, highlight and wait
+  setTimeout(() => {
+    highlightLeftCircle();
+    setTimeout(() => {
+      // Reset highlight
+      circles.forEach(circle => {
+        circle.style.transform = `translate(-50%, -50%) scale(1)`;
+      });
+      isAnimating = false;
+    }, 2500); // 2.5 seconds highlight
+  }, 1000); // Wait for position animation to finish
 }
 
-circles.forEach(circle => {
-  circle.style.transition = "transform 0.3s ease, opacity 0.3s ease";
-});
+// Start automatic animation every 5 seconds
+setInterval(animateRotation, 5000);
 
-positionCircles();
-setTimeout(startNextRotation, 1000);
-
-// ----- NEW CLICK HANDLING -----
-const welcomeText = document.getElementById("welcome-text");
-const circleInfo = document.getElementById("circle-info");
-const circleTitle = document.getElementById("circle-title");
-const circleDescription = document.getElementById("circle-description");
-const backBtn = document.getElementById("back-btn");
+// Modal functionality
+const modal = document.getElementById('image-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalDescription = document.getElementById('modal-description');
+const closeBtn = document.getElementsByClassName('close')[0];
 
 circles.forEach(circle => {
-  circle.addEventListener("click", () => {
-    circles.forEach(c => c.classList.remove("active"));
-    circle.classList.add("active");
-
-    circleTitle.textContent = circle.dataset.title;
-    circleDescription.textContent = circle.dataset.description;
-
-    welcomeText.classList.add("hidden");
-    circleInfo.classList.remove("hidden");
+  circle.addEventListener('click', () => {
+    const title = circle.getAttribute('data-title');
+    const description = circle.getAttribute('data-description');
+    modalTitle.textContent = title;
+    modalDescription.textContent = description;
+    modal.style.display = 'flex';
+    // Trigger animation after display
+    setTimeout(() => {
+      modal.classList.add('show');
+    }, 10);
   });
 });
 
-backBtn.addEventListener("click", () => {
-  circles.forEach(c => c.classList.remove("active"));
-  circleInfo.classList.add("hidden");
-  welcomeText.classList.remove("hidden");
-});
+closeBtn.onclick = () => {
+  modal.classList.remove('show');
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 300);
+};
+
+window.onclick = (event) => {
+  if (event.target === modal) {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      modal.style.display = 'none';
+    }, 300);
+  }
+};
+

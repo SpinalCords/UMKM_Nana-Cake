@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>About Us - Nana Cake</title>
   <link rel="stylesheet" href="about_us.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <section class="about-container">
@@ -19,12 +20,7 @@
         <button class="more-btn">MORE</button>
       </div>
 
-      <!-- Dynamic content that appears when a circle is clicked -->
-      <div id="circle-info" class="hidden">
-        <h2 id="circle-title"></h2>
-        <p id="circle-description"></p>
-        <button id="back-btn">Back</button>
-      </div>
+
     </div>
 
     <!-- Right side circles -->
@@ -32,27 +28,40 @@
       <img src="../images/logo.png" alt="logo">
     </div>
 
+    <!-- Circle Carousel -->
     <div class="circle-carousel">
-      <div class="outer-circle" data-title="Circle 1" data-description="This is info for circle 1">
-        <img src="../images/placeholder.jpg" alt="test">
+      <div class="outer-circle" data-title="Image 1" data-description="Description 1">
+        <img src="../images/placeholder.jpg" alt="Image 1">
       </div>
-      <div class="outer-circle" data-title="Circle 2" data-description="Circle 2 has its own description">
-        <img src="../images/placeholder.jpg" alt="test">
+      <div class="outer-circle" data-title="Image 2" data-description="Description 2">
+        <img src="../images/placeholder.jpg" alt="Image 2">
       </div>
-      <div class="outer-circle" data-title="Circle 3" data-description="Circle 3 description here">
-        <img src="../images/placeholder.jpg" alt="test">
-      <div class="outer-circle" data-title="Circle 4" data-description="This is info for circle 1">
-        <img src="../images/placeholder.jpg" alt="test">
+      <div class="outer-circle" data-title="Image 3" data-description="Description 3">
+        <img src="../images/placeholder.jpg" alt="Image 3">
       </div>
-      <div class="outer-circle" data-title="Circle 5" data-description="Circle 2 has its own description">
-        <img src="../images/placeholder.jpg" alt="test">
+      <div class="outer-circle" data-title="Image 4" data-description="Description 4">
+        <img src="../images/placeholder.jpg" alt="Image 4">
       </div>
-      <div class="outer-circle" data-title="Circle 6" data-description="Circle 3 description here">
-        <img src="../images/placeholder.jpg" alt="test">
+      <div class="outer-circle" data-title="Image 5" data-description="Description 5">
+        <img src="../images/placeholder.jpg" alt="Image 5">
       </div>
-      
+      <div class="outer-circle" data-title="Image 6" data-description="Description 6">
+        <img src="../images/placeholder.jpg" alt="Image 6">
+      </div>
     </div>
+
   </section>
+
+  <!-- Modal for Image Information -->
+  <div id="image-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title"></h2>
+      <p id="modal-description"></p>
+    </div>
+  </div>
+
+  <script src="about_us.js"></script>
 </body>
 </html>
-<script src="about_us.js"></script>
+
