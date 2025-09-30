@@ -14,6 +14,9 @@ let isNavOpenIntro = false;
 
 // Animation sequence
 document.addEventListener('DOMContentLoaded', function () {
+    // Prevent scrolling during intro animation
+    document.body.style.overflow = 'hidden';
+
     // Show intro animation
     setTimeout(() => {
         teksHeader.classList.add('show');
@@ -43,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function () {
             mobileToggleIntro.classList.add('show');
             themeSwitchIntro.classList.add('show');
             navContainer.classList.add('show');
+
+            // Allow scrolling after intro animation
+            document.body.style.overflow = 'auto';
 
             // Initialize main JavaScript after intro animation
             initMainScript();
