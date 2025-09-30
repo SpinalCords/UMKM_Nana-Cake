@@ -1,43 +1,51 @@
- :root {
-            --c1: #FF6B35;
-            --c2: #FF8F47;
-            --c3: #FFB366;
-            --c4: #d45125;
-            --c5: #D4471C;
-            --bgawal: #FFE4E1;
-            --bg: #FEFEFE;
-            --bg2: #f0ebe4;
-            --bg3: #e6d5ca;
-            --card: #FFFFFF;
+:root {
+    /* Warna utama */
+    --c1: #FF6B6B;   /* Coral Red */
+    --c2: #FF8E8E;   /* Coral Pink lembut */
+    --c3: #FFD93D;   /* Sunflower Yellow */
+    --c4: #FFEC99;   /* Yellow pastel */
+    --c5: #4D96FF;   /* Dodger Blue */
 
-            --border: #422109;
+    /* Background */
+    --bgawal: #FFE4E1;  /* Soft pink background */
+    --bg: #FFFFFF;      /* Putih utama */
+    --bg2: #F8F9FA;     /* Abu putih */
+    --bg3: #E9ECEF;     /* Abu lebih gelap */
+    --card: #FFFFFF;
 
-            --text: #2C2C2C;
-            --text2: #5A5A5A;
+    /* Border & Text */
+    --border: #FFB6B6;  
+    --text: #2C2C2C;
+    --text2: #5A5A5A;
 
-            --fontXS: clamp(0.75rem, 1vw + 0.5rem, 0.875rem);
-            --fontS: clamp(0.875rem, 1.5vw + 0.5rem, 1rem);
-            --fontM: clamp(1rem, 2vw + 0.5rem, 1.25rem);
-            --fontL: clamp(1.25rem, 3vw + 0.5rem, 1.75rem);
-            --fontXL: clamp(1.75rem, 5vw + 0.5rem, 3rem);
-        }
-        .darkmode {
-            --c1: #FF6B35;
-            --c2: #FF8F47;
-            --c3: #FFB366;
-            --c4: #d45125;
-            --c5: #D4471C;
-            --bgawal: #c9d4da;
-            --bg: #1A1A1A;
-            --bg2: #242424;
-            --bg3: #2E2E2E;
-            --card: #212121;
+    /* Typography */
+    --fontXS: clamp(0.75rem, 1vw + 0.5rem, 0.875rem);
+    --fontS: clamp(0.875rem, 1.5vw + 0.5rem, 1rem);
+    --fontM: clamp(1rem, 2vw + 0.5rem, 1.25rem);
+    --fontL: clamp(1.25rem, 3vw + 0.5rem, 1.75rem);
+    --fontXL: clamp(1.75rem, 5vw + 0.5rem, 3rem);
+}
 
-            --border: #e8d4cb;
+.darkmode {
+    /* Warna utama tetap sama agar konsisten */
+    --c1: #FF6B6B;
+    --c2: #FF8E8E;
+    --c3: #FFD93D;
+    --c4: #FFEC99;
+    --c5: #4D96FF;
 
-            --text: #F5F5F5;
-            --text2: #CCCCCC;
-        }
+    /* Background untuk dark mode */
+    --bgawal: #2B2B2B;  /* Abu gelap lembut */
+    --bg: #1E1E1E;      /* Hitam lembut */
+    --bg2: #2A2A2A;     
+    --bg3: #333333;
+    --card: #242424;
+
+    /* Border & Text */
+    --border: #FF6B6B;  
+    --text: #F5F5F5;
+    --text2: #CCCCCC;
+}
 
         * {
             margin: 0;
@@ -612,7 +620,7 @@
         .logo {
             font-size: 2.8em;
             font-weight: bold;
-            color: #8B4513;
+            color: #d438cd;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 10px;
             letter-spacing: 1px;
