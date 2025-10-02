@@ -290,3 +290,94 @@ function initMainScript() {
             `;
     document.head.appendChild(screenShakeStyle);
 }
+
+// ===== PAKET SECTION INTERACTIVITY =====
+document.addEventListener('DOMContentLoaded', () => {
+    const paketButtons = document.querySelectorAll('.paket-btn');
+
+    paketButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const paketItem = button.closest('.paket-item');
+            const details = paketItem.querySelector('.paket-details');
+            const isHidden = details.hasAttribute('hidden');
+
+            // Hide all other paket details
+            document.querySelectorAll('.paket-details').forEach(d => {
+                d.setAttribute('hidden', '');
+            });
+
+            if (isHidden) {
+                details.removeAttribute('hidden');
+                // Add animation class for smooth reveal
+                details.style.animation = 'slideDown 0.3s ease-out';
+            } else {
+                details.setAttribute('hidden', '');
+            }
+
+            // Add visual feedback
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 150);
+        });
+    });
+
+    // Keyboard navigation support
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            const focusedElement = document.activeElement;
+            if (focusedElement.classList.contains('paket-item')) {
+                const button = focusedElement.querySelector('.paket-btn');
+                if (button) {
+                    button.click();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
+
+    // Add hover effects for better interactivity
+    const paketItems = document.querySelectorAll('.paket-item');
+    paketItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            item.style.transform = 'translateY(-5px) scale(1.02)';
+            item.style.boxShadow = '0 10px 20px rgba(0,0,0,0.15)';
+        });
+
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'translateY(0) scale(1)';
+            item.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+        });
+    });
+});
+
+// CSS animation for details reveal
+const paketStyle = document.createElement('style');
+paketStyle.textContent = `
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .paket-details {
+        margin-top: 15px;
+        padding: 10px;
+        background: var(--bg2);
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        font-size: var(--fontS);
+        color: var(--text2);
+        transition: all 0.3s ease;
+    }
+
+    .paket-details[hidden] {
+        display: none;
+    }
+`;
+document.head.appendChild(paketStyle);
