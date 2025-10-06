@@ -1,5 +1,9 @@
-# TODO for Fixing Animation in about_us
+# TODO - Enhance "Order Your Favorite Nana Cake" Section
 
-- [x] Edit about_us.html: Remove one outer-circle div to have 5 circles
-- [x] Edit about_us.css: Add style for .outer-circle.enlarge to scale up
-- [x] Edit about_us.js: Adjust angleStep for 5 circles and modify pause logic to enlarge leftmost circle during pause
+## Tasks
+- [ ] Enhance visual style of the order-now-section container (background, border, shadows, typography)
+- [ ] Add subtle animated background effects (e.g., particles, sparkles) around the order section
+- [ ] Improve the order button with hover and click animations for better interactivity
+- [ ] Add sparkle or particle burst effect on button click
+- [ ] Ensure responsiveness and accessibility of the section
+- [ ] Test the section visually and functionally on desktop and mobile views

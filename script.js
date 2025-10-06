@@ -12,8 +12,35 @@ const themeSwitchIntro = document.getElementById('theme-switch');
 
 let isNavOpenIntro = false;
 
+// Save scroll position before refresh/unload
+window.addEventListener('beforeunload', function() {
+    localStorage.setItem('scrollPosition', window.scrollY);
+});
+
 // Animation sequence
 document.addEventListener('DOMContentLoaded', function () {
+    // Get saved scroll position
+    const savedScrollPosition = parseInt(localStorage.getItem('scrollPosition')) || 0;
+
+    // Disable browser scroll restoration to ensure we control it
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+
+    // Scroll to top immediately to ensure animation is visible regardless of current scroll position
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
+    // Reset all animation states to ensure fresh start on every page load/refresh
+    teksHeader.classList.remove('show', 'hidden');
+    cloudBase.classList.remove('show');
+    cupcake.classList.remove('show');
+    homepage.classList.remove('hide');
+    homebg.classList.remove('show');
+    toggleBtnIntro.classList.remove('show');
+    mobileToggleIntro.classList.remove('show');
+    themeSwitchIntro.classList.remove('show');
+    navContainer.classList.remove('show');
+
     // Prevent scrolling during intro animation
     document.body.style.overflow = 'hidden';
 
@@ -49,6 +76,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Allow scrolling after intro animation
             document.body.style.overflow = 'auto';
+
+            // Scroll back to the saved position after animation
+            setTimeout(() => {
+                window.scrollTo({ top: savedScrollPosition, left: 0, behavior: 'instant' });
+            }, 100);
+
+            // Set visibility hidden after fade out transition
+            setTimeout(() => {
+                homepage.style.visibility = 'hidden';
+            }, 1500);
 
             // Initialize main JavaScript after intro animation
             initMainScript();
@@ -289,6 +326,227 @@ function initMainScript() {
                 }
             `;
     document.head.appendChild(screenShakeStyle);
+}
+
+// ===== ORDER NOW SECTION INTERACTIVITY =====
+document.addEventListener('DOMContentLoaded', () => {
+    // Enhanced particle animation for order now section
+    const orderParticlesContainer = document.getElementById('orderParticles');
+    if (orderParticlesContainer) {
+        // Create initial particles with more variety
+        for (let i = 0; i < 80; i++) {
+            createEnhancedParticle(orderParticlesContainer);
+        }
+
+        // Add new particles periodically with different types
+        setInterval(() => {
+            if (Math.random() < 0.4) {
+                createEnhancedParticle(orderParticlesContainer);
+            }
+        }, 1500);
+
+        // Add scroll-based parallax effect with more dynamic movement
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const section = document.querySelector('.order-now-section');
+            if (section) {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+                const windowHeight = window.innerHeight;
+                const scrollProgress = (scrollY - sectionTop + windowHeight) / (sectionHeight + windowHeight);
+
+                if (scrollProgress > 0 && scrollProgress < 1) {
+                    const translateY = scrollProgress * 30;
+                    const rotate = scrollProgress * 5;
+                    orderParticlesContainer.style.transform = `translateY(${translateY}px) rotate(${rotate}deg)`;
+                }
+            }
+        });
+    }
+
+    // Enhanced interactive order button effects
+    const orderBtn = document.getElementById('orderBtn');
+    if (orderBtn) {
+        // Magnetic effect on mouse movement
+        document.addEventListener('mousemove', (e) => {
+            const rect = orderBtn.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const distance = Math.sqrt((e.clientX - centerX) ** 2 + (e.clientY - centerY) ** 2);
+
+            if (distance < 150) {
+                const strength = (150 - distance) / 150;
+                const moveX = (e.clientX - centerX) * strength * 0.3;
+                const moveY = (e.clientY - centerY) * strength * 0.3;
+                orderBtn.style.transform = `translate(${moveX}px, ${moveY}px) scale(${1 + strength * 0.1})`;
+            } else {
+                orderBtn.style.transform = 'translate(0, 0) scale(1)';
+            }
+        });
+
+        orderBtn.addEventListener('mouseenter', () => {
+            // Create enhanced sparkle effect around button with different colors
+            for (let i = 0; i < 16; i++) {
+                setTimeout(() => {
+                    const angle = (i * 22.5) * Math.PI / 180;
+                    const distance = 90 + Math.random() * 20;
+                    const x = orderBtn.offsetLeft + orderBtn.offsetWidth / 2 + Math.cos(angle) * distance;
+                    const y = orderBtn.offsetTop + orderBtn.offsetHeight / 2 + Math.sin(angle) * distance;
+                    createEnhancedSparkle(x, y, ['✨', '🌟', '💫', '⭐'][Math.floor(Math.random() * 4)]);
+                }, i * 40);
+            }
+
+            // Add heartbeat animation
+            orderBtn.style.animation = 'heartbeat 1s infinite';
+        });
+
+        orderBtn.addEventListener('mouseleave', () => {
+            orderBtn.style.animation = '';
+        });
+
+        orderBtn.addEventListener('click', () => {
+            // Enhanced click effect with multiple phases
+            orderBtn.style.transform = 'scale(0.9) rotate(-2deg)';
+            setTimeout(() => {
+                orderBtn.style.transform = 'scale(1.1) rotate(2deg)';
+                setTimeout(() => {
+                    orderBtn.style.transform = 'scale(1) rotate(0deg)';
+                }, 200);
+            }, 100);
+
+            // Create massive burst of enhanced sparkles
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 200 + 50;
+                    const x = orderBtn.offsetLeft + orderBtn.offsetWidth / 2 + Math.cos(angle) * distance;
+                    const y = orderBtn.offsetTop + orderBtn.offsetHeight / 2 + Math.sin(angle) * distance;
+                    createEnhancedSparkle(x, y, ['✨', '🌟', '💫', '⭐', '🎉'][Math.floor(Math.random() * 5)]);
+                }, i * 15);
+            }
+
+            // Screen shake effect
+            document.body.style.animation = 'screenShake 0.5s ease-in-out';
+            setTimeout(() => {
+                document.body.style.animation = '';
+            }, 500);
+
+            // Temporary color change
+            const originalBg = orderBtn.style.background;
+            orderBtn.style.background = 'linear-gradient(135deg, #FFD700, #FFA500)';
+            setTimeout(() => {
+                orderBtn.style.background = originalBg;
+            }, 1000);
+        });
+    }
+
+    // Enhanced floating elements interaction
+    const floatingItems = document.querySelectorAll('.order-floating-item');
+    floatingItems.forEach((item, index) => {
+        // Add random floating animation
+        item.style.animation = `floatRandom${index % 3 + 1} ${3 + Math.random() * 2}s ease-in-out infinite`;
+
+        item.addEventListener('mouseenter', () => {
+            item.style.transform = 'scale(1.8) rotate(15deg)';
+            item.style.opacity = '1';
+            item.style.filter = 'brightness(1.5) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8))';
+        });
+
+        item.addEventListener('mouseleave', () => {
+            item.style.transform = 'scale(1) rotate(0deg)';
+            item.style.opacity = '0.6';
+            item.style.filter = 'none';
+        });
+
+        item.addEventListener('click', () => {
+            // Create sparkles around clicked floating item
+            for (let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const rect = item.getBoundingClientRect();
+                    const x = rect.left + Math.random() * rect.width;
+                    const y = rect.top + Math.random() * rect.height;
+                    createEnhancedSparkle(x, y, '✨');
+                }, i * 50);
+            }
+        });
+    });
+
+    // Add random sparkle generation in order section
+    const orderSection = document.querySelector('.order-now-section');
+    if (orderSection) {
+        setInterval(() => {
+            if (Math.random() < 0.2) {
+                const rect = orderSection.getBoundingClientRect();
+                const x = rect.left + Math.random() * rect.width;
+                const y = rect.top + Math.random() * rect.height;
+                createEnhancedSparkle(x, y, ['✨', '🌟'][Math.floor(Math.random() * 2)]);
+            }
+        }, 2000);
+    }
+});
+
+// Function to create particles
+function createParticle(container) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 10 + 's';
+    particle.style.animationDuration = (Math.random() * 5 + 5) + 's';
+    container.appendChild(particle);
+
+    // Remove particle after animation
+    setTimeout(() => {
+        if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+        }
+    }, 10000);
+}
+
+// Enhanced particle creation function
+function createEnhancedParticle(container) {
+    const particle = document.createElement('div');
+    const particleTypes = ['✨', '🌟', '💫', '⭐', '🎈', '🎊'];
+    const colors = ['#FFD700', '#FF6B6B', '#FFD93D', '#FF8E8E', '#4D96FF'];
+
+    particle.innerHTML = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+    particle.style.position = 'absolute';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.top = Math.random() * 100 + '%';
+    particle.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+    particle.style.pointerEvents = 'none';
+    particle.style.zIndex = '1';
+    particle.style.animation = `floatParticle ${Math.random() * 3 + 2}s ease-in-out infinite`;
+    particle.style.opacity = Math.random() * 0.5 + 0.3;
+
+    container.appendChild(particle);
+
+    // Remove particle after animation
+    setTimeout(() => {
+        if (particle.parentNode) {
+            particle.parentNode.removeChild(particle);
+        }
+    }, 5000);
+}
+
+// Enhanced sparkle creation function
+function createEnhancedSparkle(x, y, emoji = '✨') {
+    const sparkle = document.createElement('div');
+    sparkle.innerHTML = emoji;
+    sparkle.style.position = 'fixed';
+    sparkle.style.left = x + 'px';
+    sparkle.style.top = y + 'px';
+    sparkle.style.pointerEvents = 'none';
+    sparkle.style.zIndex = '1000';
+    sparkle.style.fontSize = (Math.random() * 20 + 15) + 'px';
+    sparkle.style.animation = 'enhancedSparkleMove 1.5s ease-out forwards';
+    sparkle.style.opacity = '1';
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => {
+        sparkle.remove();
+    }, 1500);
 }
 
 // ===== PAKET SECTION INTERACTIVITY =====
