@@ -639,3 +639,50 @@ paketStyle.textContent = `
     }
 `;
 document.head.appendChild(paketStyle);
+
+// Halaman shop
+
+function goToShop(productId) {
+            // Fungsi untuk redirect ke halaman shop dengan product ID
+            console.log('Navigasi ke halaman shop untuk:', productId);
+            
+            // Contoh redirect (uncomment dan sesuaikan dengan URL Anda):
+            // window.location.href = '/shop?product=' + productId;
+            
+            // Atau bisa juga:
+            // window.location.href = '/shop/' + productId;
+            
+            // Untuk demo, kita tampilkan alert
+            alert('Menuju halaman shop untuk produk: ' + productId);
+        }
+
+        // Animasi card saat scroll
+        const cards = document.querySelectorAll('.product-card');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        cards.forEach(card => observer.observe(card));
+
+function goToShop(shop) {
+  window.location.href = "index html";
+}

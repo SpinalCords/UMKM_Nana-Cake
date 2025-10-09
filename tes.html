@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApCake - Delicious Cakes & Cupcakes</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* ... existing styles ... */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+            max-width: 100%;
+            padding-top: 100px;
+        }
+
+        /* Header */
+        header {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 17px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #e85d75;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* Search Results */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            margin-top: 5px;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-result-item:hover {
+            background: #f9f9f9;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .search-result-info {
+            flex: 1;
+        }
+
+        .search-result-info h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .search-result-info .price {
+            color: #e85d75;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .search-result-info .category {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .search-no-results {
+            padding: 30px;
+            text-align: center;
+            color: #999;
+        }
+
+        .search-no-results i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+        .search-loading {
+            padding: 20px;
+            text-align: center;
+            color: #999;
+        }
+
+        .cart-icon {
+            background: #749c77;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #333;
+            color: #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            position: sticky;
+            top: 120px;
+            align-self: flex-start;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+
+        /* Scrollbar styling untuk sidebar (opsional, agar lebih rapi) */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #e85d75;
+            border-radius: 10px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #d14d63;
+        }
+
+        .sidebar-section {
+            background: #e85d75;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-section h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .sidebar-section ul {
+            list-style: none;
+        }
+
+        .sidebar-section ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: padding-left 0.3s;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #fff;
+            padding: 8px 0;
+        }
+
+        .sidebar-section ul li:hover {
+            padding-left: 10px;
+        }
+
+        /* Button scrol ke atas */
+        /* Scroll to Top Button */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #e85d75;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(232, 93, 117, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .scroll-top-btn.show {
+            display: flex;
+        }
+
+        .scroll-top-btn:hover {
+            background: #d14d63;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(232, 93, 117, 0.6);
+        }
+
+        .scroll-top-btn:active {
+            transform: translateY(-2px);
+        }
+
+        .product-list {
+            list-style: none;
+        }
+
+        .product-item {
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .product-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product-info h4 {
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .product-info .price {
+            color: #e85d75;
+            font-weight: bold;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, #f5e6e8 0%, #fdf2f4 100%);
+            border-radius: 10px;
+            padding: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            color: #e85d75;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .hero-text p {
+            color: #666;
+            margin-bottom: 25px;
+            max-width: 400px;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #e85d75;
+            padding: 12px 30px;
+            border: 2px solid #e85d75;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #e85d75;
+            color: #fff;
+        }
+
+        .hero-image img {
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+        }
+
+        /* Product Categories */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .category-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(232, 93, 117, 0.9);
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Section Title */
+        .section-title {
+            margin: 40px 0 25px;
+            font-size: 28px;
+            color: #333;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #e85d75;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            padding: 15px;
+        }
+
+        .product-details h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .product-price .price {
+            color: #e85d75;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: #e85d75;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #d14d63;
+        }
+
+        /* === MODAL STYLES === */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 15px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.3s;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: #e85d75;
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .modal-main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .modal-info-section h2 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .modal-category {
+            display: inline-block;
+            background: #f5e6e8;
+            color: #e85d75;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .modal-price {
+            font-size: 36px;
+            color: #e85d75;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .modal-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-stars {
+            color: #ffc107;
+            font-size: 18px;
+        }
+
+        .modal-rating-text {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .modal-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-details-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .modal-details-list li {
+            padding: 10px 0;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-details-list li i {
+            color: #e85d75;
+            width: 20px;
+        }
+
+        .modal-quantity {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .modal-quantity label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        .quantity-btn {
+            background: #fff;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #e85d75;
+            transition: all 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: #e85d75;
+            color: #fff;
+        }
+
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-add-cart {
+            flex: 1;
+            background: #e85d75;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-add-cart:hover {
+            background: #d14d63;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(232, 93, 117, 0.3);
+        }
+
+        .btn-whatsapp {
+            flex: 1;
+            background: #25D366;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1fb855;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            /* Modal responsive */
+            .modal-body {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="gambar/logo.jpg" alt="Ap Cake Logo" width="100">
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Cari produk..." autocomplete="off">
+                <button id="searchButton"><i class="fas fa-search"></i></button>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+            <div class="cart-icon">
+                <i class="fa-solid fa-phone"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Vertical menu</h3>
+                <ul>
+                    <li><a href="#cake">Cake</a></li>
+                    <li><a href="#bresd">Bread</a></li>
+                    <li><a href="#Abon">Abon</a></li>
+                    <li><a href="#Cookiekering">Cookie kering</a></li>
+                    <li><a href="#Cookiebasah">Cookie basah</a></li>
+                    <li><a href="#paket">Paket hampers</a></li>
+                    <li>Menu Tambahan</li>
+                    <li>Menu Tambahan</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Button scrol ke atas -->
+        <button class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Banner -->
+            <div id="cake">
+                <section class="hero-banner">
+                    <div class="hero-text">
+                        <h1>chocolate Cakee</h1>
+                        <p>Cake lembut coklat yang lembut dengan toping cerry .</p>
+                        <a href="#" class="btn-primary">Details →</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="gambar/gambar ilang.jpg" alt="Strawberry Cupcake">
+                    </div>
+                </section>
+                <!-- Today Deals -->
+                <h2 class="section-title">Cake</h2>
+                <div class="product-grid" id="cake-products"></div>
+            </div>
+            <!-- Halaman roti -->
+            <div id="bresd">
+                <section class="hero-banner">
+                    <div class="hero-text">
+                        <h1>chocolate Cakee</h1>
+                        <p>Cake lembut coklat yang lembut dengan toping cerry .</p>
+                        <a href="#" class="btn-primary">Details →</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="gambar/gambar ilang.jpg" alt="Strawberry Cupcake">
+                    </div>
+                </section>
+                <h2 class="section-title">Bread</h2>
+                <div class="product-grid" id="bread-products"></div>
+            </div>
+            <!-- Halaman Abon -->
+            <div id="Abon">
+                <section class="hero-banner">
+                    <div class="hero-text">
+                        <h1>chocolate Cakee</h1>
+                        <p>Cake lembut coklat yang lembut dengan toping cerry .</p>
+                        <a href="#" class="btn-primary">Details →</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="gambar/gambar ilang.jpg" alt="Strawberry Cupcake">
+                    </div>
+                </section>
+                <h2 class="section-title">Abon</h2>
+                <div class="product-grid" id="abon-products"></div>
+            </div>
+            <!-- Halaman Cookie kering -->
+            <div id="Cookiekering">
+                <section class="hero-banner">
+                    <div class="hero-text">
+                        <h1>chocolate Cakee</h1>
+                        <p>Cake lembut coklat yang lembut dengan toping cerry .</p>
+                        <a href="#" class="btn-primary">Details →</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="gambar/gambar ilang.jpg" alt="Strawberry Cupcake">
+                    </div>
+                </section>
+                <h2 class="section-title">Cookie kering</h2>
+                <div class="product-grid" id="cookiekering-products"></div>
+            </div>
+            <!-- Halaman Cookie basah -->
+            <div id="Cookiebasah">
+                <section class="hero-banner">
+                    <div class="hero-text">
+                        <h1>chocolate Cakee</h1>
+                        <p>Cake lembut coklat yang lembut dengan toping cerry .</p>
+                        <a href="#" class="btn-primary">Details →</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="gambar/gambar ilang.jpg" alt="Strawberry Cupcake">
+                    </div>
+                </section>
+                <h2 class="section-title">Cookie basah</h2>
+                <div class="product-grid" id="cookiebasah-products"></div>
+            </div>
+            <!-- Halaman paket -->
+            <div id="paket">
+                <section class="hero-banner">
+                    <div class="hero-text">
+                        <h1>chocolate Cakee</h1>
+                        <p>Cake lembut coklat yang lembut dengan toping cerry .</p>
+                        <a href="#" class="btn-primary">Details →</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="gambar/gambar ilang.jpg" alt="Strawberry Cupcake">
+                    </div>
+                </section>
+                <h2 class="section-title">Paket hampers</h2>
+                <div class="product-grid" id="paket-products"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- === MODAL DETAIL PRODUK === -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-body">
+                <div class="modal-image-section">
+                    <img id="modalImage" src="" alt="" class="modal-main-image">
+                </div>
+                <div class="modal-info-section">
+                    <span id="modalCategory" class="modal-category"></span>
+                    <h2 id="modalTitle"></h2>
+                    <div class="modal-rating">
+                        <div class="modal-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="modal-rating-text">(4.5/5 - 128 reviews)</span>
+                    </div>
+                    <div id="modalPrice" class="modal-price"></div>
+                    <p id="modalDescription" class="modal-description"></p>
+                    <ul class="modal-details-list">
+                        <li><i class="fas fa-check-circle"></i> Bahan berkualitas premium</li>
+                        <li><i class="fas fa-check-circle"></i> Dibuat fresh setiap hari</li>
+                        <li><i class="fas fa-check-circle"></i> Tanpa bahan pengawet</li>
+                        <li><i class="fas fa-check-circle"></i> Kemasan menarik & aman</li>
+                    </ul>
+                    <div class="modal-quantity">
+                        <label>Jumlah:</label>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                            <input type="number" class="quantity-input" id="quantityInput" value="1" min="1">
+                            <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn-add-cart" onclick="addToCart()">
+                            <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                        </button>
+                        <button class="btn-whatsapp" onclick="orderWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> Pesan via WA
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Button scrol ke atas
+        // Scroll to Top Functionality
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', function () {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('show');
+            } else {
+                scrollTopBtn.classList.remove('show');
+            }
+        });
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Database Produk - enhanced with descriptions
+        const productsDatabase = [
+            // Cake
+            { id: 1, name: 'Cream Cake', price: 18000, category: 'Cake', image: 'gambar/gambar ilang.jpg', description: 'Cake lembut dengan krim vanilla yang creamy dan lezat. Cocok untuk berbagai acara spesial.' },
+            { id: 2, name: 'Blueberry Cake', price: 22000, category: 'Cake', image: 'gambar/gambar ilang.jpg', description: 'Cake dengan topping blueberry segar yang manis dan asam. Perpaduan sempurna antara cake lembut dan buah segar.' },
+            { id: 3, name: 'Strawberry Cake', price: 18000, category: 'Cake', image: 'gambar/gambar ilang.jpg', description: 'Cake strawberry dengan topping buah strawberry segar. Rasa manis alami berpadu dengan tekstur cake yang lembut.' },
+            { id: 4, name: 'Red Velvet', price: 15000, category: 'Cake', image: 'gambar/gambar ilang.jpg', description: 'Red velvet cake klasik dengan cream cheese frosting yang lezat. Tekstur lembut dengan warna merah cantik.' },
+            { id: 5, name: 'Chocolate Cake', price: 20000, category: 'Cake', image: 'gambar/gambar ilang.jpg', description: 'Cake coklat intens dengan tekstur moist dan rasa coklat yang kaya. Topping cherry memberikan sentuhan asam manis.' },
+            // Bread
+            { id: 6, name: 'Roti Coklat', price: 8000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti lembut dengan isian coklat yang lumer. Cocok untuk sarapan atau camilan.' },
+            { id: 7, name: 'Roti Keju', price: 9000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti gurih dengan taburan keju mozarella yang meleleh. Sempurna saat hangat.' },
+            { id: 8, name: 'Roti Tawar', price: 7000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti tawar premium tanpa pengawet, lembut dan tahan lama. Cocok untuk sandwich atau toast.' },
+            // Abon
+            { id: 9, name: 'Abon Ayam', price: 25000, category: 'Abon', image: 'gambar/gambar ilang.jpg', description: 'Abon ayam homemade dengan tekstur lembut dan rasa gurih. Dibuat tanpa MSG.' },
+            { id: 10, name: 'Abon Sapi', price: 30000, category: 'Abon', image: 'gambar/gambar ilang.jpg', description: 'Abon sapi premium dengan serat halus dan rasa kaya. Cocok untuk lauk atau taburan nasi.' },
+            // Cookie Kering
+            { id: 11, name: 'Cookie Chocolate Chip', price: 12000, category: 'Cookie Kering', image: 'gambar/gambar ilang.jpg', description: 'Cookie renyah dengan potongan coklat yang melimpah. Favorit keluarga!' },
+            { id: 12, name: 'Cookie Vanilla', price: 11000, category: 'Cookie Kering', image: 'gambar/gambar ilang.jpg', description: 'Cookie vanilla klasik dengan aroma wangi dan tekstur renyah sempurna.' },
+            // Cookie Basah
+            { id: 13, name: 'Nastar Basah', price: 15000, category: 'Cookie Basah', image: 'gambar/gambar ilang.jpg', description: 'Nastar lembut dengan isian nanas homemade yang manis-asam. Camilan wajib lebaran.' },
+            { id: 14, name: 'Putri Salju Basah', price: 14000, category: 'Cookie Basah', image: 'gambar/gambar ilang.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            // Paket Hampers
+            { id: 15, name: 'Paket Lebaran A', price: 150000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket lengkap berisi aneka kue kering dan basah dalam kemasan eksklusif.' },
+            { id: 16, name: 'Paket Lebaran B', price: 200000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket premium dengan variasi lebih lengkap dan kemasan mewah.' }
+        ];
+
+        // Fungsi format Rupiah
+        function formatRupiah(amount) {
+            return 'Rp ' + amount.toLocaleString('id-ID');
+        }
+
+        // Fungsi untuk render produk berdasarkan kategori
+        function renderProductsByCategory(category, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const products = productsDatabase.filter(product => {
+                const normalizedCategory = product.category.toLowerCase().replace(/\s+/g, '');
+                const normalizedTarget = category.toLowerCase().replace(/\s+/g, '');
+                return normalizedCategory === normalizedTarget;
+            });
+            container.innerHTML = '';
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.dataset.productId = product.id;
+                productCard.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <div class="product-details">
+                    <h3>${product.name}</h3>
+                    <div class="product-price">
+                        <span class="price">${formatRupiah(product.price)}</span>
+                    </div>
+                    <button class="add-to-cart" data-product-id="${product.id}">Lihat Detail</button>
+                </div>
+            `;
+                container.appendChild(productCard);
+            });
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const productId = this.dataset.productId;
+                    showProductDetail(productId);
+                });
+            });
+        }
+
+        // === MODAL FUNCTIONS ===
+        function showProductDetail(productId) {
+            const product = productsDatabase.find(p => p.id == productId);
+            if (!product) return;
+            document.getElementById('modalTitle').textContent = product.name;
+            document.getElementById('modalCategory').textContent = product.category;
+            document.getElementById('modalPrice').textContent = formatRupiah(product.price);
+            document.getElementById('modalDescription').textContent = product.description;
+            document.getElementById('modalImage').src = product.image;
+            document.getElementById('modalImage').alt = product.name;
+            document.getElementById('quantityInput').value = 1;
+            const modal = document.getElementById('productModal');
+            modal.dataset.productId = productId;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('productModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function increaseQuantity() {
+            const input = document.getElementById('quantityInput');
+            input.value = parseInt(input.value) + 1;
+        }
+
+        function decreaseQuantity() {
+            const input = document.getElementById('quantityInput');
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+
+        function addToCart() {
+            const modal = document.getElementById('productModal');
+            const productId = modal.dataset.productId;
+            const product = productsDatabase.find(p => p.id == productId);
+            const quantity = document.getElementById('quantityInput').value;
+            alert(`${product.name} (${quantity} pcs) berhasil ditambahkan ke keranjang!`);
+        }
+
+        function orderWhatsApp() {
+            const modal = document.getElementById('productModal');
+            const productId = modal.dataset.productId;
+            const product = productsDatabase.find(p => p.id == productId);
+            const quantity = document.getElementById('quantityInput').value;
+            const total = product.price * quantity;
+            const message = `Halo, saya ingin memesan:\nProduk: ${product.name}\nJumlah: ${quantity} pcs\nTotal: ${formatRupiah(total)}\nTerima kasih!`;
+            const waNumber = '6281234567890'; // Ganti dengan nomor Anda
+            const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
+        }
+
+        // Tutup modal saat klik di luar
+        document.getElementById('productModal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Tutup modal dengan ESC
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Fungsi untuk menginisialisasi semua produk
+        function initProductSections() {
+            renderProductsByCategory('Cake', 'cake-products');
+            renderProductsByCategory('Bread', 'bread-products');
+            renderProductsByCategory('Abon', 'abon-products');
+            renderProductsByCategory('Cookie Kering', 'cookiekering-products');
+            renderProductsByCategory('Cookie Basah', 'cookiebasah-products');
+            renderProductsByCategory('Paket Hampers', 'paket-products');
+        }
+
+        // === SEARCH FUNCTIONALITY (unchanged) ===
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const searchResults = document.getElementById('searchResults');
+        let searchTimeout;
+
+        function performSearch(query) {
+            clearTimeout(searchTimeout);
+            if (query.trim().length === 0) {
+                searchResults.classList.remove('active');
+                return;
+            }
+            searchResults.innerHTML = '<div class="search-loading"><i class="fas fa-spinner fa-spin"></i> Mencari...</div>';
+            searchResults.classList.add('active');
+            searchTimeout = setTimeout(() => {
+                const results = productsDatabase.filter(product => {
+                    const searchTerm = query.toLowerCase();
+                    return product.name.toLowerCase().includes(searchTerm) ||
+                        product.category.toLowerCase().includes(searchTerm);
+                });
+                displaySearchResults(results, query);
+            }, 300);
+        }
+
+        function displaySearchResults(results, query) {
+            if (results.length === 0) {
+                searchResults.innerHTML = `
+                <div class="search-no-results">
+                    <i class="fas fa-search"></i>
+                    <p>Tidak ada produk ditemukan untuk "${query}"</p>
+                    <p style="font-size: 12px; margin-top: 10px;">Coba cari: cake, roti, abon, cookie</p>
+                </div>
+            `;
+            } else {
+                let resultsHTML = '';
+                results.forEach(product => {
+                    resultsHTML += `
+                    <div class="search-result-item" data-product-id="${product.id}" data-category="${product.category}">
+                        <img src="${product.image}" alt="${product.name}" class="search-result-img">
+                        <div class="search-result-info">
+                            <h4>${highlightText(product.name, query)}</h4>
+                            <div class="price">${formatRupiah(product.price)}</div>
+                            <div class="category">${product.category}</div>
+                        </div>
+                    </div>
+                `;
+                });
+                searchResults.innerHTML = resultsHTML;
+                document.querySelectorAll('.search-result-item').forEach(item => {
+                    item.addEventListener('click', function () {
+                        const productId = this.dataset.productId;
+                        const category = this.dataset.category;
+                        handleProductClick(productId, category);
+                    });
+                });
+            }
+        }
+
+        function highlightText(text, query) {
+            if (!query) return text;
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<strong style="color: #e85d75;">$1</strong>');
+        }
+
+        function handleProductClick(productId, category) {
+            searchResults.classList.remove('active');
+            searchInput.value = '';
+            let targetId = '';
+            switch (category) {
+                case 'Cake': targetId = 'cake'; break;
+                case 'Bread': targetId = 'bresd'; break;
+                case 'Abon': targetId = 'Abon'; break;
+                case 'Cookie Kering': targetId = 'Cookiekering'; break;
+                case 'Cookie Basah': targetId = 'Cookiebasah'; break;
+                case 'Paket Hampers': targetId = 'paket'; break;
+            }
+            if (targetId) {
+                const element = document.getElementById(targetId);
+                if (element) {
+                    const productElement = element.querySelector(`.product-card[data-product-id="${productId}"]`);
+                    if (productElement) {
+                        productElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        productElement.style.boxShadow = '0 0 20px rgba(232, 93, 117, 0.7)';
+                        setTimeout(() => { productElement.style.boxShadow = ''; }, 2000);
+                    }
+                }
+            }
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', (e) => performSearch(e.target.value));
+        searchInput.addEventListener('focus', (e) => { if (e.target.value.trim().length > 0) performSearch(e.target.value); });
+        searchButton.addEventListener('click', () => performSearch(searchInput.value));
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-bar')) {
+                searchResults.classList.remove('active');
+            }
+        });
+        searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); performSearch(searchInput.value); } });
+
+        // Inisialisasi
+        document.addEventListener('DOMContentLoaded', initProductSections);
+    </script>
+</body>
+
+</html>
