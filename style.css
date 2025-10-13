@@ -331,6 +331,15 @@
             cursor: pointer;
         }
 
+        .nav-item a{
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .nav-item a:hover {
+            color: var(--c1);
+        }
+
         .nav-item:hover {
             transform: translateY(-4px) scale(1.05);
             box-shadow: 0 12px 25px rgba(255, 107, 53, 0.15);
