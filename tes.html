@@ -832,7 +832,7 @@
                     <li><a href="#Cookiekering">Cookie kering</a></li>
                     <li><a href="#Cookiebasah">Cookie basah</a></li>
                     <li><a href="#paket">Paket hampers</a></li>
-                    <li>Menu Tambahan</li>
+                    <li><a href="#paketnas">Paket Nastar</a></li>
                     <li>Menu Tambahan</li>
                 </ul>
             </div>
@@ -936,6 +936,21 @@
                 <h2 class="section-title">Paket hampers</h2>
                 <div class="product-grid" id="paket-products"></div>
             </div>
+
+            <div id="paketnas">
+                <section class="hero-banner">
+                    <div class="hero-text">
+                        <h1>Chocolate Cake</h1>
+                        <p>Cake lembut coklat yang lembut dengan toping Cherry .</p>
+                        <a href="#" class="btn-primary">Details →</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="gambar/gambar ilang.jpg" alt="Strawberry Cupcake">
+                    </div>
+                </section>
+                <h2 class="section-title">Paket Nastar</h2>
+                <div class="product-grid" id="paket-nastar"></div>
+            </div>
         </main>
     </div>
 
@@ -1033,8 +1048,14 @@
             { id: 13, name: 'Nastar Basah', price: 15000, category: 'Cookie Basah', image: 'gambar/gambar ilang.jpg', description: 'Nastar lembut dengan isian nanas homemade yang manis-asam. Camilan wajib lebaran.' },
             { id: 14, name: 'Putri Salju Basah', price: 14000, category: 'Cookie Basah', image: 'gambar/gambar ilang.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
             // Paket Hampers
-            { id: 15, name: 'Paket Lebaran A', price: 150000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket lengkap berisi aneka kue kering dan basah dalam kemasan eksklusif.' },
-            { id: 16, name: 'Paket Lebaran B', price: 200000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket premium dengan variasi lebih lengkap dan kemasan mewah.' }
+            { id: 15, name: 'Paket Ekonomis', price: 100000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket lengkap berisi aneka kue kering dan basah dalam kemasan eksklusif.' },
+            { id: 16, name: 'Paket Reguler', price: 130000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket premium dengan variasi lebih lengkap dan kemasan mewah.' },
+            { id: 17, name: 'Paket Puas', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket premium dengan variasi lebih lengkap dan kemasan mewah.' },
+            { id: 18, name: 'Paket Super Hemat', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket premium dengan variasi lebih lengkap dan kemasan mewah.' },
+            // Paket Nastar
+            { id: 19, name: 'Paket Nastar Klasik', price: 90000, category: 'Paket Nastar', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar klasik dengan isian nanas homemade dalam kemasan elegan.' },
+            { id: 20, name: 'Paket Nastar Premium', price: 120000, category: 'Paket Nastar', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar premium dengan variasi rasa dan kemasan eksklusif.' },
+            { id: 21, name: 'Paket Nastar Spesial', price: 150000, category: 'Paket Nastar', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar spesial dengan isian nanas dan keju dalam kemasan mewah.' }
         ];
 
         // Fungsi format Rupiah
@@ -1154,6 +1175,7 @@
             renderProductsByCategory('Cookie Kering', 'cookiekering-products');
             renderProductsByCategory('Cookie Basah', 'cookiebasah-products');
             renderProductsByCategory('Paket Hampers', 'paket-products');
+            renderProductsByCategory('Paket Nastar', 'paket-nastar');
         }
 
         // === SEARCH FUNCTIONALITY (unchanged) ===
@@ -1231,6 +1253,7 @@
                 case 'Cookie Kering': targetId = 'Cookiekering'; break;
                 case 'Cookie Basah': targetId = 'Cookiebasah'; break;
                 case 'Paket Hampers': targetId = 'paket'; break;
+                case 'Paket Nastar': targetId = 'paketnas'; break;
             }
             if (targetId) {
                 const element = document.getElementById(targetId);
