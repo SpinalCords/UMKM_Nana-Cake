@@ -978,10 +978,6 @@
                     <div id="modalPrice" class="modal-price"></div>
                     <p id="modalDescription" class="modal-description"></p>
                     <ul class="modal-details-list">
-                        <li><i class="fas fa-check-circle"></i> Bahan berkualitas premium</li>
-                        <li><i class="fas fa-check-circle"></i> Dibuat fresh setiap hari</li>
-                        <li><i class="fas fa-check-circle"></i> Tanpa bahan pengawet</li>
-                        <li><i class="fas fa-check-circle"></i> Kemasan menarik & aman</li>
                     </ul>
                     <div class="modal-quantity">
                         <label>Jumlah:</label>
@@ -1048,14 +1044,14 @@
             { id: 13, name: 'Nastar Basah', price: 15000, category: 'Cookie Basah', image: 'gambar/gambar ilang.jpg', description: 'Nastar lembut dengan isian nanas homemade yang manis-asam. Camilan wajib lebaran.' },
             { id: 14, name: 'Putri Salju Basah', price: 14000, category: 'Cookie Basah', image: 'gambar/gambar ilang.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
             // Paket Hampers
-            { id: 15, name: 'Paket Ekonomis', price: 100000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket lengkap berisi aneka kue kering dan basah dalam kemasan eksklusif.' },
-            { id: 16, name: 'Paket Reguler', price: 130000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket premium dengan variasi lebih lengkap dan kemasan mewah.' },
-            { id: 17, name: 'Paket Puas', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket premium dengan variasi lebih lengkap dan kemasan mewah.' },
-            { id: 18, name: 'Paket Super Hemat', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket premium dengan variasi lebih lengkap dan kemasan mewah.' },
+            { id: 15, name: 'Paket Ekonomis', price: 100000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket hemat dengan pilihan kue kering dan basah favorit keluarga. Cocok untuk acara kecil atau hadiah sederhana.', details: ['3 toples 300ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
+            { id: 16, name: 'Paket Reguler', price: 130000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket lengkap dengan variasi cake, cookies, dan brownies. Ideal untuk ulang tahun atau gathering kecil.', details: ['4 toples 300 ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
+            { id: 17, name: 'Paket Puas', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket besar dengan berbagai jenis kue premium dan abon. Cocok untuk acara keluarga atau corporate gifts.', details: ['3 toples 600ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
+            { id: 18, name: 'Paket Super Hemat', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket ekonomis dengan kualitas premium. Berisi aneka cookies dan cake mini untuk berbagai kebutuhan.', details: ['5 toples 250gr', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
             // Paket Nastar
-            { id: 19, name: 'Paket Nastar Klasik', price: 90000, category: 'Paket Nastar', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar klasik dengan isian nanas homemade dalam kemasan elegan.' },
-            { id: 20, name: 'Paket Nastar Premium', price: 120000, category: 'Paket Nastar', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar premium dengan variasi rasa dan kemasan eksklusif.' },
-            { id: 21, name: 'Paket Nastar Spesial', price: 150000, category: 'Paket Nastar', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar spesial dengan isian nanas dan keju dalam kemasan mewah.' }
+            { id: 19, name: 'Paket Nastar Klasik', price: 90000, category: 'Paket Nastar', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar tradisional dengan isian nanas asli. Tekstur lembut dan rasa manis yang autentik. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Lidah Kucing', 'Putri Salju', 'Kastengel', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 20, name: 'Paket Nastar Premium', price: 120000, category: 'Paket Nastar', image: 'gambar/gambar ilang.jpg', description: 'Nastar premium dengan variasi rasa nanas, keju, dan coklat. Kemasan elegan untuk acara spesial. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Milk Cookies (Janit)', 'Sagu Keju', 'Putri Salju', 'Thumbprint Strawberry', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 21, name: 'Paket Nastar Spesial', price: 150000, category: 'Paket Nastar', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] }
         ];
 
         // Fungsi format Rupiah
@@ -1108,6 +1104,26 @@
             document.getElementById('modalDescription').textContent = product.description;
             document.getElementById('modalImage').src = product.image;
             document.getElementById('modalImage').alt = product.name;
+
+            // Populate details list dynamically
+            const detailsList = document.querySelector('.modal-details-list');
+            detailsList.innerHTML = '';
+            if (product.details && product.details.length > 0) {
+                product.details.forEach(detail => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<i class="fas fa-check-circle"></i> ${detail}`;
+                    detailsList.appendChild(li);
+                });
+            } else {
+                // Fallback for products without details
+                detailsList.innerHTML = `
+                    <li><i class="fas fa-check-circle"></i> Bahan berkualitas premium</li>
+                    <li><i class="fas fa-check-circle"></i> Dibuat fresh setiap hari</li>
+                    <li><i class="fas fa-check-circle"></i> Tanpa bahan pengawet</li>
+                    <li><i class="fas fa-check-circle"></i> Kemasan menarik & aman</li>
+                `;
+            }
+
             document.getElementById('quantityInput').value = 1;
             const modal = document.getElementById('productModal');
             modal.dataset.productId = productId;

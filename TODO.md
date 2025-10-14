@@ -1,9 +1,18 @@
-# TODO - Enhance "Order Your Favorite Nana Cake" Section
+# TODO: Buat Isi Detail Paket Berbeda-Beda
 
-## Tasks
-- [ ] Enhance visual style of the order-now-section container (background, border, shadows, typography)
-- [ ] Add subtle animated background effects (e.g., particles, sparkles) around the order section
-- [ ] Improve the order button with hover and click animations for better interactivity
-- [ ] Add sparkle or particle burst effect on button click
-- [ ] Ensure responsiveness and accessibility of the section
-- [ ] Test the section visually and functionally on desktop and mobile views
+## Tugas Utama
+- [x] Edit description untuk setiap paket hampers dan paket nastar di tes.html agar berbeda-beda
+
+## Langkah-Langkah
+- [x] Baca file tes.html untuk memahami struktur productsDatabase
+- [x] Update description untuk Paket Ekonomis
+- [x] Update description untuk Paket Reguler
+- [x] Update description untuk Paket Puas
+- [x] Update description untuk Paket Super Hemat
+- [x] Update description untuk Paket Nastar Klasik
+- [x] Update description untuk Paket Nastar Premium
+- [x] Update description untuk Paket Nastar Spesial
+- [x] Test halaman shop untuk memastikan perubahan
+
+## Status
+Selesai
