@@ -1030,6 +1030,72 @@
     color: var(--text2);
 }
 
+.paket-section {
+  padding: 80px 40px;
+  background-color: #fff5f8;
+  text-align: center;
+}
+
+.paket-section h2 {
+  font-size: 2.4rem;
+  margin-bottom: 50px;
+  color: #c94f7c;
+  font-weight: 700;
+}
+
+.paket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.paket-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.paket-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(201, 79, 124, 0.2);
+}
+
+.paket-card h3 {
+  color: #ff69b4;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.paket-card p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.paket-btn {
+  background: linear-gradient(135deg, #ff92b6, #ff6b9f);
+  border: none;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.paket-btn:hover {
+  background: linear-gradient(135deg, #ff6b9f, #ff92b6);
+  transform: scale(1.05);
+}
+
 .contact-us-section {
   padding: 80px 40px;
   text-align: left;
