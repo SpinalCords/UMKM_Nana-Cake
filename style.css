@@ -1032,27 +1032,39 @@
 
 .paket-section {
   padding: 80px 40px;
-  background-color: #fff5f8;
+  background: var(--bgawal);
   text-align: center;
 }
 
 .paket-section h2 {
-  font-size: 2.4rem;
-  margin-bottom: 50px;
-  color: #c94f7c;
+  font-size: var(--fontXL);
+  margin-bottom: 3rem;
+  color: var(--c1);
   font-weight: 700;
 }
 
 .paket-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 30px;
   max-width: 1100px;
   margin: 0 auto;
 }
 
+.paket-baris-pertama {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.paket-baris-kedua {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
 .paket-card {
-  background: #ffffff;
+  background: var(--card);
   border-radius: 20px;
   padding: 30px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -1060,41 +1072,44 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-width: 280px;
 }
 
 .paket-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 10px 25px rgba(201, 79, 124, 0.2);
+  box-shadow: 0 10px 25px rgba(255, 107, 107, 0.2);
 }
 
 .paket-card h3 {
-  color: #ff69b4;
-  font-size: 1.5rem;
+  color: var(--c1);
+  font-size: var(--fontL);
   margin-bottom: 10px;
 }
 
 .paket-card p {
-  font-size: 1rem;
-  color: #555;
+  font-size: var(--fontS);
+  color: var(--text2);
   margin-bottom: 20px;
   line-height: 1.5;
 }
 
 .paket-btn {
-  background: linear-gradient(135deg, #ff92b6, #ff6b9f);
+  background: linear-gradient(135deg, var(--c2), var(--c1));
   border: none;
   color: #fff;
   padding: 12px 20px;
   border-radius: 30px;
-  font-size: 1rem;
+  font-size: var(--fontS);
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .paket-btn:hover {
-  background: linear-gradient(135deg, #ff6b9f, #ff92b6);
+  background: linear-gradient(135deg, var(--c1), var(--c2));
   transform: scale(1.05);
 }
+
+
 
 .contact-us-section {
   padding: 80px 40px;
