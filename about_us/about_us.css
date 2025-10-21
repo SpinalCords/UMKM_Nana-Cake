@@ -115,7 +115,7 @@
 .lingk{
   position: absolute;
   width: 90%;
-  height: 110%;
+  height: 100%;
   left: 60%;
   display: flex;
   justify-content: center;
@@ -127,8 +127,8 @@
   top: 50%;
   left: 48%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
+  width: 500px;
+  height: 500px;
   z-index: 14;
 }
 

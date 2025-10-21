@@ -371,6 +371,44 @@
             color: var(--text2);
         }
 
+        /* make entire nav-item clickable by letting the anchor fill the box */
+        .nav-item > a.nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            /* remove extra padding on anchor so .nav-item padding controls spacing */
+            padding: 0;
+        }
+
+        /* ensure hover styles still apply when hovering the anchor */
+        .nav-item > a.nav-link:hover .icon,
+        .nav-item > a.nav-link:hover h3,
+        .nav-item > a.nav-link:hover p {
+            /* reuse existing hover behavior: accent color on icon/title */
+            color: var(--c1);
+        }
+
+        /* mobile layout: keep the grid layout inside the anchor */
+        @media screen and (max-width: 768px) {
+            .nav-item > a.nav-link {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                align-items: center;
+                gap: 8px;
+                padding: 0;
+            }
+            .nav-item > a.nav-link h3,
+            .nav-item > a.nav-link p {
+                margin: 0;
+            }
+        }
+
         .home { grid-area: home; }
         .about { grid-area: about; }
         .sajian { grid-area: sajian; }
@@ -1206,13 +1244,6 @@
   align-items: center;
   background-color: var(--bgawal);
   padding: 0;
-}
-
-.contact-illustration {
-  width: 95%;
-  height: 95%;
-  border-radius: 15px;
-  border: none;
 }
 
 /* Responsive */

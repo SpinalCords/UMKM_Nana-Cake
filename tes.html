@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ApCake - Delicious Cakes & Cupcakes</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
         /* ... existing styles ... */
         * {
@@ -42,14 +43,18 @@
         }
 
         .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             flex: 1;
+            margin-top: -4rem;
             max-width: 500px;
-            margin: 0 30px;
+            transform: translateX(370px);
             position: relative;
         }
 
         .search-bar input {
-            width: 100%;
+            flex: 1;
             padding: 10px 40px 10px 15px;
             border: 1px solid #ddd;
             border-radius: 25px;
@@ -68,6 +73,20 @@
             font-size: 16px;
         }
 
+        .phone-icon /*TITIK A*/{
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #749c77;
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            transform: translateX(33rem);
+        }
+
         /* Search Results */
         .search-results {
             position: absolute;
@@ -83,7 +102,15 @@
             z-index: 1000;
             display: none;
             margin-top: 5px;
+            flex: 1;
+            max-width: 500px;
+            margin: 0;
+            position: relative;
         }
+
+
+
+
 
         .search-results.active {
             display: block;
@@ -730,16 +757,13 @@
             box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .product-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+    /* Navbar font color to match main page */
+    .nav-item h3 {
+        color: #2C2C2C;
+    }
+    .nav-item p {
+        color: #5A5A5A;
+    }
 
         @media (max-width: 768px) {
             .main-container {
@@ -803,22 +827,81 @@
 </head>
 
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-content">
-            <div class="logo">
-                <img src="gambar/logo trans.png" alt="Ap Cake Logo" width="80">
-            </div>
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Cari produk..." autocomplete="off">
-                <button id="searchButton"><i class="fas fa-search"></i></button>
-                <div class="search-results" id="searchResults"></div>
-            </div>
-            <div class="cart-icon">
+    <!-- Search Bar -->
+    <div class="search-section">
+        <div class="search-bar">
+            <div class="phone-icon">
                 <i class="fa-solid fa-phone"></i>
             </div>
+            <input type="text" id="searchInput" placeholder="Cari produk..." autocomplete="off">
+            <button id="searchButton"><i class="fas fa-search"></i></button>
+            
+            <div class="search-results" id="searchResults"></div>
         </div>
-    </header>
+    </div>
+
+    <!-- Tombol Menu -->
+    <button class="toggle-btn" id="toggleBtn">Menu</button>
+
+    <!-- Tombol Mobile Menu -->
+    <button class="mobile-toggle" id="mobileToggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </button>
+
+    <!-- Tombol Darkmode -->
+    <button id="theme-switch">🌙 Dark Mode</button>
+
+    <!-- Navbar -->
+    <div class="nav-container" id="navContainer">
+        <nav class="navbar" id="navbar">
+            <div class="menu-grid">
+                <div class="nav-item home">
+                    <a class="nav-link" href="#homebg">
+                        <span class="icon">🏠</span>
+                        <h3>Home</h3>
+                        <p>Temukan manisnya kue di sini</p>
+                    </a>
+                </div>
+                <div class="nav-item sajian">
+                    <a class="nav-link" href="#aboutUsPage">
+                        <span class="icon">👤</span>
+                        <h3>About</h3>
+                        <p>Ketahui lebih dalam tentang kami</p>
+                    </a>
+                </div>
+                <div class="nav-item about">
+                    <a class="nav-link" href="#menupop">
+                        <span class="icon">🥇</span>
+                        <h3>Menu Populer</h3>
+                        <p>Lihat menu populer kami</p>
+                    </a>
+                </div>
+                <div class="nav-item paket">
+                    <a class="nav-link" href="#shop">
+                        <span class="icon">🍰</span>
+                        <h3>Menu</h3>
+                        <p>Kumpulan menu yang lezat dan enak</p>
+                    </a>
+                </div>
+                <div class="nav-item album">
+                    <a class="nav-link" href="#">
+                        <span class="icon">🎁</span>
+                        <h3>Paket</h3>
+                        <p>Satu paket, sejuta rasa manis</p>
+                    </a>
+                </div>
+                <div class="nav-item meet">
+                    <a class="nav-link" href="#meetus">
+                        <span class="icon">📞</span>
+                        <h3>Meet Us At</h3>
+                        <p>Koleksi manis dari dapur kami</p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
     <!-- Main Container -->
     <div class="main-container">
         <!-- Sidebar -->
@@ -1001,6 +1084,119 @@
     </div>
 
     <script>
+        // Show navbar elements on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('toggleBtn');
+            const mobileToggle = document.getElementById('mobileToggle');
+            const navContainer = document.querySelector('.nav-container');
+            const navbar = document.getElementById('navbar');
+            const themeSwitch = document.getElementById('theme-switch');
+
+            if (toggleBtn) toggleBtn.classList.add('show');
+            if (mobileToggle) mobileToggle.classList.add('show');
+            if (navContainer) navContainer.classList.add('show');
+            // Navbar will be hidden by default, only show when toggled
+            if (themeSwitch) themeSwitch.classList.add('show');
+        });
+
+        // ===== NAVBAR FUNCTIONALITY =====
+        const toggleBtn = document.getElementById('toggleBtn');
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navbar = document.getElementById('navbar');
+        const themeSwitch = document.getElementById('theme-switch');
+
+        let isNavOpen = false;
+
+        // Toggle menu functionality
+        function toggleMenu() {
+            if (!isNavOpen) {
+                navbar.classList.add('active');
+                navbar.classList.remove('closing');
+                toggleBtn.textContent = '✕ Close';
+                mobileToggle.classList.add('active');
+                isNavOpen = true;
+            } else {
+                navbar.classList.add('closing');
+                navbar.classList.remove('active');
+                toggleBtn.textContent = '☰ Menu';
+                mobileToggle.classList.remove('active');
+
+                setTimeout(() => {
+                    navbar.classList.remove('closing');
+                }, 400);
+
+                isNavOpen = false;
+            }
+        }
+
+        // Event listeners for toggle buttons
+        toggleBtn.addEventListener('click', toggleMenu);
+        mobileToggle.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking nav items
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (isNavOpen) {
+                    toggleMenu();
+                }
+                // Navigate to section
+                const sectionId = item.classList[1]; // Get second class (home, about, etc.)
+                navigateToSection(sectionId);
+            });
+        });
+
+        // Navigation mapping
+        function navigateToSection(sectionClass) {
+            let targetId = '';
+            switch(sectionClass) {
+                case 'home':
+                case 'about':
+                case 'sajian':
+                    targetId = 'cake';
+                    break;
+                case 'paket':
+                    targetId = 'paket';
+                    break;
+                case 'album':
+                case 'meet':
+                    targetId = 'paketnas';
+                    break;
+            }
+            if (targetId) {
+                const element = document.getElementById(targetId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function (event) {
+            if (isNavOpen &&
+                !navbar.contains(event.target) &&
+                !toggleBtn.contains(event.target) &&
+                !mobileToggle.contains(event.target)) {
+                toggleMenu();
+            }
+        });
+
+        // Dark mode functionality
+        const enableDarkmode = () => {
+            document.body.classList.add('darkmode');
+            themeSwitch.textContent = "⏾";
+        }
+
+        const disableDarkmode = () => {
+            document.body.classList.remove('darkmode');
+            themeSwitch.textContent = "☀";
+        }
+
+        themeSwitch.addEventListener("click", () => {
+            const isDarkmode = document.body.classList.contains('darkmode');
+            !isDarkmode ? enableDarkmode() : disableDarkmode();
+        });
+
         // Button scrol ke atas
         // Scroll to Top Functionality
         const scrollTopBtn = document.getElementById('scrollTopBtn');
