@@ -1,18 +1,4 @@
-# TODO: Buat Isi Detail Paket Berbeda-Beda
+# TODO: Make About Us Page Text Responsive
 
-## Tugas Utama
-- [x] Edit description untuk setiap paket hampers dan paket nastar di tes.html agar berbeda-beda
-
-## Langkah-Langkah
-- [x] Baca file tes.html untuk memahami struktur productsDatabase
-- [x] Update description untuk Paket Ekonomis
-- [x] Update description untuk Paket Reguler
-- [x] Update description untuk Paket Puas
-- [x] Update description untuk Paket Super Hemat
-- [x] Update description untuk Paket Nastar Klasik
-- [x] Update description untuk Paket Nastar Premium
-- [x] Update description untuk Paket Nastar Spesial
-- [x] Test halaman shop untuk memastikan perubahan
-
-## Status
-Selesai
+- [x] Edit about_us/about_us.css: In the @media (max-width: 768px) section, change .text-container text-align from center to right and add margin-left: 0 to reset the negative margin.
+- [x] Remove margin-left: -5vw from .text-container and center h1/p text-align on larger screens to prevent sticking left.
