@@ -13,7 +13,7 @@ const themeSwitchIntro = document.getElementById('theme-switch');
 let isNavOpenIntro = false;
 
 // Save scroll position before refresh/unload
-window.addEventListener('beforeunload', function() {
+window.addEventListener('beforeunload', function () {
     localStorage.setItem('scrollPosition', window.scrollY);
 });
 
@@ -643,46 +643,113 @@ document.head.appendChild(paketStyle);
 // Halaman shop
 
 function goToShop(productId) {
-            // Fungsi untuk redirect ke halaman shop dengan product ID
-            console.log('Navigasi ke halaman shop untuk:', productId);
-            
-            // Contoh redirect (uncomment dan sesuaikan dengan URL Anda):
-            // window.location.href = '/shop?product=' + productId;
-            
-            // Atau bisa juga:
-            // window.location.href = '/shop/' + productId;
-            
-            // Untuk demo, kita tampilkan alert
-            alert('Menuju halaman shop untuk produk: ' + productId);
+    // Fungsi untuk redirect ke halaman shop dengan product ID
+    console.log('Navigasi ke halaman shop untuk:', productId);
+
+    // Contoh redirect (uncomment dan sesuaikan dengan URL Anda):
+    // window.location.href = '/shop?product=' + productId;
+
+    // Atau bisa juga:
+    // window.location.href = '/shop/' + productId;
+
+    // Untuk demo, kita tampilkan alert
+    alert('Menuju halaman shop untuk produk: ' + productId);
+}
+
+// Animasi card saat scroll
+const cards = document.querySelectorAll('.product-card');
+
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '0';
+            entry.target.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, 100);
+
+            observer.unobserve(entry.target);
         }
+    });
+}, observerOptions);
 
-        // Animasi card saat scroll
-        const cards = document.querySelectorAll('.product-card');
-        
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '0';
-                    entry.target.style.transform = 'translateY(20px)';
-                    
-                    setTimeout(() => {
-                        entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, 100);
-                    
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        cards.forEach(card => observer.observe(card));
+cards.forEach(card => observer.observe(card));
 
 function goToShop(shop) {
-  window.location.href = "index html";
+    window.location.href = "index html";
 }
+
+// Paket
+document.addEventListener('DOMContentLoaded', function () {
+
+    const allTabButtons = document.querySelectorAll('.paket-tab-btn');
+
+    allTabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+
+            const tabId = button.getAttribute('data-tab');
+            const navContainer = button.closest('.paket-tab-nav');
+            const contentWrapper = navContainer.nextElementSibling;
+            const targetContent = contentWrapper.querySelector('#' + tabId);
+
+            // 1. Nonaktifkan semua tombol & konten di scope ini
+            navContainer.querySelectorAll('.paket-tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            contentWrapper.querySelectorAll('.paket-tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // 2. Aktifkan tombol & konten yang dituju
+            button.classList.add('active');
+            targetContent.classList.add('active');
+
+            // 3. LOGIKA "STATEFUL" (Menyimpan state & tidak kosong)
+            const subNav = targetContent.querySelector('.paket-tab-nav.paket-sub-nav');
+
+            if (subNav) {
+                const activeSubButton = subNav.querySelector('.paket-tab-btn.active');
+                const subContentWrapper = subNav.nextElementSibling;
+
+                if (activeSubButton) {
+                    // =========================================================
+                    // == PERBAIKAN BUG ADA DI SINI ==
+                    // Jika state tersimpan (tombol sub-nav ada yg aktif),
+                    // kita HARUS aktifkan kontennya juga.
+                    // =========================================================
+                    const activeSubTabId = activeSubButton.getAttribute('data-tab');
+                    const activeSubContent = subContentWrapper.querySelector('#' + activeSubTabId);
+
+                    if (activeSubContent) {
+                        // (Walaupun sudah di-loop di atas, ini untuk memastikan
+                        //  hanya konten sub-nav ini yg aktif)
+                        subContentWrapper.querySelectorAll('.paket-tab-content').forEach(content => {
+                            content.classList.remove('active');
+                        });
+                        // Aktifkan konten yang sesuai dengan tombol yg sudah aktif
+                        activeSubContent.classList.add('active');
+                    }
+
+                } else {
+                    // =========================================================
+                    // Jika tidak ada state tersimpan (kasus "kosong"),
+                    // klik tombol sub-nav pertama.
+                    // =========================================================
+                    const firstSubButton = subNav.querySelector('.paket-tab-btn');
+
+                    if (firstSubButton) {
+                        firstSubButton.click();
+                    }
+                }
+            }
+        });
+    });
+});
