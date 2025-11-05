@@ -42,79 +42,114 @@
             align-items: center;
         }
 
-        .search-bar {
+        .search-section {
+            /* --- Core Positioning --- */
+            position: fixed;
+            /* Fixes the element relative to the viewport */
+            top: 20px;
+            /* 20px from the top */
+            left: 50%;
+            /* Moves the left edge to the center */
+            transform: translateX(-50%);
+            /* Pulls the element back by half its own width to perfectly center it */
+            z-index: 1001;
+            /* Ensures it stays on top of other content */
+
+            /* --- Layout & Spacing --- */
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex: 1;
-            margin-top: -4rem;
-            max-width: 500px;
-            transform: translateX(370px);
+            gap: 20px;
+            /* Space between search bar and phone icon */
+
+            /* --- Appearance --- */
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            /* Frosted glass effect for modern browsers */
+            border-radius: 50px;
+            /* Pill shape */
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .search-bar {
             position: relative;
+            /* CRITICAL: This is the anchor for the search-results dropdown */
+            display: flex;
+            align-items: center;
+            width: 500px;
+            /* Or any width you prefer */
         }
 
-        .search-bar input {
-            flex: 1;
-            padding: 10px 40px 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            outline: none;
-        }
-
-        .search-bar button {
-            position: absolute;
-            right: 17px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
+        #searchInput {
+            width: 100%;
             border: none;
-            color: #e85d75;
+            outline: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            background: transparent;
+            /* Makes the input blend with the container */
+            color: #333;
+        }
+
+        #searchButton {
+            border: none;
+            background: transparent;
             cursor: pointer;
+            padding: 10px;
+            color: #555;
             font-size: 16px;
         }
 
-        .phone-icon /*TITIK A*/{
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: #749c77;
-            color: #fff;
-            border-radius: 50%;
-            cursor: pointer;
-            transform: translateX(33rem);
+        #searchButton:hover {
+            color: #e85d75;
         }
 
-        /* Search Results */
+        /* Phone Icon Styling */
+        .phone-icon {
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            padding-right: 10px;
+            /* Adds some space inside the pill shape */
+        }
+
+        .phone-icon:hover {
+            transform: scale(1.1);
+            color: #e85d75;
+        }
+
+
+        /* --- CORRECTED & REFINED SEARCH RESULTS --- */
         .search-results {
+            /* --- Positioning --- */
             position: absolute;
-            top: 100%;
+            /* Positions it relative to the .search-bar */
+            top: calc(100% + 10px);
+            /* Positions it below the search bar with a 10px gap */
             left: 0;
-            right: 0;
+            width: 100%;
+            /* Makes it the same width as the search-bar */
+
+            /* --- Appearance --- */
             background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            max-height: 400px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+            /* --- Content Flow --- */
+            max-height: 450px;
             overflow-y: auto;
             z-index: 1000;
             display: none;
-            margin-top: 5px;
-            flex: 1;
-            max-width: 500px;
-            margin: 0;
-            position: relative;
+            /* Hidden by default */
         }
-
-
-
-
 
         .search-results.active {
             display: block;
+            /* Show when active */
         }
+
+        /* --- Item Styling (Your original styles are great, just minor tweaks) --- */
 
         .search-result-item {
             display: flex;
@@ -122,7 +157,7 @@
             padding: 15px;
             border-bottom: 1px solid #eee;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.2s;
         }
 
         .search-result-item:hover {
@@ -134,8 +169,9 @@
         }
 
         .search-result-img {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            /* Slightly smaller for a cleaner look */
+            height: 60px;
             object-fit: cover;
             border-radius: 8px;
         }
@@ -145,9 +181,11 @@
         }
 
         .search-result-info h4 {
-            font-size: 14px;
-            margin-bottom: 5px;
+            font-size: 15px;
+            /* Slightly larger for better readability */
+            margin: 0 0 5px 0;
             color: #333;
+            font-weight: 600;
         }
 
         .search-result-info .price {
@@ -158,11 +196,13 @@
 
         .search-result-info .category {
             font-size: 12px;
-            color: #999;
+            color: #888;
             margin-top: 5px;
         }
 
-        .search-no-results {
+        /* No Results & Loading States */
+        .search-no-results,
+        .search-loading {
             padding: 30px;
             text-align: center;
             color: #999;
@@ -172,12 +212,6 @@
             font-size: 48px;
             margin-bottom: 15px;
             color: #ddd;
-        }
-
-        .search-loading {
-            padding: 20px;
-            text-align: center;
-            color: #999;
         }
 
         .cart-icon {
@@ -757,13 +791,14 @@
             box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
 
-    /* Navbar font color to match main page */
-    .nav-item h3 {
-        color: #2C2C2C;
-    }
-    .nav-item p {
-        color: #5A5A5A;
-    }
+        /* Navbar font color to match main page */
+        .nav-item h3 {
+            color: #2C2C2C;
+        }
+
+        .nav-item p {
+            color: #5A5A5A;
+        }
 
         @media (max-width: 768px) {
             .main-container {
@@ -830,13 +865,13 @@
     <!-- Search Bar -->
     <div class="search-section">
         <div class="search-bar">
-            <div class="phone-icon">
-                <i class="fa-solid fa-phone"></i>
-            </div>
             <input type="text" id="searchInput" placeholder="Cari produk..." autocomplete="off">
             <button id="searchButton"><i class="fas fa-search"></i></button>
-            
+
             <div class="search-results" id="searchResults"></div>
+        </div>
+        <div class="phone-icon">
+            <i class="fa-solid fa-phone"></i>
         </div>
     </div>
 
@@ -913,9 +948,9 @@
                     <li><a href="#bresd">Bread</a></li>
                     <li><a href="#Abon">Abon</a></li>
                     <li><a href="#Cookiekering">Cookie kering</a></li>
-                    <li><a href="#Cookiebasah">Cookie basah</a></li>
+                    <li><a href="#Bolu">Bolu</a></li>
                     <li><a href="#paket">Paket hampers</a></li>
-                    <li><a href="#paketnas">Paket Nastar</a></li>
+                    <li><a href="#paketnas">Nastar</a></li>
                     <li>Menu Tambahan</li>
                 </ul>
             </div>
@@ -989,8 +1024,8 @@
                 <h2 class="section-title">Cookie kering</h2>
                 <div class="product-grid" id="cookiekering-products"></div>
             </div>
-            <!-- Halaman Cookie basah -->
-            <div id="Cookiebasah">
+            <!-- Halaman Bolu -->
+            <div id="Bolu">
                 <section class="hero-banner">
                     <div class="hero-text">
                         <h1>Chocolate Cake</h1>
@@ -1001,7 +1036,7 @@
                         <img src="gambar/gambar ilang.jpg" alt="Strawberry Cupcake">
                     </div>
                 </section>
-                <h2 class="section-title">Cookie basah</h2>
+                <h2 class="section-title">Bolu</h2>
                 <div class="product-grid" id="cookiebasah-products"></div>
             </div>
             <!-- Halaman paket -->
@@ -1031,7 +1066,7 @@
                         <img src="gambar/beseler.jpg" alt="Strawberry Cupcake">
                     </div>
                 </section>
-                <h2 class="section-title">Paket Nastar</h2>
+                <h2 class="section-title">Nastar</h2>
                 <div class="product-grid" id="paket-nastar"></div>
             </div>
         </main>
@@ -1085,7 +1120,7 @@
 
     <script>
         // Show navbar elements on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const toggleBtn = document.getElementById('toggleBtn');
             const mobileToggle = document.getElementById('mobileToggle');
             const navContainer = document.querySelector('.nav-container');
@@ -1149,7 +1184,7 @@
         // Navigation mapping
         function navigateToSection(sectionClass) {
             let targetId = '';
-            switch(sectionClass) {
+            switch (sectionClass) {
                 case 'home':
                 case 'about':
                 case 'sajian':
@@ -1236,30 +1271,31 @@
             // Cookie Kering
             { id: 11, name: 'Cookie Chocolate Chip', price: 12000, category: 'Cookie Kering', image: 'gambar/gambar ilang.jpg', description: 'Cookie renyah dengan potongan coklat yang melimpah. Favorit keluarga!' },
             { id: 12, name: 'Cookie Vanilla', price: 11000, category: 'Cookie Kering', image: 'gambar/gambar ilang.jpg', description: 'Cookie vanilla klasik dengan aroma wangi dan tekstur renyah sempurna.' },
-            // Cookie Basah
-            { id: 13, name: 'Vanilla Original', price: 25000, category: 'Cookie Basah', image: 'gambar/vanilla Original.jpg', description: 'Nastar lembut dengan isian nanas homemade yang manis-asam. Camilan wajib lebaran.' },
-            { id: 14, name: 'Vanilla Keju', price: 25000, category: 'Cookie Basah', image: 'gambar/vanila keju.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 14, name: 'Tapai Singkong', price: 25000, category: 'Cookie Basah', image: 'gambar/tapai singkong.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 14, name: 'Gambung Kuah Sarikaya', price: 25000, category: 'Cookie Basah', image: 'gambar/gambung kuah sarikaya.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 14, name: 'Tapai Ketan', price: 25000, category: 'Cookie Basah', image: 'gambar/tapai ketan.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 14, name: 'Marmer', price: 25000, category: 'Cookie Basah', image: 'gambar/marmer.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 14, name: 'Gula Merah', price: 25000, category: 'Cookie Basah', image: 'gambar/gula merah.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 14, name: 'Gulung', price: 25000, category: 'Cookie Basah', image: 'gambar/gulung.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            // Bolu
+            { id: 13, name: 'Rosa mosa', price: 25000, category: 'Bolu', image: 'gambar/vanilla Original.jpg', description: 'Nastar lembut dengan isian nanas homemade yang manis-asam. Camilan wajib lebaran.' },
+            { id: 14, name: 'Vanilla Keju', price: 25000, category: 'Bolu', image: 'gambar/vanila keju.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 15, name: 'Tapai Singkong', price: 25000, category: 'Bolu', image: 'gambar/tapai singkong.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 16, name: 'Gambung Kuah Sarikaya', price: 25000, category: 'Bolu', image: 'gambar/gambung kuah sarikaya.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 17, name: 'Tapai Ketan', price: 25000, category: 'Bolu', image: 'gambar/tapai ketan.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 18, name: 'Marmer', price: 25000, category: 'Bolu', image: 'gambar/marmer.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 19, name: 'Gula Merah', price: 25000, category: 'Bolu', image: 'gambar/gula merah.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 20, name: 'Gulung', price: 25000, category: 'Bolu', image: 'gambar/gulung.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
             // Paket Hampers
-            { id: 15, name: 'Paket Ekonomis', price: 100000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket hemat dengan pilihan kue kering dan basah favorit keluarga. Cocok untuk acara kecil atau hadiah sederhana.', details: ['3 toples 300ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
-            { id: 16, name: 'Paket Reguler', price: 130000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket lengkap dengan variasi cake, cookies, dan brownies. Ideal untuk ulang tahun atau gathering kecil.', details: ['4 toples 300 ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
-            { id: 17, name: 'Paket Puas', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket besar dengan berbagai jenis kue premium dan abon. Cocok untuk acara keluarga atau corporate gifts.', details: ['3 toples 600ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
-            { id: 18, name: 'Paket Super Hemat', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket ekonomis dengan kualitas premium. Berisi aneka cookies dan cake mini untuk berbagai kebutuhan.', details: ['5 toples 250gr', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
+            { id: 21, name: 'Paket Ekonomis', price: 100000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket hemat dengan pilihan kue kering dan basah favorit keluarga. Cocok untuk acara kecil atau hadiah sederhana.', details: ['3 toples 300ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
+            { id: 22, name: 'Paket Reguler', price: 130000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket lengkap dengan variasi cake, cookies, dan brownies. Ideal untuk ulang tahun atau gathering kecil.', details: ['4 toples 300 ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
+            { id: 23, name: 'Paket Puas', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket besar dengan berbagai jenis kue premium dan abon. Cocok untuk acara keluarga atau corporate gifts.', details: ['3 toples 600ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
+            { id: 24, name: 'Paket Super Hemat', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket ekonomis dengan kualitas premium. Berisi aneka cookies dan cake mini untuk berbagai kebutuhan.', details: ['5 toples 250gr', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
             // Paket Nastar
-            { id: 19, name: 'Nastar', price: 35000, category: 'Paket Nastar', image: 'gambar/nastar.jpg', description: 'Paket nastar tradisional dengan isian nanas asli. Tekstur lembut dan rasa manis yang autentik. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Lidah Kucing', 'Putri Salju', 'Kastengel', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 20, name: 'Kastengel', price: 35000, category: 'Paket Nastar', image: 'gambar/nastar keju.jpg', description: 'Nastar premium dengan variasi rasa nanas, keju, dan coklat. Kemasan elegan untuk acara spesial. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Milk Cookies (Janit)', 'Sagu Keju', 'Putri Salju', 'Thumbprint Strawberry', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 21, name: 'Putri Salju', price: 35000, category: 'Paket Nastar', image: 'gambar/putri salju.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 22, name: 'Lidah Kucing', price: 35000, category: 'Paket Nastar', image: 'gambar/lidah kucing.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 23, name: 'Thrumbprint Stawberry', price: 35000, category: 'Paket Nastar', image: 'gambar/thrumbprint stawberry.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 24, name: 'Mawar Vanilla', price: 35000, category: 'Paket Nastar', image: 'gambar/mawar vanilla.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 25, name: 'Cookies Palm Suger Cheese', price: 35000, category: 'Paket Nastar', image: 'gambar/palm suger cheese.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 26, name: 'Sagu Keju Pandan', price: 35000, category: 'Paket Nastar', image: 'gambar/sagu keju pandan.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 27, name: 'Sagu Keju Ori', price: 35000, category: 'Paket Nastar', image: 'gambar/sagu keju.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] }
+            { id: 25, name: 'Nastar', price: 35000, category: 'Nastar', image: 'gambar/nastar.jpg', description: 'Paket nastar tradisional dengan isian nanas asli. Tekstur lembut dan rasa manis yang autentik. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Lidah Kucing', 'Putri Salju', 'Kastengel', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 26, name: 'Kastengel', price: 35000, category: 'Nastar', image: 'gambar/nastar keju.jpg', description: 'Nastar premium dengan variasi rasa nanas, keju, dan coklat. Kemasan elegan untuk acara spesial. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Milk Cookies (Janit)', 'Sagu Keju', 'Putri Salju', 'Thumbprint Strawberry', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 27, name: 'Putri Salju', price: 35000, category: 'Nastar', image: 'gambar/putri salju.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 28, name: 'Lidah Kucing', price: 35000, category: 'Nastar', image: 'gambar/lidah kucing.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 29, name: 'Thrumbprint Stawberry', price: 35000, category: 'Nastar', image: 'gambar/thrumbprint stawberry.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 30, name: 'Mawar Vanilla', price: 35000, category: 'Nastar', image: 'gambar/mawar vanilla.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 31, name: 'Cookies Palm Suger Cheese', price: 35000, category: 'Nastar', image: 'gambar/palm suger cheese.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 32, name: 'Sagu Keju Pandan', price: 35000, category: 'Nastar', image: 'gambar/sagu keju pandan.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 33, name: 'Sagu Keju Ori', price: 35000, category: 'Nastar', image: 'gambar/sagu keju.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 34, name: 'Nastar Keju', price: 35000, category: 'Nastar', image: 'gambar/nastar keju sungguh.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] }
         ];
 
         // Fungsi format Rupiah
@@ -1397,9 +1433,9 @@
             renderProductsByCategory('Bread', 'bread-products');
             renderProductsByCategory('Abon', 'abon-products');
             renderProductsByCategory('Cookie Kering', 'cookiekering-products');
-            renderProductsByCategory('Cookie Basah', 'cookiebasah-products');
+            renderProductsByCategory('Bolu', 'cookiebasah-products');
             renderProductsByCategory('Paket Hampers', 'paket-products');
-            renderProductsByCategory('Paket Nastar', 'paket-nastar');
+            renderProductsByCategory('Nastar', 'paket-nastar');
         }
 
         // === SEARCH FUNCTIONALITY (unchanged) ===
@@ -1475,9 +1511,9 @@
                 case 'Bread': targetId = 'bresd'; break;
                 case 'Abon': targetId = 'Abon'; break;
                 case 'Cookie Kering': targetId = 'Cookiekering'; break;
-                case 'Cookie Basah': targetId = 'Cookiebasah'; break;
+                case 'Bolu': targetId = 'Cookiebasah'; break;
                 case 'Paket Hampers': targetId = 'paket'; break;
-                case 'Paket Nastar': targetId = 'paketnas'; break;
+                case 'Nastar': targetId = 'paketnas'; break;
             }
             if (targetId) {
                 const element = document.getElementById(targetId);
