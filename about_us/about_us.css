@@ -35,7 +35,6 @@
 
 .text-container {
   position: relative;
-  margin-left: -5vw;
   width: 65%;
   animation: slideInLeft 1.2s ease-out;
 }
@@ -312,9 +311,10 @@
 
   .text-container {
     width: 100%;
-    text-align: center;
+    text-align: right;
     margin-bottom: 20px;
-  
+    margin-left: 0;
+
   }
 
   .center-circle {
