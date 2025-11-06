@@ -9,6 +9,187 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="about_us/about_us.css">
+    <!-- WARNA: Dominan biru — HANYA ubah warna di seluruh halaman -->
+    <style>
+        :root{
+            --color-primary: #6EC1E4;   /* Baby Blue - header / judul */
+            --color-accent:  #4DA3D9;   /* Aksen ikon / detail */
+            --color-hover:   #A8EAF9;   /* Hover ringan */
+            --color-bg:      #F0FAFF;   /* Latar halaman (very light blue) */
+            --color-text:    #274556;   /* Teks & border (dark blue-gray) */
+            --color-cta:     #3B82B5;   /* CTA / tombol utama (medium blue) */
+        }
+
+        /* Dasar halaman dan teks umum */
+        body {
+            background-color: var(--color-bg) !important;
+            color: var(--color-text) !important;
+        }
+        p, .product-description, .tagline, .stat-label {
+            color: var(--color-text) !important;
+        }
+
+        /* Headings & judul di seluruh halaman */
+        h1, h2, h3, h4, h5, h6,
+        .intro-header h1,
+        .home-header .logo,
+        .about-container h1,
+        footer .footer-section h3,
+        footer .footer-section h4 {
+            color: var(--color-primary) !important;
+        }
+
+        /* Tombol / CTA di seluruh halaman */
+        button,
+        .cta-button,
+        .contact-btn,
+        .paket-btn,
+        .btn-buy,
+        .more-btn {
+            background-color: var(--color-cta) !important;
+            color: #fff !important;
+            border: 1px solid rgba(39,69,86,0.06) !important;
+        }
+        button:hover,
+        .cta-button:hover,
+        .contact-btn:hover,
+        .paket-btn:hover,
+        .btn-buy:hover,
+        .more-btn:hover {
+            background-color: var(--color-hover) !important;
+            color: var(--color-text) !important;
+        }
+
+        /* Nav, section headings, card titles */
+        .nav-item h3,
+        .cards-section h2,
+        .paket-section h2,
+        .contact-us-section h2 {
+            color: var(--color-primary) !important;
+        }
+
+        /* Ikon / elemen dekoratif */
+        .icon,
+        .floating-item,
+        .footer-floating-item,
+        #social-icon,
+        .fa-solid,
+        .fa-brands {
+            color: var(--color-accent) !important;
+        }
+
+        /* Border / outline lembut di seluruh komponen */
+        .container-shop .product-card,
+        .cards-row .container .card,
+        .paket-card,
+        .contact-form-container,
+        .nav-container .navbar,
+        .paket-item-details,
+        .paket-tab-nav,
+        .paket-tab-btn {
+            border: 1px solid rgba(39,69,86,0.08) !important;
+        }
+
+        /* Paket tab aktif / tombol tab */
+        .paket-tab-btn.active {
+            background-color: var(--color-cta) !important;
+            color: #fff !important;
+            border-color: rgba(39,69,86,0.12) !important;
+        }
+        .paket-tab-btn:hover { background-color: var(--color-hover) !important; color: var(--color-text) !important; }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(180deg, rgba(240,250,255,0.98), rgba(240,250,255,0.95)) !important;
+            color: var(--color-text) !important;
+        }
+        .footer .stat-number { color: var(--color-primary) !important; }
+
+        /* Link warna global */
+        a { color: var(--color-primary) !important; }
+        a:hover { color: var(--color-accent) !important; }
+
+        /* Sedikit transisi untuk perubahan warna */
+        * { transition: color .12s ease, background-color .12s ease; }
+
+        /* ===== Dark mode: override warna dengan variabel berbeda ===== */
+        .darkmode {
+            /* dark-mode variables */
+            --color-bg: #071822;
+            --color-text: #DFF6FF;
+            --color-primary: #82CFFF;
+            --color-accent: #66B8E6;
+            --color-hover: #22576f;
+            --color-cta: #1F6F9B;
+        }
+
+        /* General overrides for elements that assume white backgrounds */
+        .darkmode body {
+            background-color: var(--color-bg) !important;
+            color: var(--color-text) !important;
+        }
+        .darkmode header,
+        .darkmode .homebg,
+        .darkmode .home-container,
+        .darkmode .nav-container .navbar,
+        .darkmode .cards-section .card,
+        .darkmode .product-card,
+        .darkmode .modal-content,
+        .darkmode .search-results,
+        .darkmode .contact-form-container,
+        .darkmode .footer {
+            background-color: rgba(6,20,28,0.65) !important;
+            color: var(--color-text) !important;
+            border-color: rgba(255,255,255,0.04) !important;
+            box-shadow: none !important;
+        }
+
+        /* Buttons / CTA in dark mode */
+        .darkmode .cta-button,
+        .darkmode .contact-btn,
+        .darkmode .paket-btn,
+        .darkmode .btn-buy,
+        .darkmode .btn-primary,
+        .darkmode .add-to-cart {
+            background-color: var(--color-cta) !important;
+            color: #fff !important;
+            border-color: rgba(255,255,255,0.06) !important;
+        }
+        .darkmode .cta-button:hover,
+        .darkmode .contact-btn:hover,
+        .darkmode .paket-btn:hover,
+        .darkmode .btn-buy:hover,
+        .darkmode .btn-primary:hover {
+            background-color: var(--color-hover) !important;
+            color: var(--color-text) !important;
+        }
+
+        /* Links, icons and accents */
+        .darkmode a { color: var(--color-primary) !important; }
+        .darkmode a:hover { color: var(--color-accent) !important; }
+        .darkmode .icon,
+        .darkmode .floating-item,
+        .darkmode .footer-floating-item,
+        .darkmode #social-icon,
+        .darkmode .fa-solid,
+        .darkmode .fa-brands {
+            color: var(--color-accent) !important;
+        }
+
+        /* Footer dark gradient */
+        .darkmode .footer {
+            background: linear-gradient(180deg, rgba(6,20,28,0.98), rgba(6,20,28,0.92)) !important;
+            color: var(--color-text) !important;
+        }
+        .darkmode .footer .stat-number { color: var(--color-primary) !important; }
+
+        /* Ensure inputs / textareas readable */
+        .darkmode input, .darkmode textarea, .darkmode select {
+            background: rgba(255,255,255,0.03) !important;
+            color: var(--color-text) !important;
+            border-color: rgba(255,255,255,0.04) !important;
+        }
+    </style>
 </head>
 
 <body>

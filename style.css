@@ -56,12 +56,48 @@
     --border: #FF6B6B;
     --text: #F5F5F5;
     --text2: #CCCCCC;
+
+    /* Dark mode variables and overrides from index.html */
+    --color-bg: #071822;
+    --color-text: #DFF6FF;
+    --color-primary: #82CFFF;
+    --color-accent: #66B8E6;
+    --color-hover: #22576f;
+    --color-cta: #1F6F9B;
 }
+
+/* Adding shared dark mode styles */
+.darkmode body {
+    background-color: var(--color-bg) !important;
+    color: var(--color-text) !important;
+}
+
+.darkmode header,
+.darkmode .homebg,
+.darkmode .home-container,
+.darkmode .nav-container .navbar,
+.darkmode .cards-section .card,
+.darkmode .product-card,
+.darkmode .modal-content,
+.darkmode .search-results,
+.darkmode .contact-form-container,
+.darkmode .footer {
+    background-color: rgba(6,20,28,0.65) !important;
+    color: var(--color-text) !important;
+    border-color: rgba(255,255,255,0.04) !important;
+    box-shadow: none !important;
+}
+
+/* Additional dark mode styles */
+.darkmode a { color: var(--color-primary) !important; }
+.darkmode a:hover { color: var(--color-accent) !important; }
+.darkmode .search-highlight { color: var(--color-hover); }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: color .12s ease, background-color .12s ease;
 }
 
 body {
