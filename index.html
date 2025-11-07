@@ -10,7 +10,214 @@
     <link rel="stylesheet" href="footer.css">
     <link rel="stylesheet" href="about_us/about_us.css">
 </head>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 30px;
+    padding: 50px;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  .card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(255, 120, 120, 0.25);
+  overflow: hidden;
+  transition: all 0.5s ease;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  opacity: 0;
+  width: 270px;
+  height: 380px;
+  margin: 20px;
+  animation: cardEnter 1s forwards;
+}
+
+/* ✨ Animasi muncul dari bawah bergantian */
+@keyframes cardEnter {
+  0% { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* animasi muncul satu per satu */
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.3s; }
+.card:nth-child(3) { animation-delay: 0.5s; }
+.card:nth-child(4) { animation-delay: 0.7s; }
+
+/* 🌸 Hover — membesar pakai width & height */
+.card:hover {
+  width: 290px;
+  height: 400px;
+  box-shadow: 0 15px 35px rgba(255, 130, 150, 0.4);
+  border-color: #ffb6c1;
+  filter: brightness(1.05);
+}
+
+/* ✨ Frame dekoratif */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 25px;
+  padding: 3px;
+  background: linear-gradient(135deg, #ffc2d1, #ffe4b3, #ff9ec7, #ffb6b9);
+  background-size: 300% 300%;
+  animation: shimmer 6s infinite linear;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid rgba(255, 200, 200, 0.4);
+  }
+
+  .card h3, .card p {
+    text-align: center;
+    color: #444;
+  }
+
+  .card p {
+    color: #666;
+    margin-bottom: 15px;
+  }
+
+  .add-btn {
+    display: block;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #ff6b81, #ffa3b1);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(255, 120, 120, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .add-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 18px rgba(255, 120, 120, 0.5);
+  }
+
+  .corner-deco {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at top left, #ffd5df, transparent 70%);
+    border-top-left-radius: 25px;
+  }
+
+  .corner-deco.bottom-right {
+    bottom: 0;
+    right: 0;
+    transform: rotate(180deg);
+  }
+
+  .corner-deco.top-right {
+    top: 0;
+    right: 0;
+    background: radial-gradient(circle at top right, #ffe3c6, transparent 70%);
+  }
+
+  .cart-toggle {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    background: linear-gradient(135deg, #ff6b81, #ffa3b1);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    z-index: 11;
+    transition: all 0.3s ease;
+  }
+
+  .cart-toggle:hover {
+    transform: scale(1.1) rotate(10deg);
+  }
+
+  .cart {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 350px;
+    height: 100%;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: -8px 0 20px rgba(0,0,0,0.1);
+    border-radius: 15px 0 0 15px;
+    padding: 25px;
+    transition: right 0.5s ease;
+    overflow-y: auto;
+    z-index: 10;
+  }
+
+  .cart.active {
+    right: 0;
+  }
+
+  .cart h2 {
+    text-align: center;
+    color: #ff6b81;
+    margin-bottom: 20px;
+  }
+
+  .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,230,230,0.8);
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .total {
+    text-align: right;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 18px;
+    color: #444;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ff9f9f;
+    border-radius: 10px;
+  }
+</style>
 <body>
     <!-- Homepage Animation -->
     <div class="homepage" id="homepage">
@@ -113,59 +320,85 @@
         </div>
     </div>
 
-    <section id="menupop" class="cards-section">
-        <h2>Menu Populer</h2>
-        <div class="cards-row">
-            <div class="container">
-                <div class="card card1">
-                    <img src="gambar/cake.png" alt="Cake">
-                    <h2>Cake</h2>
-                    <p>Rp 50.000</p>
-                </div>
-                <div class="card card2">
-                    <h2>Cake</h2>
-                    <p>Delicious homemade cake made with fresh ingredients.</p>
-                    <button>Pesan</button>
-                </div>
-            </div>
-            <div class="container">
-                <div class="card card1">
-                    <img src="gambar/cake.png" alt="Cupcake">
-                    <h2>Cupcake</h2>
-                    <p>Rp 30.000</p>
-                </div>
-                <div class="card card2">
-                    <h2>Cupcake</h2>
-                    <p>Sweet and fluffy cupcakes perfect for any occasion.</p>
-                    <button>Pesan</button>
-                </div>
-            </div>
-            <div class="container">
-                <div class="card card1">
-                    <img src="gambar/cake.png" alt="Brownie">
-                    <h2>Brownie</h2>
-                    <p>Rp 40.000</p>
-                </div>
-                <div class="card card2">
-                    <h2>Brownie</h2>
-                    <p>Rich chocolate brownies that melt in your mouth.</p>
-                    <button>Pesan</button>
-                </div>
-            </div>
-            <div class="container">
-                <div class="card card1">
-                    <img src="gambar/cake.png" alt="Cookie">
-                    <h2>Cookie</h2>
-                    <p>Rp 20.000</p>
-                </div>
-                <div class="card card2">
-                    <h2>Cookie</h2>
-                    <p>Crispy on the outside, chewy on the inside cookies.</p>
-                    <button>Pesan</button>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="menupop">
+<header>🍓 Menu Populer</header>
+
+<div class="cart" id="cart">
+  <h2>Keranjang Belanja</h2>
+  <div id="cart-items"></div>
+  <div class="total">Total: Rp<span id="total">0</span></div>
+</div>
+
+<div class="container">
+  <div class="card">
+    <div class="corner-deco"></div>
+    <div class="corner-deco top-right"></div>
+    <div class="corner-deco bottom-right"></div>
+    <img src="gambar/cake coklat.jpg" alt="Cupcake">
+    <h3>Yummy Cupcake</h3>
+    <p>Rp15.000</p>
+    <button class="add-btn" data-name="Yummy Cupcake" data-price="15000">Tambah</button>
+  </div>
+
+  <div class="card">
+    <div class="corner-deco"></div>
+    <div class="corner-deco top-right"></div>
+    <div class="corner-deco bottom-right"></div>
+    <img src="https://images.unsplash.com/photo-1589307004391-7a4e7b9b3de5" alt="Brownies">
+    <h3>Choco Brownies</h3>
+    <p>Rp20.000</p>
+    <button class="add-btn" data-name="Choco Brownies" data-price="20000">Tambah</button>
+  </div>
+
+  <div class="card">
+    <div class="corner-deco"></div>
+    <div class="corner-deco top-right"></div>
+    <div class="corner-deco bottom-right"></div>
+    <img src="https://images.unsplash.com/photo-1617196034796-73f7b9e0aabb" alt="Donat">
+    <h3>Donat Lumer</h3>
+    <p>Rp10.000</p>
+    <button class="add-btn" data-name="Donat Lumer" data-price="10000">Tambah</button>
+  </div>
+
+  <div class="card">
+    <div class="corner-deco"></div>
+    <div class="corner-deco top-right"></div>
+    <div class="corner-deco bottom-right"></div>
+    <img src="https://images.unsplash.com/photo-1590080875831-2cf4eeab3bda" alt="Macaron">
+    <h3>Sweet Macaron</h3>
+    <p>Rp18.000</p>
+    <button class="add-btn" data-name="Sweet Macaron" data-price="18000">Tambah</button>
+  </div>
+</div>
+
+<script>
+  const cartBtn = document.querySelector('.cart-toggle');
+  const cart = document.getElementById('cart');
+  const addButtons = document.querySelectorAll('.add-btn');
+  const cartItems = document.getElementById('cart-items');
+  const total = document.getElementById('total');
+  let totalPrice = 0;
+
+  cartBtn.addEventListener('click', () => {
+    cart.classList.toggle('active');
+  });
+
+  addButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.getAttribute('data-name');
+      const price = parseInt(btn.getAttribute('data-price'));
+
+      const item = document.createElement('div');
+      item.classList.add('cart-item');
+      item.innerHTML = `<span>${name}</span><strong>Rp${price.toLocaleString()}</strong>`;
+      cartItems.appendChild(item);
+
+      totalPrice += price;
+      total.textContent = totalPrice.toLocaleString();
+    });
+  });
+</script>
+</div>
 
     <div id="aboutUsPage" class="about-page">
         <section class="about-container">
