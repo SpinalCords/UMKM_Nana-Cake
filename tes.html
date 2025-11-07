@@ -857,7 +857,162 @@
             .footer-content {
                 grid-template-columns: 1fr;
             }
+        }   
+
+        /* WARNA: Dominan biru — override warna (HANYA ubah warna) */
+        :root{
+            --color-primary: #6EC1E4;   /* Baby Blue - headings */
+            --color-accent:  #4DA3D9;   /* Icon / accents */
+            --color-hover:   #A8EAF9;   /* Hover ringan */
+            --color-bg:      #F0FAFF;   /* Background very light blue */
+            --color-text:    #274556;   /* Teks dark blue-gray */
+            --color-cta:     #3B82B5;   /* CTA / tombol utama */
         }
+
+        /* Header */
+        header {
+            background: linear-gradient(180deg, rgba(240,250,255,0.98), rgba(240,250,255,0.95)) !important;
+            box-shadow: 0 2px 5px rgba(39,69,86,0.06) !important;
+        }
+
+        /* Search area */
+        .search-section {
+            background: rgba(240,250,255,0.95) !important;
+            box-shadow: 0 8px 30px rgba(39,69,86,0.06) !important;
+        }
+        #searchInput { color: var(--color-text) !important; }
+        #searchButton { color: var(--color-accent) !important; }
+        #searchButton:hover { color: var(--color-hover) !important; }
+
+        .phone-icon {
+            color: var(--color-accent) !important;
+        }
+        .phone-icon:hover {
+            color: var(--color-hover) !important;
+            transform: scale(1.1);
+        }
+
+        .search-results {
+            background: #fff !important;
+            color: var(--color-text) !important;
+            box-shadow: 0 10px 30px rgba(39,69,86,0.06) !important;
+        }
+        .search-result-info .price { color: var(--color-cta) !important; }
+        .search-result-info .category { color: rgba(39,69,86,0.6) !important; }
+
+        /* Sidebar */
+        .sidebar-section {
+            background: var(--color-cta) !important;
+            color: #fff !important;
+        }
+        .sidebar-section ul li { border-bottom: 1px solid rgba(255,255,255,0.12) !important; }
+
+        /* Scroll top button */
+        .scroll-top-btn {
+            background: var(--color-cta) !important;
+            box-shadow: 0 4px 15px rgba(59,130,181,0.2) !important;
+        }
+        .scroll-top-btn:hover { background: var(--color-accent) !important; }
+
+        /* Hero banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(110,193,228,0.12) 0%, rgba(240,250,255,0.6) 100%) !important;
+        }
+        .hero-text h1 { color: var(--color-primary) !important; }
+        .hero-text p { color: rgba(39,69,86,0.8) !important; }
+
+        .btn-primary {
+            background: #fff !important;
+            color: var(--color-cta) !important;
+            border: 2px solid var(--color-cta) !important;
+        }
+        .btn-primary:hover {
+            background: var(--color-cta) !important;
+            color: #fff !important;
+        }
+
+        .category-label {
+            background: var(--color-accent) !important;
+            color: #fff !important;
+        }
+
+        .section-title { color: var(--color-text) !important; }
+        .section-title:after { background: var(--color-cta) !important; }
+
+        /* Product cards */
+        .product-card {
+            background: #fff !important;
+            border: 1px solid rgba(39,69,86,0.06) !important;
+        }
+        .product-details h3 { color: var(--color-text) !important; }
+        .product-price .price { color: var(--color-cta) !important; }
+
+        .add-to-cart {
+            background: var(--color-cta) !important;
+            color: #fff !important;
+        }
+        .add-to-cart:hover { background: var(--color-accent) !important; }
+
+        /* Modal */
+        .modal {
+            background: rgba(39,69,86,0.48) !important;
+        }
+        .modal-content { background: #fff !important; color: var(--color-text) !important; }
+        .modal-close:hover { background: var(--color-cta) !important; color: #fff !important; }
+
+        /* Small global link/txt tweaks */
+        a { color: var(--color-primary) !important; }
+        a:hover { color: var(--color-accent) !important; }
+
+        /* Highlight class for search results — responsive to theme */
+        .search-highlight { color: var(--color-cta); font-weight: 700; }
+
+        /* ===== Dark mode overrides ===== */
+        .darkmode {
+            --color-bg: #071822;
+            --color-text: #DFF6FF;
+            --color-primary: #82CFFF;
+            --color-accent: #66B8E6;
+            --color-hover: #22576f;
+            --color-cta: #1F6F9B;
+        }
+
+
+        .darkmode body { background-color: var(--color-bg) !important; color: var(--color-text) !important; }
+        .darkmode header,
+        .darkmode .search-section,
+        .darkmode .sidebar-section,
+        .darkmode .product-card,
+        .darkmode .modal-content,
+        .darkmode .search-results,
+        .darkmode .hero-banner {
+            background-color: rgba(6,20,28,0.65) !important;
+            color: var(--color-text) !important;
+            border-color: rgba(255,255,255,0.04) !important;
+            box-shadow: none !important;
+        }
+        .darkmode .hero-text p{
+            color: rgba(223,246,255,0.8) !important;
+        }
+
+        .darkmode .btn-primary,
+        .darkmode .add-to-cart,
+        .darkmode .scroll-top-btn {
+            background: var(--color-cta) !important;
+            color: #fff !important;
+        }
+        .darkmode .btn-primary:hover,
+        .darkmode .add-to-cart:hover {
+            background: var(--color-hover) !important;
+            color: var(--color-text) !important;
+        }
+
+        .darkmode .search-highlight { color: var(--color-hover); }
+        .darkmode a { color: var(--color-primary) !important; }
+        .darkmode a:hover { color: var(--color-accent) !important; }
+
+        /* Transitions */
+        * { transition: color .12s ease, background-color .12s ease; }
     </style>
 </head>
 
@@ -1499,7 +1654,8 @@
         function highlightText(text, query) {
             if (!query) return text;
             const regex = new RegExp(`(${query})`, 'gi');
-            return text.replace(regex, '<strong style="color: #e85d75;">$1</strong>');
+            // gunakan kelas agar warna bisa diubah oleh CSS darkmode
+            return text.replace(regex, '<strong class="search-highlight">$1</strong>');
         }
 
         function handleProductClick(productId, category) {
@@ -1543,5 +1699,4 @@
         document.addEventListener('DOMContentLoaded', initProductSections);
     </script>
 </body>
-
 </html>
