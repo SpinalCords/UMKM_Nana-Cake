@@ -1492,26 +1492,52 @@ h1 {
 
 @media (max-width: 768px) {
   .container {
+    display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     align-items: center;
+    justify-content: flex-start;
     width: 100%;
+    max-width: 1200px;
     gap: 20px;
-  }
+    margin: 0 auto;
+    height: auto;
+    perspective: none; 
 
-  .container .card {
-    width: 90%;
+  .container > .card {
+    width: 95%;
+    max-width: 420px;
+    box-sizing: border-box;
   }
-
-  
 
   .about-container {
+    display: flex;
     flex-direction: column;
     width: 100%;
     text-align: center;
     gap: 30px;
   }
 
-  .text-container, .lingk {
+  .text-container,
+  .lingk {
     width: 100%;
   }
+
+  .menu-popular,
+  .card-wrapper,
+  .menu-list {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 16px !important;
+    align-items: center !important;
+  }
+
+  .menu-popular .card,
+  .card-wrapper .card,
+  .menu-list .card {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
 }
