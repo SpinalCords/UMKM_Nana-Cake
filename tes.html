@@ -510,6 +510,43 @@
             color: #333;
         }
 
+        .product-sizes {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .size-btn {
+            flex: 1;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 6px 0;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .size-btn.active,
+        .size-btn:hover {
+            background: #e85d75;
+            color: #fff;
+            border-color: #e85d75;
+        }
+
+        .darkmode .size-btn {
+            background: #222;
+            border-color: #444;
+            color: #f0f0f0;
+        }
+
+        .darkmode .size-btn.active,
+        .darkmode .size-btn:hover {
+            background: #f0f0f0;
+            color: #e85d75;
+        }
+
         .product-price {
             display: flex;
             justify-content: space-between;
@@ -1466,6 +1503,13 @@
             return 'Rp ' + amount.toLocaleString('id-ID');
         }
 
+        const sizePriceAdjustments = { S: 0, M: 5000, L: 10000 };
+
+        function calculateSizePrice(basePrice, size) {
+            const adjustment = sizePriceAdjustments[size] || 0;
+            return basePrice + adjustment;
+        }
+
         // Fungsi untuk render produk berdasarkan kategori
         function renderProductsByCategory(category, containerId) {
             const container = document.getElementById(containerId);
@@ -1484,13 +1528,30 @@
                 <img src="${product.image}" alt="${product.name}">
                 <div class="product-details">
                     <h3>${product.name}</h3>
+                    <div class="product-sizes" role="group" aria-label="Pilih ukuran">
+                        <button class="size-btn active" data-size="S">S</button>
+                        <button class="size-btn" data-size="M">M</button>
+                        <button class="size-btn" data-size="L">L</button>
+                    </div>
                     <div class="product-price">
-                        <span class="price">${formatRupiah(product.price)}</span>
+                        <span class="price">${formatRupiah(calculateSizePrice(product.price, 'S'))}</span>
                     </div>
                     <button class="add-to-cart" data-product-id="${product.id}">Lihat Detail</button>
                 </div>
             `;
                 container.appendChild(productCard);
+                productCard.dataset.basePrice = product.price;
+                productCard.dataset.selectedSize = 'S';
+                const sizeButtons = productCard.querySelectorAll('.size-btn');
+                const priceElement = productCard.querySelector('.price');
+                sizeButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const size = btn.dataset.size;
+                        productCard.dataset.selectedSize = size;
+                        sizeButtons.forEach(button => button.classList.toggle('active', button === btn));
+                        priceElement.textContent = formatRupiah(calculateSizePrice(product.price, size));
+                    });
+                });
             });
             document.querySelectorAll('.add-to-cart').forEach(button => {
                 button.addEventListener('click', function (e) {
@@ -1505,9 +1566,12 @@
         function showProductDetail(productId) {
             const product = productsDatabase.find(p => p.id == productId);
             if (!product) return;
+            const productCard = document.querySelector(`.product-card[data-product-id="${productId}"]`);
+            const selectedSize = productCard ? productCard.dataset.selectedSize || 'S' : 'S';
+            const selectedPrice = calculateSizePrice(product.price, selectedSize);
             document.getElementById('modalTitle').textContent = product.name;
             document.getElementById('modalCategory').textContent = product.category;
-            document.getElementById('modalPrice').textContent = formatRupiah(product.price);
+            document.getElementById('modalPrice').textContent = formatRupiah(selectedPrice);
             document.getElementById('modalDescription').textContent = product.description;
             document.getElementById('modalImage').src = product.image;
             document.getElementById('modalImage').alt = product.name;
@@ -1534,6 +1598,8 @@
             document.getElementById('quantityInput').value = 1;
             const modal = document.getElementById('productModal');
             modal.dataset.productId = productId;
+            modal.dataset.selectedSize = selectedSize;
+            modal.dataset.selectedPrice = selectedPrice;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1560,17 +1626,21 @@
             const modal = document.getElementById('productModal');
             const productId = modal.dataset.productId;
             const product = productsDatabase.find(p => p.id == productId);
+            const selectedSize = modal.dataset.selectedSize || 'S';
+            const selectedPrice = parseInt(modal.dataset.selectedPrice || product.price, 10);
             const quantity = document.getElementById('quantityInput').value;
-            alert(`${product.name} (${quantity} pcs) berhasil ditambahkan ke keranjang!`);
+            alert(`${product.name} ukuran ${selectedSize} (${quantity} pcs) berhasil ditambahkan ke keranjang dengan harga ${formatRupiah(selectedPrice)} masing-masing!`);
         }
 
         function orderWhatsApp() {
             const modal = document.getElementById('productModal');
             const productId = modal.dataset.productId;
             const product = productsDatabase.find(p => p.id == productId);
+            const selectedSize = modal.dataset.selectedSize || 'S';
+            const selectedPrice = parseInt(modal.dataset.selectedPrice || product.price, 10);
             const quantity = document.getElementById('quantityInput').value;
-            const total = product.price * quantity;
-            const message = `Halo, saya ingin memesan:\nProduk: ${product.name}\nJumlah: ${quantity} pcs\nTotal: ${formatRupiah(total)}\nTerima kasih!`;
+            const total = selectedPrice * quantity;
+            const message = `Halo, saya ingin memesan:\nProduk: ${product.name}\nUkuran: ${selectedSize}\nJumlah: ${quantity} pcs\nHarga per pcs: ${formatRupiah(selectedPrice)}\nTotal: ${formatRupiah(total)}\nTerima kasih!`;
             const waNumber = '6281234567890'; // Ganti dengan nomor Anda
             const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
             window.open(waUrl, '_blank');
