@@ -786,6 +786,18 @@ body {
     }
 }
 
+.top_three{
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #d438cd;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 7.5vw;
+}
+
 .home-container {
     max-width: 400px;
     margin: 0 auto;
