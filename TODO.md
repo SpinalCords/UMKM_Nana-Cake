@@ -3,3 +3,6 @@
 - [x] Add CSS styling for disabled size buttons
 - [x] Test the changes in the browser
 - [x] Disable S button in modal popup for "Bolu Vanilla Original"
+- [x] Enable S button for "Bolu Vanilla Original" in both card and modal
+- [x] Disable S button for "Bolu Coklat" and "Brownies Kukus" in both card and modal
+- [x] Disable S and L buttons for "Roll Cake (Bolu Gulung)" in both card and modal

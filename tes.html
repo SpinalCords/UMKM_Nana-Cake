@@ -397,7 +397,6 @@
 
         .hero-text h1 {
             font-size: 48px;
-            text-align: left;
             color: #e85d75;
             margin-bottom: 20px;
             font-style: italic;
@@ -426,6 +425,13 @@
             background: #e85d75;
             color: #fff;
         }
+
+        .hero-image img {
+            max-width: 400px;
+            height: auto;
+            border-radius: 20px;
+        }
+
         /* Product Categories */
         .category-grid {
             display: grid;
@@ -508,6 +514,22 @@
             display: flex;
             gap: 8px;
             margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .product-sizes.cookie-sizes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .product-sizes.cookie-sizes .size-btn {
+            font-size: 10px;
+            padding: 4px 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .size-btn {
@@ -529,6 +551,18 @@
             border-color: #e85d75;
         }
 
+        .darkmode .size-btn {
+            background: #222;
+            border-color: #444;
+            color: #f0f0f0;
+        }
+
+        .darkmode .size-btn.active,
+        .darkmode .size-btn:hover {
+            background: #f0f0f0;
+            color: #e85d75;
+        }
+
         .size-btn:disabled {
             background: #ccc;
             color: #666;
@@ -541,16 +575,65 @@
             color: #666;
         }
 
-        .darkmode .size-btn {
-            background: #222;
-            border-color: #444;
-            color: #f0f0f0;
+        /* Dropdown styling */
+        .size-dropdown {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #e85d75;
+            border-radius: 25px;
+            background: #fff;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e85d75' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
         }
 
-        .darkmode .size-btn.active,
-        .darkmode .size-btn:hover {
-            background: #f0f0f0;
-            color: #e85d75;
+        .size-dropdown:focus {
+            outline: none;
+            border-color: #d44d63;
+            box-shadow: 0 0 0 3px rgba(232, 93, 117, 0.1);
+        }
+
+        .size-dropdown:hover {
+            border-color: #d44d63;
+            background-color: #fef7f8;
+        }
+
+        .size-dropdown option {
+            padding: 8px;
+            background: #fff;
+            color: #333;
+        }
+
+        .modal-sizes {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .modal-sizes.cookie-sizes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
+            justify-content: center;
+        }
+
+        .modal-sizes.cookie-sizes .size-btn {
+            font-size: 10px;
+            padding: 4px 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .product-price {
@@ -691,56 +774,7 @@
             font-size: 36px;
             color: #e85d75;
             font-weight: bold;
-            margin: 20px 0 10px 0;
-        }
-
-        .modal-sizes {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .modal-sizes .size-btn {
-            flex: 1;
-            background: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 8px 0;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .modal-sizes .size-btn.active,
-        .modal-sizes .size-btn:hover {
-            background: #e85d75;
-            color: #fff;
-            border-color: #e85d75;
-        }
-
-        .modal-sizes .size-btn:disabled {
-            background: #ccc;
-            color: #666;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-
-        .modal-sizes .size-btn:disabled:hover {
-            background: #ccc;
-            color: #666;
-        }
-
-        .darkmode .modal-sizes .size-btn {
-            background: #222;
-            border-color: #444;
-            color: #f0f0f0;
-        }
-
-        .darkmode .modal-sizes .size-btn.active,
-        .darkmode .modal-sizes .size-btn:hover {
-            background: #f0f0f0;
-            color: #e85d75;
+            margin: 20px 0;
         }
 
         .modal-rating {
@@ -1105,22 +1139,6 @@
 
         /* Transitions */
         * { transition: color .12s ease, background-color .12s ease; }
-
-        /* Hero image styling */
-        .hero-image {
-            display: flex;
-            justify-content: center;
-            background-color: #2C2C2C;
-            align-items: center;
-            margin-top: 20px;
-        }
-        .hero-image img {
-            background-color: #a5a5a5;
-            height: 250px;
-            width: 330px;
-            object-fit: contain;
-            border-radius: 10px;
-        }
     </style>
 </head>
 
@@ -1538,40 +1556,40 @@
             { id: 12, name: 'Brownies Kukus', price: 25000, category: 'Cake', image: 'gambar/BOLUFINAL/roti/rotikasur.jpg', description: 'Cake coklat intens dengan tekstur moist dan rasa coklat yang kaya. Topping cherry memberikan sentuhan asam manis.' },
             { id: 13, name: 'Roll Cake (Bolu Gulung)', price: 25000, category: 'Cake', image: 'gambar/BOLUFINAL/roti/rotikasur.jpg', description: 'Cake coklat intens dengan tekstur moist dan rasa coklat yang kaya. Topping cherry memberikan sentuhan asam manis.' },
             // Bread
-            { id: 6, name: 'Roti Coklat', price: 8000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti lembut dengan isian coklat yang lumer. Cocok untuk sarapan atau camilan.' },
-            { id: 7, name: 'Roti Keju', price: 9000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti gurih dengan taburan keju mozarella yang meleleh. Sempurna saat hangat.' },
-            { id: 8, name: 'Roti Tawar', price: 7000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti tawar premium tanpa pengawet, lembut dan tahan lama. Cocok untuk sandwich atau toast.' },
+            { id: 14, name: 'Roti Coklat', price: 8000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti lembut dengan isian coklat yang lumer. Cocok untuk sarapan atau camilan.' },
+            { id: 15, name: 'Roti Keju', price: 9000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti gurih dengan taburan keju mozarella yang meleleh. Sempurna saat hangat.' },
+            { id: 16, name: 'Roti Tawar', price: 7000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti tawar premium tanpa pengawet, lembut dan tahan lama. Cocok untuk sandwich atau toast.' },
             // Abon
-            { id: 9, name: 'Abon Ayam', price: 25000, category: 'Abon', image: 'gambar/gambar ilang.jpg', description: 'Abon ayam homemade dengan tekstur lembut dan rasa gurih. Dibuat tanpa MSG.' },
-            { id: 10, name: 'Abon Sapi', price: 30000, category: 'Abon', image: 'gambar/gambar ilang.jpg', description: 'Abon sapi premium dengan serat halus dan rasa kaya. Cocok untuk lauk atau taburan nasi.' },
+            { id: 17, name: 'Abon Ayam', price: 25000, category: 'Abon', image: 'gambar/gambar ilang.jpg', description: 'Abon ayam homemade dengan tekstur lembut dan rasa gurih. Dibuat tanpa MSG.' },
+            { id: 18, name: 'Abon Sapi', price: 30000, category: 'Abon', image: 'gambar/gambar ilang.jpg', description: 'Abon sapi premium dengan serat halus dan rasa kaya. Cocok untuk lauk atau taburan nasi.' },
             // Cookie Kering
-            { id: 11, name: 'Cookie Chocolate Chip', price: 12000, category: 'Cookie Kering', image: 'gambar/gambar ilang.jpg', description: 'Cookie renyah dengan potongan coklat yang melimpah. Favorit keluarga!' },
-            { id: 12, name: 'Cookie Vanilla', price: 11000, category: 'Cookie Kering', image: 'gambar/gambar ilang.jpg', description: 'Cookie vanilla klasik dengan aroma wangi dan tekstur renyah sempurna.' },
+            { id: 19, name: 'Cookie Chocolate Chip', price: 12000, category: 'Cookie Kering', image: 'gambar/gambar ilang.jpg', description: 'Cookie renyah dengan potongan coklat yang melimpah. Favorit keluarga!' },
+            { id: 20, name: 'Cookie Vanilla', price: 11000, category: 'Cookie Kering', image: 'gambar/gambar ilang.jpg', description: 'Cookie vanilla klasik dengan aroma wangi dan tekstur renyah sempurna.' },
             // Bolu
-            { id: 13, name: 'Rosa mosa', price: 25000, category: 'Bolu', image: 'gambar/vanilla Original.jpg', description: 'Nastar lembut dengan isian nanas homemade yang manis-asam. Camilan wajib lebaran.' },
-            { id: 14, name: 'Vanilla Keju', price: 25000, category: 'Bolu', image: 'gambar/vanila keju.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 15, name: 'Tapai Singkong', price: 25000, category: 'Bolu', image: 'gambar/tapai singkong.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 16, name: 'Gambung Kuah Sarikaya', price: 25000, category: 'Bolu', image: 'gambar/gambung kuah sarikaya.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 17, name: 'Tapai Ketan', price: 25000, category: 'Bolu', image: 'gambar/tapai ketan.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 18, name: 'Marmer', price: 25000, category: 'Bolu', image: 'gambar/marmer.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 19, name: 'Gula Merah', price: 25000, category: 'Bolu', image: 'gambar/gula merah.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 20, name: 'Gulung', price: 25000, category: 'Bolu', image: 'gambar/gulung.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 21, name: 'Rosa mosa', price: 25000, category: 'Bolu', image: 'gambar/vanilla Original.jpg', description: 'Nastar lembut dengan isian nanas homemade yang manis-asam. Camilan wajib lebaran.' },
+            { id: 22, name: 'Vanilla Keju', price: 25000, category: 'Bolu', image: 'gambar/vanila keju.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 23, name: 'Tapai Singkong', price: 25000, category: 'Bolu', image: 'gambar/tapai singkong.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 24, name: 'Gambung Kuah Sarikaya', price: 25000, category: 'Bolu', image: 'gambar/gambung kuah sarikaya.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 25, name: 'Tapai Ketan', price: 25000, category: 'Bolu', image: 'gambar/tapai ketan.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 26, name: 'Marmer', price: 25000, category: 'Bolu', image: 'gambar/marmer.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 27, name: 'Gula Merah', price: 25000, category: 'Bolu', image: 'gambar/gula merah.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 28, name: 'Gulung', price: 25000, category: 'Bolu', image: 'gambar/gulung.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
             // Paket Hampers
-            { id: 21, name: 'Paket Ekonomis', price: 100000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket hemat dengan pilihan kue kering dan basah favorit keluarga. Cocok untuk acara kecil atau hadiah sederhana.', details: ['3 toples 300ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
-            { id: 22, name: 'Paket Reguler', price: 130000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket lengkap dengan variasi cake, cookies, dan brownies. Ideal untuk ulang tahun atau gathering kecil.', details: ['4 toples 300 ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
-            { id: 23, name: 'Paket Puas', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket besar dengan berbagai jenis kue premium dan abon. Cocok untuk acara keluarga atau corporate gifts.', details: ['3 toples 600ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
-            { id: 24, name: 'Paket Super Hemat', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket ekonomis dengan kualitas premium. Berisi aneka cookies dan cake mini untuk berbagai kebutuhan.', details: ['5 toples 250gr', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
+            { id: 29, name: 'Paket Ekonomis', price: 100000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket hemat dengan pilihan kue kering dan basah favorit keluarga. Cocok untuk acara kecil atau hadiah sederhana.', details: ['3 toples 300ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
+            { id: 30, name: 'Paket Reguler', price: 130000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket lengkap dengan variasi cake, cookies, dan brownies. Ideal untuk ulang tahun atau gathering kecil.', details: ['4 toples 300 ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
+            { id: 31, name: 'Paket Puas', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket besar dengan berbagai jenis kue premium dan abon. Cocok untuk acara keluarga atau corporate gifts.', details: ['3 toples 600ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
+            { id: 32, name: 'Paket Super Hemat', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket ekonomis dengan kualitas premium. Berisi aneka cookies dan cake mini untuk berbagai kebutuhan.', details: ['5 toples 250gr', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
             // Paket Nastar
-            { id: 25, name: 'Nastar', price: 35000, category: 'Nastar', image: 'gambar/nastar.jpg', description: 'Paket nastar tradisional dengan isian nanas asli. Tekstur lembut dan rasa manis yang autentik. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Lidah Kucing', 'Putri Salju', 'Kastengel', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 26, name: 'Kastengel', price: 35000, category: 'Nastar', image: 'gambar/nastar keju.jpg', description: 'Nastar premium dengan variasi rasa nanas, keju, dan coklat. Kemasan elegan untuk acara spesial. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Milk Cookies (Janit)', 'Sagu Keju', 'Putri Salju', 'Thumbprint Strawberry', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 27, name: 'Putri Salju', price: 35000, category: 'Nastar', image: 'gambar/putri salju.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 28, name: 'Lidah Kucing', price: 35000, category: 'Nastar', image: 'gambar/lidah kucing.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 29, name: 'Thrumbprint Stawberry', price: 35000, category: 'Nastar', image: 'gambar/thrumbprint stawberry.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 30, name: 'Mawar Vanilla', price: 35000, category: 'Nastar', image: 'gambar/mawar vanilla.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 31, name: 'Cookies Palm Suger Cheese', price: 35000, category: 'Nastar', image: 'gambar/palm suger cheese.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 32, name: 'Sagu Keju Pandan', price: 35000, category: 'Nastar', image: 'gambar/sagu keju pandan.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 33, name: 'Sagu Keju Ori', price: 35000, category: 'Nastar', image: 'gambar/sagu keju.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 34, name: 'Nastar Keju', price: 35000, category: 'Nastar', image: 'gambar/nastar keju sungguh.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] }
+            { id: 33, name: 'Nastar', price: 35000, category: 'Nastar', image: 'gambar/nastar.jpg', description: 'Paket nastar tradisional dengan isian nanas asli. Tekstur lembut dan rasa manis yang autentik. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Lidah Kucing', 'Putri Salju', 'Kastengel', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 34, name: 'Kastengel', price: 35000, category: 'Nastar', image: 'gambar/nastar keju.jpg', description: 'Nastar premium dengan variasi rasa nanas, keju, dan coklat. Kemasan elegan untuk acara spesial. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Milk Cookies (Janit)', 'Sagu Keju', 'Putri Salju', 'Thumbprint Strawberry', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 35, name: 'Putri Salju', price: 35000, category: 'Nastar', image: 'gambar/putri salju.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 36, name: 'Lidah Kucing', price: 35000, category: 'Nastar', image: 'gambar/lidah kucing.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 37, name: 'Thrumbprint Stawberry', price: 35000, category: 'Nastar', image: 'gambar/thrumbprint stawberry.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 38, name: 'Mawar Vanilla', price: 35000, category: 'Nastar', image: 'gambar/mawar vanilla.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 39, name: 'Cookies Palm Suger Cheese', price: 35000, category: 'Nastar', image: 'gambar/palm suger cheese.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 40, name: 'Sagu Keju Pandan', price: 35000, category: 'Nastar', image: 'gambar/sagu keju pandan.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 41, name: 'Sagu Keju Ori', price: 35000, category: 'Nastar', image: 'gambar/sagu keju.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 42, name: 'Nastar Keju', price: 35000, category: 'Nastar', image: 'gambar/nastar keju sungguh.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] }
         ];
 
         // Fungsi format Rupiah
@@ -1583,6 +1601,19 @@
 
         function calculateSizePrice(basePrice, size) {
             const adjustment = sizePriceAdjustments[size] || 0;
+            return basePrice + adjustment;
+        }
+
+        const cookieSizePriceAdjustments = {
+            'Toples Tabung (300 ml)': 0,
+            'Toples Tabung (600 ml)': 15000,
+            'Toples Tabung (800 ml)': 25000,
+            'Toples Bulat (250 gr)': 10000,
+            'Toples Bulat (500 gr)': 20000
+        };
+
+        function calculateCookieSizePrice(basePrice, size) {
+            const adjustment = cookieSizePriceAdjustments[size] || 0;
             return basePrice + adjustment;
         }
 
@@ -1601,22 +1632,64 @@
                 productCard.className = 'product-card';
                 productCard.dataset.productId = product.id;
 
-                // Special handling for Bolu Vanilla Original - disable S size
-                const isVanillaOriginal = product.name === 'Bolu Vanilla Original';
-                const defaultSize = isVanillaOriginal ? 'M' : 'S';
-                const sDisabled = isVanillaOriginal ? 'disabled' : '';
+                let sizeHtml = '';
+                let defaultSize = 'S';
+                let priceDisplay = formatRupiah(product.price);
+
+                if (category === 'Bread') {
+                    // No size selection for Bread
+                    sizeHtml = '';
+                    priceDisplay = formatRupiah(product.price);
+                } else if (category === 'Cookie Kering') {
+                    // Dropdown for Cookie Kering sizes
+                    sizeHtml = `
+                    <div class="product-sizes" role="group" aria-label="Pilih ukuran">
+                        <select class="size-dropdown" data-product-id="${product.id}">
+                            <option value="Toples Tabung (300 ml)">Toples Tabung (300 ml)</option>
+                            <option value="Toples Tabung (600 ml)">Toples Tabung (600 ml)</option>
+                            <option value="Toples Tabung (800 ml)">Toples Tabung (800 ml)</option>
+                            <option value="Toples Bulat (250 gr)">Toples Bulat (250 gr)</option>
+                            <option value="Toples Bulat (500 gr)">Toples Bulat (500 gr)</option>
+                        </select>
+                    </div>
+                    `;
+                    defaultSize = 'Toples Tabung (300 ml)';
+                    priceDisplay = formatRupiah(calculateCookieSizePrice(product.price, defaultSize));
+                } else {
+                    // Special handling for size restrictions for other categories
+                    const isBoluCoklat = product.name === 'Bolu Coklat';
+                    const isBrowniesKukus = product.name === 'Brownies Kukus';
+                    const isBoluGulung = product.name === 'Roll Cake (Bolu Gulung)';
+
+                    let sDisabled = '';
+                    let lDisabled = '';
+
+                    if (isBoluCoklat || isBrowniesKukus) {
+                        sDisabled = 'disabled';
+                        defaultSize = 'M';
+                    } else if (isBoluGulung) {
+                        sDisabled = 'disabled';
+                        lDisabled = 'disabled';
+                        defaultSize = 'M';
+                    }
+
+                    sizeHtml = `
+                    <div class="product-sizes" role="group" aria-label="Pilih ukuran">
+                        <button class="size-btn" data-size="S" ${sDisabled}>S</button>
+                        <button class="size-btn" data-size="M">M</button>
+                        <button class="size-btn" data-size="L" ${lDisabled}>L</button>
+                    </div>
+                    `;
+                    priceDisplay = formatRupiah(calculateSizePrice(product.price, defaultSize));
+                }
 
                 productCard.innerHTML = `
                 <img src="${product.image}" alt="${product.name}">
                 <div class="product-details">
                     <h3>${product.name}</h3>
-                    <div class="product-sizes" role="group" aria-label="Pilih ukuran">
-                        <button class="size-btn" data-size="S" ${sDisabled}>S</button>
-                        <button class="size-btn" data-size="M">M</button>
-                        <button class="size-btn" data-size="L">L</button>
-                    </div>
+                    ${sizeHtml}
                     <div class="product-price">
-                        <span class="price">${formatRupiah(calculateSizePrice(product.price, defaultSize))}</span>
+                        <span class="price">${priceDisplay}</span>
                     </div>
                     <button class="add-to-cart" data-product-id="${product.id}">Lihat Detail</button>
                 </div>
@@ -1624,21 +1697,37 @@
                 container.appendChild(productCard);
                 productCard.dataset.basePrice = product.price;
                 productCard.dataset.selectedSize = defaultSize;
-                const sizeButtons = productCard.querySelectorAll('.size-btn');
-                const priceElement = productCard.querySelector('.price');
-                sizeButtons.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        if (btn.disabled) return; // Skip if disabled
-                        const size = btn.dataset.size;
-                        productCard.dataset.selectedSize = size;
-                        sizeButtons.forEach(button => button.classList.toggle('active', button === btn));
-                        priceElement.textContent = formatRupiah(calculateSizePrice(product.price, size));
-                    });
-                });
-                // Set initial active state
-                const initialActiveBtn = productCard.querySelector(`.size-btn[data-size="${defaultSize}"]`);
-                if (initialActiveBtn) {
-                    initialActiveBtn.classList.add('active');
+
+                if (category !== 'Bread') {
+                    if (category === 'Cookie Kering') {
+                        // Handle dropdown for Cookie Kering
+                        const dropdown = productCard.querySelector('.size-dropdown');
+                        const priceElement = productCard.querySelector('.price');
+                        dropdown.value = defaultSize;
+                        dropdown.addEventListener('change', () => {
+                            const selectedSize = dropdown.value;
+                            productCard.dataset.selectedSize = selectedSize;
+                            priceElement.textContent = formatRupiah(calculateCookieSizePrice(product.price, selectedSize));
+                        });
+                    } else {
+                        // Handle buttons for other categories
+                        const sizeButtons = productCard.querySelectorAll('.size-btn');
+                        const priceElement = productCard.querySelector('.price');
+                        sizeButtons.forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                if (btn.disabled) return; // Skip if disabled
+                                const size = btn.dataset.size;
+                                productCard.dataset.selectedSize = size;
+                                sizeButtons.forEach(button => button.classList.toggle('active', button === btn));
+                                priceElement.textContent = formatRupiah(calculateSizePrice(product.price, size));
+                            });
+                        });
+                        // Set initial active state
+                        const initialActiveBtn = productCard.querySelector(`.size-btn[data-size="${defaultSize}"]`);
+                        if (initialActiveBtn) {
+                            initialActiveBtn.classList.add('active');
+                        }
+                    }
                 }
             });
             document.querySelectorAll('.add-to-cart').forEach(button => {
@@ -1656,7 +1745,14 @@
             if (!product) return;
             const productCard = document.querySelector(`.product-card[data-product-id="${productId}"]`);
             const selectedSize = productCard ? productCard.dataset.selectedSize || 'S' : 'S';
-            const selectedPrice = calculateSizePrice(product.price, selectedSize);
+            let selectedPrice;
+
+            if (product.category === 'Cookie Kering') {
+                selectedPrice = calculateCookieSizePrice(product.price, selectedSize);
+            } else {
+                selectedPrice = calculateSizePrice(product.price, selectedSize);
+            }
+
             document.getElementById('modalTitle').textContent = product.name;
             document.getElementById('modalCategory').textContent = product.category;
             document.getElementById('modalPrice').textContent = formatRupiah(selectedPrice);
@@ -1664,43 +1760,94 @@
             document.getElementById('modalImage').src = product.image;
             document.getElementById('modalImage').alt = product.name;
 
-            // Special handling for Bolu Vanilla Original in modal
-            const isVanillaOriginal = product.name === 'Bolu Vanilla Original';
-
             // Set up size buttons in modal
             const modalSizeButtons = document.querySelectorAll('.modal-sizes .size-btn');
-            modalSizeButtons.forEach(btn => {
-                // Disable S button for Bolu Vanilla Original
-                if (isVanillaOriginal && btn.dataset.size === 'S') {
-                    btn.disabled = true;
-                    btn.classList.add('disabled');
-                } else {
-                    btn.disabled = false;
-                    btn.classList.remove('disabled');
-                }
+            const isBoluCoklat = product.name === 'Bolu Coklat';
+            const isBrowniesKukus = product.name === 'Brownies Kukus';
+            const isBoluGulung = product.name === 'Roll Cake (Bolu Gulung)';
 
-                btn.classList.toggle('active', btn.dataset.size === selectedSize);
-                btn.addEventListener('click', () => {
-                    if (btn.disabled) return; // Skip if disabled
-                    modalSizeButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    const newSize = btn.dataset.size;
-                    const newPrice = calculateSizePrice(product.price, newSize);
+            // Clear existing modal size buttons
+            const modalSizesContainer = document.querySelector('.modal-sizes');
+            modalSizesContainer.innerHTML = '';
+
+            if (product.category === 'Bread') {
+                // No size buttons for Bread
+            } else if (product.category === 'Cookie Kering') {
+                // Dropdown for Cookie Kering sizes in modal - same as card
+                modalSizesContainer.className = 'modal-sizes';
+                const dropdown = document.createElement('select');
+                dropdown.className = 'size-dropdown';
+                dropdown.innerHTML = `
+                    <option value="Toples Tabung (300 ml)">Toples Tabung (300 ml)</option>
+                    <option value="Toples Tabung (600 ml)">Toples Tabung (600 ml)</option>
+                    <option value="Toples Tabung (800 ml)">Toples Tabung (800 ml)</option>
+                    <option value="Toples Bulat (250 gr)">Toples Bulat (250 gr)</option>
+                    <option value="Toples Bulat (500 gr)">Toples Bulat (500 gr)</option>
+                `;
+                dropdown.value = selectedSize;
+                dropdown.addEventListener('change', () => {
+                    const newSize = dropdown.value;
+                    const newPrice = calculateCookieSizePrice(product.price, newSize);
                     document.getElementById('modalPrice').textContent = formatRupiah(newPrice);
                     modal.dataset.selectedSize = newSize;
                     modal.dataset.selectedPrice = newPrice;
-                    // Update the product card size as well
+                    // Update the product card dropdown as well
                     if (productCard) {
-                        productCard.dataset.selectedSize = newSize;
-                        const cardSizeButtons = productCard.querySelectorAll('.size-btn');
-                        cardSizeButtons.forEach(b => b.classList.toggle('active', b.dataset.size === newSize));
+                        const cardDropdown = productCard.querySelector('.size-dropdown');
+                        if (cardDropdown) {
+                            cardDropdown.value = newSize;
+                        }
                         const cardPriceElement = productCard.querySelector('.price');
                         if (cardPriceElement) {
                             cardPriceElement.textContent = formatRupiah(newPrice);
                         }
                     }
                 });
-            });
+                modalSizesContainer.appendChild(dropdown);
+            } else {
+                // Standard sizes for other categories
+                const standardSizes = ['S', 'M', 'L'];
+                standardSizes.forEach(size => {
+                    let shouldDisable = false;
+
+                    if ((isBoluCoklat || isBrowniesKukus) && size === 'S') {
+                        shouldDisable = true;
+                    } else if (isBoluGulung && (size === 'S' || size === 'L')) {
+                        shouldDisable = true;
+                    }
+
+                    const btn = document.createElement('button');
+                    btn.className = 'size-btn';
+                    btn.dataset.size = size;
+                    btn.textContent = size;
+                    if (shouldDisable) {
+                        btn.disabled = true;
+                        btn.classList.add('disabled');
+                    }
+                    btn.classList.toggle('active', size === selectedSize);
+                    btn.addEventListener('click', () => {
+                        if (btn.disabled) return; // Skip if disabled
+                        modalSizeButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        const newSize = btn.dataset.size;
+                        const newPrice = calculateSizePrice(product.price, newSize);
+                        document.getElementById('modalPrice').textContent = formatRupiah(newPrice);
+                        modal.dataset.selectedSize = newSize;
+                        modal.dataset.selectedPrice = newPrice;
+                        // Update the product card size as well
+                        if (productCard) {
+                            productCard.dataset.selectedSize = newSize;
+                            const cardSizeButtons = productCard.querySelectorAll('.size-btn');
+                            cardSizeButtons.forEach(b => b.classList.toggle('active', b.dataset.size === newSize));
+                            const cardPriceElement = productCard.querySelector('.price');
+                            if (cardPriceElement) {
+                                cardPriceElement.textContent = formatRupiah(newPrice);
+                            }
+                        }
+                    });
+                    modalSizesContainer.appendChild(btn);
+                });
+            }
 
             // Populate details list dynamically
             const detailsList = document.querySelector('.modal-details-list');
@@ -1766,8 +1913,8 @@
             const selectedPrice = parseInt(modal.dataset.selectedPrice || product.price, 10);
             const quantity = document.getElementById('quantityInput').value;
             const total = selectedPrice * quantity;
-            const message = `*Halo, saya ingin memesan:*\nProduk: ${product.name}\nUkuran: ${selectedSize}\nJumlah: ${quantity} pcs\nHarga per pcs: ${formatRupiah(selectedPrice)}\nTotal: ${formatRupiah(total)}\nTerima kasih!\n\nTambah Catatan: `;
-            const waNumber = '6282150825788'; // Ganti dengan nomor Anda
+            const message = `Halo, saya ingin memesan:\nProduk: ${product.name}\nUkuran: ${selectedSize}\nJumlah: ${quantity} pcs\nHarga per pcs: ${formatRupiah(selectedPrice)}\nTotal: ${formatRupiah(total)}\nTerima kasih!`;
+            const waNumber = '6281234567890'; // Ganti dengan nomor Anda
             const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
             window.open(waUrl, '_blank');
         }
