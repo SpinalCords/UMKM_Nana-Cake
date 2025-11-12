@@ -138,7 +138,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin: 20px 0 120px 0;
+      margin: 20px 0 30px 0;
     }
 
     .container {
@@ -275,6 +275,27 @@
       background: radial-gradient(circle at top right, #ffe3c6, transparent 70%);
     }
 
+    .cart-toggle {
+      position: fixed;
+      top: 25px;
+      right: 25px;
+      background: linear-gradient(135deg, #ff6b81, #ffa3b1);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      z-index: 11;
+      transition: all 0.3s ease;
+    }
+
+    .cart-toggle:hover {
+      transform: scale(1.1) rotate(10deg);
+    }
+
     .cart {
       position: fixed;
       right: -400px;
@@ -339,20 +360,94 @@
         flex-wrap: nowrap;
       }
     }
-    .popu{
-        height: 820px;
+
+    @media (max-width: 768px) {
+      .top_three {
+        font-size: 32px;
+        margin: 10px 0 20px 0;
+      }
+
+      .container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 15px;
+      }
+
+      .card {
+        width: 90%;
+        max-width: 350px;
+        height: auto;
+        min-height: 380px;
+      }
+
+      .card:hover {
+        width: 92%;
+        max-width: 360px;
+        height: auto;
+      }
+
+      .cart {
+        width: 100%;
+        height: auto;
+        max-height: 60vh;
+        right: auto;
+        left: 0;
+        top: auto;
+        bottom: -100%;
+        border-radius: 25px 25px 0 0;
+        transition: bottom 0.5s ease;
+      }
+
+      .cart.active {
+        bottom: 0 !important;
+        right: auto !important;
+      }
+
+      .cart-toggle {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        top: 15px;
+        right: 15px;
+      }
+
+      .popu {
+        height: auto;
+        min-height: 100vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .top_three {
+        font-size: 28px;
+      }
+
+      .card {
+        width: 95%;
+      }
+
+      .cart {
+        max-height: 70vh;
+        padding: 20px;
+      }
+
+      .cart h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+      }
     }
   </style>
 </head>
 <body>
 
+<button class="cart-toggle" onclick="toggleCart()">🛒</button>
 
 <div class="cart" id="cart">
   <h2>Keranjang Belanja</h2>
   <div id="cart-items"></div>
   <div class="total">Total: Rp<span id="total">0</span></div>
 </div>
-<div class="popu">
+
 <header class="top_three">3 Most Popular</header>
 
 <div class="container">
@@ -386,7 +481,6 @@
     <button class="add-btn" data-name="Sweet Macaron" data-price="18000">Tambah</button>
   </div>
 </div>
-</div>
 
 <script>
   const cart = document.getElementById('cart');
@@ -394,6 +488,10 @@
   const cartItems = document.getElementById('cart-items');
   const total = document.getElementById('total');
   let totalPrice = 0;
+
+  function toggleCart() {
+    cart.classList.toggle('active');
+  }
 
   addButtons.forEach(btn => {
     btn.addEventListener('click', () => {
