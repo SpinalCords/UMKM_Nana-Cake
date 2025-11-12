@@ -397,6 +397,7 @@
 
         .hero-text h1 {
             font-size: 48px;
+            text-align: left;
             color: #e85d75;
             margin-bottom: 20px;
             font-style: italic;
@@ -425,13 +426,6 @@
             background: #e85d75;
             color: #fff;
         }
-
-        .hero-image img {
-            max-width: 400px;
-            height: auto;
-            border-radius: 20px;
-        }
-
         /* Product Categories */
         .category-grid {
             display: grid;
@@ -533,6 +527,18 @@
             background: #e85d75;
             color: #fff;
             border-color: #e85d75;
+        }
+
+        .size-btn:disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .size-btn:disabled:hover {
+            background: #ccc;
+            color: #666;
         }
 
         .darkmode .size-btn {
@@ -711,6 +717,18 @@
             background: #e85d75;
             color: #fff;
             border-color: #e85d75;
+        }
+
+        .modal-sizes .size-btn:disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .modal-sizes .size-btn:disabled:hover {
+            background: #ccc;
+            color: #666;
         }
 
         .darkmode .modal-sizes .size-btn {
@@ -1087,6 +1105,22 @@
 
         /* Transitions */
         * { transition: color .12s ease, background-color .12s ease; }
+
+        /* Hero image styling */
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            background-color: #2C2C2C;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .hero-image img {
+            background-color: #a5a5a5;
+            height: 250px;
+            width: 330px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -1566,34 +1600,46 @@
                 const productCard = document.createElement('div');
                 productCard.className = 'product-card';
                 productCard.dataset.productId = product.id;
+
+                // Special handling for Bolu Vanilla Original - disable S size
+                const isVanillaOriginal = product.name === 'Bolu Vanilla Original';
+                const defaultSize = isVanillaOriginal ? 'M' : 'S';
+                const sDisabled = isVanillaOriginal ? 'disabled' : '';
+
                 productCard.innerHTML = `
                 <img src="${product.image}" alt="${product.name}">
                 <div class="product-details">
                     <h3>${product.name}</h3>
                     <div class="product-sizes" role="group" aria-label="Pilih ukuran">
-                        <button class="size-btn" data-size="S">S</button>
+                        <button class="size-btn" data-size="S" ${sDisabled}>S</button>
                         <button class="size-btn" data-size="M">M</button>
                         <button class="size-btn" data-size="L">L</button>
                     </div>
                     <div class="product-price">
-                        <span class="price">${formatRupiah(calculateSizePrice(product.price, 'S'))}</span>
+                        <span class="price">${formatRupiah(calculateSizePrice(product.price, defaultSize))}</span>
                     </div>
                     <button class="add-to-cart" data-product-id="${product.id}">Lihat Detail</button>
                 </div>
             `;
                 container.appendChild(productCard);
                 productCard.dataset.basePrice = product.price;
-                productCard.dataset.selectedSize = 'S';
+                productCard.dataset.selectedSize = defaultSize;
                 const sizeButtons = productCard.querySelectorAll('.size-btn');
                 const priceElement = productCard.querySelector('.price');
                 sizeButtons.forEach(btn => {
                     btn.addEventListener('click', () => {
+                        if (btn.disabled) return; // Skip if disabled
                         const size = btn.dataset.size;
                         productCard.dataset.selectedSize = size;
                         sizeButtons.forEach(button => button.classList.toggle('active', button === btn));
                         priceElement.textContent = formatRupiah(calculateSizePrice(product.price, size));
                     });
                 });
+                // Set initial active state
+                const initialActiveBtn = productCard.querySelector(`.size-btn[data-size="${defaultSize}"]`);
+                if (initialActiveBtn) {
+                    initialActiveBtn.classList.add('active');
+                }
             });
             document.querySelectorAll('.add-to-cart').forEach(button => {
                 button.addEventListener('click', function (e) {
@@ -1618,11 +1664,24 @@
             document.getElementById('modalImage').src = product.image;
             document.getElementById('modalImage').alt = product.name;
 
+            // Special handling for Bolu Vanilla Original in modal
+            const isVanillaOriginal = product.name === 'Bolu Vanilla Original';
+
             // Set up size buttons in modal
             const modalSizeButtons = document.querySelectorAll('.modal-sizes .size-btn');
             modalSizeButtons.forEach(btn => {
+                // Disable S button for Bolu Vanilla Original
+                if (isVanillaOriginal && btn.dataset.size === 'S') {
+                    btn.disabled = true;
+                    btn.classList.add('disabled');
+                } else {
+                    btn.disabled = false;
+                    btn.classList.remove('disabled');
+                }
+
                 btn.classList.toggle('active', btn.dataset.size === selectedSize);
                 btn.addEventListener('click', () => {
+                    if (btn.disabled) return; // Skip if disabled
                     modalSizeButtons.forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     const newSize = btn.dataset.size;
