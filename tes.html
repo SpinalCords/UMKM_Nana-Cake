@@ -1571,7 +1571,7 @@
                 <div class="product-details">
                     <h3>${product.name}</h3>
                     <div class="product-sizes" role="group" aria-label="Pilih ukuran">
-                        <button class="size-btn active" data-size="S">S</button>
+                        <button class="size-btn" data-size="S">S</button>
                         <button class="size-btn" data-size="M">M</button>
                         <button class="size-btn" data-size="L">L</button>
                     </div>
@@ -1707,8 +1707,8 @@
             const selectedPrice = parseInt(modal.dataset.selectedPrice || product.price, 10);
             const quantity = document.getElementById('quantityInput').value;
             const total = selectedPrice * quantity;
-            const message = `Halo, saya ingin memesan:\nProduk: ${product.name}\nUkuran: ${selectedSize}\nJumlah: ${quantity} pcs\nHarga per pcs: ${formatRupiah(selectedPrice)}\nTotal: ${formatRupiah(total)}\nTerima kasih!`;
-            const waNumber = '6281234567890'; // Ganti dengan nomor Anda
+            const message = `*Halo, saya ingin memesan:*\nProduk: ${product.name}\nUkuran: ${selectedSize}\nJumlah: ${quantity} pcs\nHarga per pcs: ${formatRupiah(selectedPrice)}\nTotal: ${formatRupiah(total)}\nTerima kasih!\n\nTambah Catatan: `;
+            const waNumber = '6282150825788'; // Ganti dengan nomor Anda
             const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
             window.open(waUrl, '_blank');
         }
