@@ -753,3 +753,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+const cart = document.getElementById('cart');
+const addButtons = document.querySelectorAll('.add-btn');
+const cartItems = document.getElementById('cart-items');
+const total = document.getElementById('total');
+let totalPrice = 0;
+
+
+
+addButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const name = btn.getAttribute('data-name');
+        const price = parseInt(btn.getAttribute('data-price'));
+
+        const item = document.createElement('div');
+        item.classList.add('cart-item');
+        item.innerHTML = `<span>${name}</span><strong>Rp${price.toLocaleString()}</strong>`;
+        cartItems.appendChild(item);
+
+        totalPrice += price;
+        total.textContent = totalPrice.toLocaleString();
+    });
+});
