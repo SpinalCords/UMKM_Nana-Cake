@@ -122,34 +122,49 @@
     <header class="top_three">3 Most Popular</header>
 
     <div class="container">
-        <div class="card">
+        <div class="card" data-product-id="1">
             <div class="corner-deco"></div>
             <div class="corner-deco top-right"></div>
             <div class="corner-deco bottom-right"></div>
             <img src="https://images.unsplash.com/photo-1587241321921-91a834d6d191?w=500" alt="Cupcake">
             <h3>Yummy Cupcake</h3>
-            <p>Rp15.000</p>
-            <button class="add-btn" data-name="Yummy Cupcake" data-price="15000">Tambah</button>
+            <div class="size-options">
+                <button class="size-btn active" data-size="S">S</button>
+                <button class="size-btn" data-size="M">M</button>
+                <button class="size-btn" data-size="L">L</button>
+            </div>
+            <p class="price">Rp15.000</p>
+            <button class="detail-btn" data-product-id="1">Lihat Detail</button>
         </div>
 
-        <div class="card">
+        <div class="card" data-product-id="2">
             <div class="corner-deco"></div>
             <div class="corner-deco top-right"></div>
             <div class="corner-deco bottom-right"></div>
             <img src="https://images.unsplash.com/photo-1617196034796-73f7b9e0aabb?w=500" alt="Donat">
             <h3>Donat Lumer</h3>
-            <p>Rp10.000</p>
-            <button class="add-btn" data-name="Donat Lumer" data-price="10000">Tambah</button>
+            <div class="size-options">
+                <button class="size-btn active" data-size="S">S</button>
+                <button class="size-btn" data-size="M">M</button>
+                <button class="size-btn" data-size="L">L</button>
+            </div>
+            <p class="price">Rp10.000</p>
+            <button class="detail-btn" data-product-id="2">Lihat Detail</button>
         </div>
 
-        <div class="card">
+        <div class="card" data-product-id="3">
             <div class="corner-deco"></div>
             <div class="corner-deco top-right"></div>
             <div class="corner-deco bottom-right"></div>
             <img src="https://images.unsplash.com/photo-1590080875831-2cf4eeab3bda?w=500" alt="Macaron">
             <h3>Sweet Macaron</h3>
-            <p>Rp18.000</p>
-            <button class="add-btn" data-name="Sweet Macaron" data-price="18000">Tambah</button>
+            <div class="size-options">
+                <button class="size-btn active" data-size="S">S</button>
+                <button class="size-btn" data-size="M">M</button>
+                <button class="size-btn" data-size="L">L</button>
+            </div>
+            <p class="price">Rp18.000</p>
+            <button class="detail-btn" data-product-id="3">Lihat Detail</button>
         </div>
     </div>
 
@@ -793,6 +808,55 @@
         </div>
     </section>
 
+    <!-- === MODAL DETAIL PRODUK === -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-body">
+                <div class="modal-image-section">
+                    <img id="modalImage" src="" alt="" class="modal-main-image">
+                </div>
+                <div class="modal-info-section">
+                    <span id="modalCategory" class="modal-category">Popular Menu</span>
+                    <h2 id="modalTitle"></h2>
+                    <div class="modal-rating">
+                        <div class="modal-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="modal-rating-text">(4.5/5 - 128 reviews)</span>
+                    </div>
+                    <div id="modalPrice" class="modal-price"></div>
+                    <div class="modal-sizes" role="group" aria-label="Pilih ukuran">
+                        <button class="size-btn active" data-size="S">S</button>
+                        <button class="size-btn" data-size="M">M</button>
+                        <button class="size-btn" data-size="L">L</button>
+                    </div>
+                    <p id="modalDescription" class="modal-description"></p>
+                    <div class="modal-quantity">
+                        <label>Jumlah:</label>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                            <input type="number" class="quantity-input" id="quantityInput" value="1" min="1">
+                            <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn-add-cart" onclick="addToCart()">
+                            <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+                        </button>
+                        <button class="btn-whatsapp" onclick="orderWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> Pesan via WA
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer Section -->
     <footer class="footer">
         <div class="footer-container">
@@ -861,11 +925,176 @@
     </footer>
 
 </body>
-<script src="about_us/about_us.js">
+<script>
+    // Product data for popular menu
+    const popularProducts = [
+        { id: 1, name: 'Yummy Cupcake', price: 15000, image: 'https://images.unsplash.com/photo-1587241321921-91a834d6d191?w=500', description: 'Cupcake lembut dengan topping krim yang creamy dan lezat.' },
+        { id: 2, name: 'Donat Lumer', price: 10000, image: 'https://images.unsplash.com/photo-1617196034796-73f7b9e0aabb?w=500', description: 'Donat renyah dengan isian coklat yang lumer di mulut.' },
+        { id: 3, name: 'Sweet Macaron', price: 18000, image: 'https://images.unsplash.com/photo-1590080875831-2cf4eeab3bda?w=500', description: 'Macaron Prancis dengan berbagai rasa dan tekstur yang renyah.' }
+    ];
 
+    // Pricing for sizes (S: base, M: +5000, L: +10000)
+    function calculatePrice(basePrice, size) {
+        const adjustments = { S: 0, M: 5000, L: 10000 };
+        return basePrice + (adjustments[size] || 0);
+    }
 
+    // Format Rupiah
+    function formatRupiah(amount) {
+        return 'Rp ' + amount.toLocaleString('id-ID');
+    }
 
+    // Initialize size buttons for cards
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.card').forEach(card => {
+            const productId = parseInt(card.dataset.productId);
+            const product = popularProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            const sizeButtons = card.querySelectorAll('.size-btn');
+            const priceElement = card.querySelector('.price');
+
+            sizeButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    sizeButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const size = btn.dataset.size;
+                    const newPrice = calculatePrice(product.price, size);
+                    priceElement.textContent = formatRupiah(newPrice);
+                    card.dataset.selectedSize = size;
+                });
+            });
+
+            // Set initial price and size
+            card.dataset.selectedSize = 'S';
+            priceElement.textContent = formatRupiah(product.price);
+        });
+
+        // Add event listeners for detail buttons
+        document.querySelectorAll('.detail-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productId = parseInt(this.dataset.productId);
+                showProductDetail(productId);
+            });
+        });
+    });
+
+    // Show product detail modal
+    function showProductDetail(productId) {
+        const product = popularProducts.find(p => p.id === productId);
+        if (!product) return;
+
+        const card = document.querySelector(`.card[data-product-id="${productId}"]`);
+        const selectedSize = card ? card.dataset.selectedSize || 'S' : 'S';
+
+        document.getElementById('modalTitle').textContent = product.name;
+        // Set modal price to match current card price
+        if (card) {
+            const priceElement = card.querySelector('.price');
+            document.getElementById('modalPrice').textContent = priceElement.textContent;
+        }
+        document.getElementById('modalDescription').textContent = product.description;
+        document.getElementById('modalImage').src = product.image;
+        document.getElementById('modalImage').alt = product.name;
+
+        // Set up size buttons in modal
+        const modalSizeButtons = document.querySelectorAll('.modal-sizes .size-btn');
+        modalSizeButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.size === selectedSize);
+            btn.addEventListener('click', function() {
+                modalSizeButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const newSize = btn.dataset.size;
+                const newPrice = calculatePrice(product.price, newSize);
+                document.getElementById('modalPrice').textContent = formatRupiah(newPrice);
+                // Update card as well
+                if (card) {
+                    card.dataset.selectedSize = newSize;
+                    const cardSizeButtons = card.querySelectorAll('.size-btn');
+                    cardSizeButtons.forEach(b => b.classList.remove('active'));
+                    const matchingBtn = card.querySelector(`.size-btn[data-size="${newSize}"]`);
+                    if (matchingBtn) matchingBtn.classList.add('active');
+                    const cardPriceElement = card.querySelector('.price');
+                    if (cardPriceElement) {
+                        cardPriceElement.textContent = formatRupiah(newPrice);
+                    }
+                }
+                // Update modal dataset
+                const modal = document.getElementById('productModal');
+                modal.dataset.selectedSize = newSize;
+                modal.dataset.selectedPrice = newPrice;
+            });
+        });
+
+        document.getElementById('quantityInput').value = 1;
+        const modal = document.getElementById('productModal');
+        modal.dataset.productId = productId;
+        modal.dataset.selectedSize = selectedSize;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Close modal
+    function closeModal() {
+        const modal = document.getElementById('productModal');
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Quantity controls
+    function increaseQuantity() {
+        const input = document.getElementById('quantityInput');
+        input.value = parseInt(input.value) + 1;
+    }
+
+    function decreaseQuantity() {
+        const input = document.getElementById('quantityInput');
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    }
+
+    // Add to cart
+    function addToCart() {
+        const modal = document.getElementById('productModal');
+        const productId = modal.dataset.productId;
+        const product = popularProducts.find(p => p.id == productId);
+        const selectedSize = modal.dataset.selectedSize || 'S';
+        const selectedPrice = parseInt(modal.dataset.selectedPrice || product.price, 10);
+        const quantity = document.getElementById('quantityInput').value;
+        alert(`${product.name} ukuran ${selectedSize} (${quantity} pcs) berhasil ditambahkan ke keranjang dengan harga ${formatRupiah(selectedPrice)} masing-masing!`);
+    }
+
+    // Order via WhatsApp
+    function orderWhatsApp() {
+        const modal = document.getElementById('productModal');
+        const productId = modal.dataset.productId;
+        const product = popularProducts.find(p => p.id == productId);
+        const selectedSize = modal.dataset.selectedSize || 'S';
+        const selectedPrice = parseInt(modal.dataset.selectedPrice || product.price, 10);
+        const quantity = document.getElementById('quantityInput').value;
+        const total = selectedPrice * quantity;
+        const message = `Halo, saya ingin memesan:\nProduk: ${product.name}\nUkuran: ${selectedSize}\nJumlah: ${quantity} pcs\nHarga per pcs: ${formatRupiah(selectedPrice)}\nTotal: ${formatRupiah(total)}\nTerima kasih!`;
+        const waNumber = '6281234567890';
+        const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
+        window.open(waUrl, '_blank');
+    }
+
+    // Close modal on outside click
+    document.getElementById('productModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+
+    // Close modal on ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
 </script>
+<script src="about_us/about_us.js"></script>
 <script src="script.js"></script>
 
 </html>

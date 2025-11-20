@@ -1172,14 +1172,14 @@
             padding: 12px 16px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             border-radius: 12px;
-            border: 2px solid #e85d75;
+            border: 2px solid var(--color-cta);
             transition: all 0.3s ease;
         }
 
         .double-nastar-option:hover {
             background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(232, 93, 117, 0.2);
+            box-shadow: 0 4px 12px rgba(59, 130, 181, 0.2);
         }
 
         .double-nastar-checkbox {
@@ -1192,7 +1192,7 @@
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
-            color: #333;
+            color: var(--color-text);
             transition: color 0.3s ease;
         }
 
@@ -1205,19 +1205,19 @@
             width: 24px;
             height: 24px;
             background: #fff;
-            border: 2px solid #e85d75;
+            border: 2px solid var(--color-cta);
             border-radius: 6px;
             transition: all 0.3s ease;
         }
 
         .double-nastar-checkbox:checked + label:before {
-            background: #e85d75;
-            border-color: #e85d75;
+            background: var(--color-cta);
+            border-color: var(--color-cta);
             box-shadow: inset 0 0 0 2px #fff;
         }
 
         .double-nastar-checkbox:checked + label {
-            color: #e85d75;
+            color: var(--color-cta);
         }
 
         .double-nastar-checkbox + label:after {
@@ -1650,6 +1650,10 @@
                                     <span class="paket-total-price-label">Total Ekonomis 2:</span>
                                     <span class="paket-total-price-amount">Rp 100.000</span>
                                 </div>
+                                <div class="double-nastar-option">
+                                    <input type="checkbox" id="double-nastar-ekonomis2" class="double-nastar-checkbox" data-tab="ekonomis2">
+                                    <label for="double-nastar-ekonomis2">tambah double nastar</label>
+                                </div>
                             </div>
                             <div id="ekonomis3" class="paket-tab-content">
                                 <div class="paket-item-list">
@@ -1678,6 +1682,10 @@
                                 <div class="paket-total-price-container">
                                     <span class="paket-total-price-label">Total Ekonomis 3:</span>
                                     <span class="paket-total-price-amount">Rp 100.000</span>
+                                </div>
+                                <div class="double-nastar-option">
+                                    <input type="checkbox" id="double-nastar-ekonomis3" class="double-nastar-checkbox" data-tab="ekonomis3">
+                                    <label for="double-nastar-ekonomis3">tambah double nastar</label>
                                 </div>
                             </div>
                         </div>
@@ -2127,27 +2135,27 @@
             // Individual product pricing - each product has its own pricing structure
             products: {
                 // Cake products
-                1: { basePrice: 20000, sizes: { S: 0, M: 15000, L: 10000 } }, // Bolu Vanilla Original
-                2: { basePrice: 20000, sizes: { S: 0, M: 5000, L: 10000 } }, // Bolu Vanilla Keju
-                3: { basePrice: 25000, sizes: { S: 0, M: 5000, L: 10000 } }, // Bolu Caramel
-                4: { basePrice: 25000, sizes: { S: 0, M: 5000, L: 10000 } }, // Bolu Tapai Singkong
-                5: { basePrice: 20000, sizes: { S: 0, M: 5000, L: 10000 } }, // Bolu Tapai Ketan
-                6: { basePrice: 25000, sizes: { S: 0, M: 5000, L: 10000 } }, // Bolu Marmer/Bolu Zebra
-                7: { basePrice: 25000, sizes: { S: 0, M: 5000, L: 10000 } }, // Bolu Pisang
-                8: { basePrice: 25000, sizes: { S: 0, M: 5000, L: 10000 } }, // Bolu Coffee
-                9: { basePrice: 25000, sizes: { S: 0, M: 5000, L: 10000 } }, // Bolu Pandan
-                10: { basePrice: 25000, sizes: { S: 0, M: 5000, L: 10000 } }, // Bolu Gula Merah/Aren Spikuk
-                11: { basePrice: 25000, sizes: { S: 0, M: 5000, L: 10000 } }, // Bolu Coklat /* BE */
-                12: { basePrice: 25000, sizes: { S: 0, M: 5000, L: 10000 } }, // Brownies Kukus
-                13: { basePrice: 25000, sizes: { S: 0, M: 5000, L: 10000 } }, // Roll Cake (Bolu Gulung)
+                1: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 45000 } }, // Bolu Vanilla Original
+                2: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 55000 } }, // Bolu Vanilla Keju
+                3: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 60000 } }, // Bolu Caramel
+                4: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 55000 } }, // Bolu Tapai Singkong
+                5: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 55000 } }, // Bolu Tapai Ketan
+                6: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 55000 } }, // Bolu Marmer/Bolu Zebra
+                7: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 55000 } }, // Bolu Pisang
+                8: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 55000 } }, // Bolu Coffee
+                9: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 55000 } }, // Bolu Pandan
+                10: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 55000 } }, // Bolu Gula Merah/Aren Spikuk
+                11: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 60000 } }, // Bolu Coklat /* BE */
+                12: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 85000 } }, // Brownies Kukus
+                13: { basePrice: 25000, sizes: { S: 0, M: 15000, L: 10000 } }, // Roll Cake (Bolu Gulung)
 
                 // Bread products (no size variations)
-                14: { basePrice: 8000, sizes: {} }, // Roti Coklat
-                15: { basePrice: 9000, sizes: {} }, // Roti Keju
-                16: { basePrice: 7000, sizes: {} }, // Roti Tawar
-                17: { basePrice: 7000, sizes: {} }, // Roti Tawar
-                18: { basePrice: 7000, sizes: {} }, // Roti Tawar
-                19: { basePrice: 7000, sizes: {} }, // Roti Tawar
+                14: { basePrice: 20000, sizes: {} }, // Roti Coklat
+                15: { basePrice: 20000, sizes: {} }, // Roti Keju
+                16: { basePrice: 25000, sizes: {} }, // Roti Tawar
+                17: { basePrice: 25000, sizes: {} }, // Roti Tawar
+                18: { basePrice: 20000, sizes: {} }, // Roti Tawar
+                19: { basePrice: 25000, sizes: {} }, // Roti Tawar
 
                 // Abon products (no size variations)
                 20: { basePrice: 25000, sizes: {} }, // Abon Ayam
@@ -2190,7 +2198,7 @@
         // Database Produk - enhanced with descriptions
         const productsDatabase = [
             // Cake
-            { id: 1, name: 'Bolu Vanilla Original', price: 20000, category: 'Cake', image: 'gambar/BOLUFINAL/roti/gambungsrikaya.jpg', description: 'Cake lembut dengan krim vanilla yang creamy dan lezat. Cocok untuk berbagai acara spesial.' },
+            { id: 1, name: 'Bolu Vanilla Original', price: 25000, category: 'Cake', image: 'gambar/BOLUFINAL/roti/gambungsrikaya.jpg', description: 'Cake lembut dengan krim vanilla yang creamy dan lezat. Cocok untuk berbagai acara spesial.' },
             { id: 2, name: 'Bolu Vanilla Keju', price: 20000, category: 'Cake', image: 'gambar/gambar ilang.jpg', description: 'Cake dengan topping blueberry segar yang manis dan asam. Perpaduan sempurna antara cake lembut dan buah segar.' },
             { id: 3, name: 'Bolu Caramel', price: 25000, category: 'Cake', image: 'gambar/gambar ilang.jpg', description: 'Cake strawberry dengan topping buah strawberry segar. Rasa manis alami berpadu dengan tekstur cake yang lembut.' },
             { id: 4, name: 'Bolu Tapai Singkong', price: 25000, category: 'Cake', image: 'gambar/BOLUFINAL/roti/gambungcampur.jpg', description: 'Red velvet cake klasik dengan cream cheese frosting yang lezat. Tekstur lembut dengan warna merah cantik.' },
@@ -2204,12 +2212,12 @@
             { id: 12, name: 'Brownies Kukus', price: 25000, category: 'Cake', image: 'gambar/BOLUFINAL/roti/rotikasur.jpg', description: 'Cake coklat intens dengan tekstur moist dan rasa coklat yang kaya. Topping cherry memberikan sentuhan asam manis.' },
             { id: 13, name: 'Roll Cake (Bolu Gulung)', price: 25000, category: 'Cake', image: 'gambar/BOLUFINAL/roti/rotikasur.jpg', description: 'Cake coklat intens dengan tekstur moist dan rasa coklat yang kaya. Topping cherry memberikan sentuhan asam manis.' },
             // Bread
-            { id: 14, name: 'Gambung Kuah Srikaya', price: 8000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti lembut dengan isian coklat yang lumer. Cocok untuk sarapan atau camilan.' },
-            { id: 15, name: 'Gambung isi Mentega', price: 9000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti gurih dengan taburan keju mozarella yang meleleh. Sempurna saat hangat.' },
-            { id: 16, name: 'Gambung isi Coklat + Mentega', price: 7000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti tawar premium tanpa pengawet, lembut dan tahan lama. Cocok untuk sandwich atau toast.' },
-            { id: 17, name: 'Gambung isi Campur', price: 7000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti tawar premium tanpa pengawet, lembut dan tahan lama. Cocok untuk sandwich atau toast.' },
-            { id: 18, name: 'Gambung Butter Palm Sugar', price: 7000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti tawar premium tanpa pengawet, lembut dan tahan lama. Cocok untuk sandwich atau toast.' },
-            { id: 19, name: 'Roti Kasur', price: 7000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti tawar premium tanpa pengawet, lembut dan tahan lama. Cocok untuk sandwich atau toast.' },
+            { id: 14, name: 'Gambung Kuah Srikaya', price: 20000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti lembut dengan isian coklat yang lumer. Cocok untuk sarapan atau camilan.' },
+            { id: 15, name: 'Gambung isi Mentega', price: 20000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti gurih dengan taburan keju mozarella yang meleleh. Sempurna saat hangat.' },
+            { id: 16, name: 'Gambung isi Coklat + Mentega', price: 25000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti tawar premium tanpa pengawet, lembut dan tahan lama. Cocok untuk sandwich atau toast.' },
+            { id: 17, name: 'Gambung isi Campur', price: 25000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti tawar premium tanpa pengawet, lembut dan tahan lama. Cocok untuk sandwich atau toast.' },
+            { id: 18, name: 'Gambung Butter Palm Sugar', price: 20000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti tawar premium tanpa pengawet, lembut dan tahan lama. Cocok untuk sandwich atau toast.' },
+            { id: 19, name: 'Roti Kasur', price: 25000, category: 'Bread', image: 'gambar/gambar ilang.jpg', description: 'Roti tawar premium tanpa pengawet, lembut dan tahan lama. Cocok untuk sandwich atau toast.' },
             // Abon
             { id: 20, name: 'Abon Ayam', price: 25000, category: 'Abon', image: 'gambar/gambar ilang.jpg', description: 'Abon ayam homemade dengan tekstur lembut dan rasa gurih. Dibuat tanpa MSG.' },
             { id: 21, name: 'Abon Telang', price: 30000, category: 'Abon', image: 'gambar/gambar ilang.jpg', description: 'Abon sapi premium dengan serat halus dan rasa kaya. Cocok untuk lauk atau taburan nasi.' },
@@ -2344,7 +2352,7 @@
                     priceDisplay = formatRupiah(calculateSizePrice(product.price, defaultSize, product.id));
                 }
 
-                let buttonHtml = noSizeButModal ? `<button class="add-to-cart-direct" data-product-id="${product.id}">Tambah ke Keranjang</button>` : `<button class="add-to-cart" data-product-id="${product.id}">Lihat Detail</button>`;
+                let buttonHtml = noSizeButModal ? `<button class="add-to-cart" data-product-id="${product.id}">Lihat Detail</button>` : `<button class="add-to-cart" data-product-id="${product.id}">Lihat Detail</button>`;
 
                 productCard.innerHTML = `
                 <img src="${product.image}" alt="${product.name}">
@@ -2409,18 +2417,33 @@
             const product = productsDatabase.find(p => p.id == productId);
             if (!product) return;
             const productCard = document.querySelector(`.product-card[data-product-id="${productId}"]`);
-            const selectedSize = productCard ? productCard.dataset.selectedSize || 'S' : 'S';
-            let selectedPrice;
-
+            let defaultSize = 'S';
             if (product.category === 'Cookie Kering') {
-                selectedPrice = calculateCookieSizePrice(product.price, selectedSize);
+                defaultSize = 'Toples Tabung (300 ml)';
+            }
+            const selectedSize = productCard ? productCard.dataset.selectedSize || defaultSize : defaultSize;
+
+            // Get the price from the card to ensure it matches
+            let modalPriceText;
+            let selectedPrice;
+            if (productCard) {
+                const cardPriceElement = productCard.querySelector('.price');
+                if (cardPriceElement) {
+                    modalPriceText = cardPriceElement.textContent;
+                    // Parse the price back to number for dataset
+                    selectedPrice = parseInt(cardPriceElement.textContent.replace(/[^\d]/g, ''), 10);
+                } else {
+                    modalPriceText = formatRupiah(product.price);
+                    selectedPrice = product.price;
+                }
             } else {
-                selectedPrice = calculateSizePrice(product.price, selectedSize);
+                modalPriceText = formatRupiah(product.price);
+                selectedPrice = product.price;
             }
 
             document.getElementById('modalTitle').textContent = product.name;
             document.getElementById('modalCategory').textContent = product.category;
-            document.getElementById('modalPrice').textContent = formatRupiah(selectedPrice);
+            document.getElementById('modalPrice').textContent = modalPriceText;
             document.getElementById('modalDescription').textContent = product.description;
             document.getElementById('modalImage').src = product.image;
             document.getElementById('modalImage').alt = product.name;
