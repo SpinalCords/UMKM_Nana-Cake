@@ -551,17 +551,7 @@
             border-color: #e85d75;
         }
 
-        .darkmode .size-btn {
-            background: #222;
-            border-color: #444;
-            color: #f0f0f0;
-        }
 
-        .darkmode .size-btn.active,
-        .darkmode .size-btn:hover {
-            background: #f0f0f0;
-            color: #e85d75;
-        }
 
         .size-btn:disabled {
             background: #ccc;
@@ -1107,50 +1097,6 @@
 
         /* Highlight class for search results — responsive to theme */
         .search-highlight { color: var(--color-cta); font-weight: 700; }
-
-        /* ===== Dark mode overrides ===== */
-        .darkmode {
-            --color-bg: #071822;
-            --color-text: #DFF6FF;
-            --color-primary: #82CFFF;
-            --color-accent: #66B8E6;
-            --color-hover: #22576f;
-            --color-cta: #1F6F9B;
-        }
-
-
-        .darkmode body { background-color: var(--color-bg) !important; color: var(--color-text) !important; }
-        .darkmode header,
-        .darkmode .search-section,
-        .darkmode .sidebar-section,
-        .darkmode .product-card,
-        .darkmode .modal-content,
-        .darkmode .search-results,
-        .darkmode .hero-banner {
-            background-color: rgba(6,20,28,0.65) !important;
-            color: var(--color-text) !important;
-            border-color: rgba(255,255,255,0.04) !important;
-            box-shadow: none !important;
-        }
-        .darkmode .hero-text p{
-            color: rgba(223,246,255,0.8) !important;
-        }
-
-        .darkmode .btn-primary,
-        .darkmode .add-to-cart,
-        .darkmode .scroll-top-btn {
-            background: var(--color-cta) !important;
-            color: #fff !important;
-        }
-        .darkmode .btn-primary:hover,
-        .darkmode .add-to-cart:hover {
-            background: var(--color-hover) !important;
-            color: var(--color-text) !important;
-        }
-
-        .darkmode .search-highlight { color: var(--color-hover); }
-        .darkmode a { color: var(--color-primary) !important; }
-        .darkmode a:hover { color: var(--color-accent) !important; }
 
         /* Transitions */
         * { transition: color .12s ease, background-color .12s ease; }
@@ -2002,20 +1948,16 @@
             const mobileToggle = document.getElementById('mobileToggle');
             const navContainer = document.querySelector('.nav-container');
             const navbar = document.getElementById('navbar');
-            const themeSwitch = document.getElementById('theme-switch');
-
             if (toggleBtn) toggleBtn.classList.add('show');
             if (mobileToggle) mobileToggle.classList.add('show');
             if (navContainer) navContainer.classList.add('show');
             // Navbar will be hidden by default, only show when toggled
-            if (themeSwitch) themeSwitch.classList.add('show');
         });
 
         // ===== NAVBAR FUNCTIONALITY =====
         const toggleBtn = document.getElementById('toggleBtn');
         const mobileToggle = document.getElementById('mobileToggle');
         const navbar = document.getElementById('navbar');
-        const themeSwitch = document.getElementById('theme-switch');
 
         let isNavOpen = false;
 
@@ -2093,21 +2035,7 @@
             }
         });
 
-        // Dark mode functionality
-        const enableDarkmode = () => {
-            document.body.classList.add('darkmode');
-            themeSwitch.textContent = "⏾";
-        }
 
-        const disableDarkmode = () => {
-            document.body.classList.remove('darkmode');
-            themeSwitch.textContent = "☀";
-        }
-
-        themeSwitch.addEventListener("click", () => {
-            const isDarkmode = document.body.classList.contains('darkmode');
-            !isDarkmode ? enableDarkmode() : disableDarkmode();
-        });
 
         // Button scrol ke atas
         // Scroll to Top Functionality
@@ -2175,22 +2103,8 @@
                 32: { basePrice: 35000, sizes: { 'Toples Tabung (300 ml)': 0, 'Toples Tabung (600 ml)': 15000, 'Toples Tabung (800 ml)': 35000, 'Toples Bulat (250 gr)': 0, 'Toples Bulat (500 gr)': 30000 } }, // Cookie Vanilla
                 33: { basePrice: 35000, sizes: { 'Toples Tabung (300 ml)': 0, 'Toples Tabung (600 ml)': 15000, 'Toples Tabung (800 ml)': 35000, 'Toples Bulat (250 gr)': 0, 'Toples Bulat (500 gr)': 30000 } }, // Cookie Vanilla
                 34: { basePrice: 35000, sizes: { 'Toples Tabung (300 ml)': 0, 'Toples Tabung (600 ml)': 15000, 'Toples Tabung (800 ml)': 40000, 'Toples Bulat (250 gr)': 0, 'Toples Bulat (500 gr)': 35000 } }, // Cookie Vanilla
-                35: { basePrice: 35000, sizes: { 'Toples Tabung (300 ml)': 0, 'Toples Tabung (600 ml)': 15000, 'Toples Tabung (800 ml)': 35000, 'Toples Bulat (250 gr)': 0, 'Toples Bulat (500 gr)': 30000 } }, // Cookie Vanilla
+                35: { basePrice: 35000, sizes: { 'Toples Tabung (300 ml)': 0, 'Toples Tabung (600 ml)': 15000, 'Toples Tabung (800 ml)': 35000, 'Toples Bulat (250 gr)': 0, 'Toples Bulat (500 gr)': 30000 } } // Cookie Vanilla
                 // Bolu products (different pricing from Cake)
-                36: { basePrice: 25000, sizes: { S: 0, M: 4000, L: 8000 } }, // Rosa mosa
-                37: { basePrice: 25000, sizes: { S: 0, M: 4000, L: 8000 } }, // Vanilla Keju
-                38: { basePrice: 25000, sizes: { S: 0, M: 4000, L: 8000 } }, // Tapai Singkong
-                39: { basePrice: 25000, sizes: { S: 0, M: 4000, L: 8000 } }, // Gambung Kuah Sarikaya
-                40: { basePrice: 25000, sizes: { S: 0, M: 4000, L: 8000 } }, // Tapai Ketan
-                41: { basePrice: 25000, sizes: { S: 0, M: 4000, L: 8000 } }, // Marmer
-                42: { basePrice: 25000, sizes: { S: 0, M: 4000, L: 8000 } }, // Gula Merah
-                43: { basePrice: 25000, sizes: { S: 0, M: 4000, L: 8000 } }, // Gulung
-                // Paket Hampers (no size variations)
-                44: { basePrice: 100000, sizes: {} }, // Paket Ekonomis
-                45: { basePrice: 130000, sizes: {} }, // Paket Reguler
-                46: { basePrice: 135000, sizes: {} }, // Paket Puas
-                47: { basePrice: 135000, sizes: {} }, // Paket Super Hemat
-                48: { basePrice: 150000, sizes: {} }, // Paket Spesial
 
             }
         };
@@ -2235,24 +2149,9 @@
             { id: 32, name: 'Cookies Susu', price: 35000, category: 'Cookie Kering', image: 'gambar/BOLUFINAL/cookies/cookiessusu (2).jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
             { id: 33, name: 'Kacang Jadul', price: 35000, category: 'Cookie Kering', image: 'gambar/BOLUFINAL/cookies/kacangjadul.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] }, 
             { id: 34, name: 'Cookies Nutella', price: 35000, category: 'Cookie Kering', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] }, 
-            { id: 35, name: 'Emping Madu', price: 35000, category: 'Cookie Kering', image: 'gambar/BOLUFINAL/cookies/empingmadu.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            // Bolu
-            { id: 36, name: 'Rosa mosa', price: 25000, category: 'Bolu', image: 'gambar/vanilla Original.jpg', description: 'Nastar lembut dengan isian nanas homemade yang manis-asam. Camilan wajib lebaran.' },
-            { id: 37, name: 'Vanilla Keju', price: 25000, category: 'Bolu', image: 'gambar/vanila keju.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 38, name: 'Tapai Singkong', price: 25000, category: 'Bolu', image: 'gambar/tapai singkong.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 39, name: 'Gambung Kuah Sarikaya', price: 25000, category: 'Bolu', image: 'gambar/gambung kuah sarikaya.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 40, name: 'Tapai Ketan', price: 25000, category: 'Bolu', image: 'gambar/tapai ketan.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 41, name: 'Marmer', price: 25000, category: 'Bolu', image: 'gambar/marmer.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 42, name: 'Gula Merah', price: 25000, category: 'Bolu', image: 'gambar/gula merah.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
-            { id: 43, name: 'Gulung', price: 25000, category: 'Bolu', image: 'gambar/gulung.jpg', description: 'Putri salju dengan tekstur lembut dan taburan gula halus yang melimpah.' },
+            { id: 35, name: 'Emping Madu', price: 35000, category: 'Cookie Kering', image: 'gambar/BOLUFINAL/cookies/empingmadu.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] }
             // Paket Hampers
-            { id: 44, name: 'Paket Ekonomis', price: 100000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket hemat dengan pilihan kue kering dan basah favorit keluarga. Cocok untuk acara kecil atau hadiah sederhana.', details: ['3 toples 300ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
-            { id: 45, name: 'Paket Reguler', price: 130000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket lengkap dengan variasi cake, cookies, dan brownies. Ideal untuk ulang tahun atau gathering kecil.', details: ['4 toples 300 ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
-            { id: 46, name: 'Paket Puas', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket besar dengan berbagai jenis kue premium dan abon. Cocok untuk acara keluarga atau corporate gifts.', details: ['3 toples 600ml', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
-            { id: 47, name: 'Paket Super Hemat', price: 135000, category: 'Paket Hampers', image: 'gambar/gambar ilang.jpg', description: 'Paket ekonomis dengan kualitas premium. Berisi aneka cookies dan cake mini untuk berbagai kebutuhan.', details: ['5 toples 250gr', 'Jenis Cookies tidak dapat dipilih', 'Double nastar tambah harga 15k'] },
-            // Paket Nastar
-            { id: 48, name: 'Paket Nastar Spesial', price: 150000, category: 'Nastar', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-        ];
+            ];
 
         // Fungsi format Rupiah
         function formatRupiah(amount) {
