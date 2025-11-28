@@ -2111,6 +2111,28 @@
 
         // Database Produk - enhanced with descriptions
         const productsDatabase = [
+            // Sections
+            { id: 100, name: 'Cake', category: 'Section', image: 'gambar/BOLUFINAL/bolu/boluvanillakeju.jpg', description: 'Koleksi kue basah lezat dan segar' },
+            { id: 101, name: 'Bread', category: 'Section', image: 'gambar/BOLUFINAL/roti/bolugambungsrikaya.jpg', description: 'Aneka roti dan kue kering yang enak' },
+            { id: 102, name: 'Abon', category: 'Section', image: 'gambar/BOLUFINAL/lainnya/rabukayam.jpg', description: 'Abon ayam dan sapi berkualitas' },
+            { id: 103, name: 'Cookie Kering', category: 'Section', image: 'gambar/nastar.jpg', description: 'Kue kering dan cookies untuk berbagai acara' },
+            { id: 104, name: 'Paket Hemat', category: 'Section', image: 'gambar/nastar.jpg', description: 'Paket hemat dengan berbagai pilihan cookies' },
+            { id: 105, name: 'Ekonomis', category: 'Section', image: 'gambar/nastar.jpg', description: 'Paket ekonomis untuk kebutuhan sehari-hari' },
+            { id: 106, name: 'Paket Regular', category: 'Section', image: 'gambar/nastar.jpg', description: 'Paket regular dengan pilihan lengkap' },
+            { id: 107, name: 'Paket Puas', category: 'Section', image: 'gambar/beseler.jpg', description: 'Paket puas untuk acara spesial' },
+            // Packages
+            { id: 200, name: 'Hemat 1', category: 'Package', sectionId: 'paket-hemat', tabId: 'hemat1', image: 'gambar/nastar.jpg', description: 'Paket hemat dengan 5 jenis cookies' },
+            { id: 201, name: 'Hemat 2', category: 'Package', sectionId: 'paket-hemat', tabId: 'hemat2', image: 'gambar/nastar.jpg', description: 'Paket hemat dengan variasi cookies' },
+            { id: 202, name: 'Hemat 3', category: 'Package', sectionId: 'paket-hemat', tabId: 'hemat3', image: 'gambar/nastar.jpg', description: 'Paket hemat pilihan terbaik' },
+            { id: 203, name: 'Ekonomis 1', category: 'Package', sectionId: 'ekonomis', tabId: 'ekonomis1', image: 'gambar/nastar.jpg', description: 'Paket ekonomis dengan 3 jenis cookies' },
+            { id: 204, name: 'Ekonomis 2', category: 'Package', sectionId: 'ekonomis', tabId: 'ekonomis2', image: 'gambar/nastar.jpg', description: 'Paket ekonomis pilihan populer' },
+            { id: 205, name: 'Ekonomis 3', category: 'Package', sectionId: 'ekonomis', tabId: 'ekonomis3', image: 'gambar/nastar.jpg', description: 'Paket ekonomis untuk semua kalangan' },
+            { id: 206, name: 'Reguler 1', category: 'Package', sectionId: 'paket-regular', tabId: 'reguler1', image: 'gambar/nastar.jpg', description: 'Paket regular dengan 4 jenis cookies' },
+            { id: 207, name: 'Reguler 2', category: 'Package', sectionId: 'paket-regular', tabId: 'reguler2', image: 'gambar/nastar.jpg', description: 'Paket regular pilihan lengkap' },
+            { id: 208, name: 'Reguler 3', category: 'Package', sectionId: 'paket-regular', tabId: 'reguler3', image: 'gambar/nastar.jpg', description: 'Paket regular untuk acara spesial' },
+            { id: 209, name: 'Puas 1', category: 'Package', sectionId: 'paket-puas', tabId: 'puas1', image: 'gambar/nastar.jpg', description: 'Paket puas dengan 3 jenis cookies' },
+            { id: 210, name: 'Puas 2', category: 'Package', sectionId: 'paket-puas', tabId: 'puas2', image: 'gambar/nastar.jpg', description: 'Paket puas pilihan premium' },
+            { id: 211, name: 'Puas 3', category: 'Package', sectionId: 'paket-puas', tabId: 'puas3', image: 'gambar/nastar.jpg', description: 'Paket puas untuk kepuasan maksimal' },
             // Cake
             { id: 1, name: 'Bolu Vanilla Original', price: 25000, category: 'Cake', image: 'gambar/BOLUFINAL/bolu/vanillaori.jpg', description: 'Cake lembut dengan krim vanilla yang creamy dan lezat. Cocok untuk berbagai acara spesial.' },
             { id: 2, name: 'Bolu Vanilla Keju', price: 20000, category: 'Cake', image: 'gambar/BOLUFINAL/bolu/vanillakeju.jpg', description: 'Cake dengan topping blueberry segar yang manis dan asam. Perpaduan sempurna antara cake lembut dan buah segar.' },
@@ -2147,8 +2169,8 @@
             { id: 30, name: 'Sagu Keju Ori', price: 35000, category: 'Cookie Kering', image: 'gambar/BOLUFINAL/cookies/sagukeju (4).jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
             { id: 31, name: 'Nastar Keju', price: 35000, category: 'Cookie Kering', image: 'gambar/nastar keju sungguh.jpg ', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
             { id: 32, name: 'Cookies Susu', price: 35000, category: 'Cookie Kering', image: 'gambar/BOLUFINAL/cookies/cookiessusu (2).jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
-            { id: 33, name: 'Kacang Jadul', price: 35000, category: 'Cookie Kering', image: 'gambar/BOLUFINAL/cookies/kacangjadul.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] }, 
-            { id: 34, name: 'Cookies Nutella', price: 35000, category: 'Cookie Kering', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] }, 
+            { id: 33, name: 'Kacang Jadul', price: 35000, category: 'Cookie Kering', image: 'gambar/BOLUFINAL/cookies/kacangjadul.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
+            { id: 34, name: 'Cookies Nutella', price: 35000, category: 'Cookie Kering', image: 'gambar/gambar ilang.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] },
             { id: 35, name: 'Emping Madu', price: 35000, category: 'Cookie Kering', image: 'gambar/BOLUFINAL/cookies/empingmadu.jpg', description: 'Paket nastar spesial dengan isian nanas premium dan keju. Cocok untuk Lebaran atau acara formal. Isi 5 macam cookies ukuran toples 250gr', details: ['Nastar', 'Putri Salju', 'Mawar Vanilla', 'Kacang Jadul', 'Palm Sugar Cheese', 'Jika tambah Nastar double maka tambah harga 10k'] }
             // Paket Hampers
             ];
@@ -2556,7 +2578,8 @@
                 const results = productsDatabase.filter(product => {
                     const searchTerm = query.toLowerCase();
                     return product.name.toLowerCase().includes(searchTerm) ||
-                        product.category.toLowerCase().includes(searchTerm);
+                        product.category.toLowerCase().includes(searchTerm) ||
+                        (product.description && product.description.toLowerCase().includes(searchTerm));
                 });
                 displaySearchResults(results, query);
             }, 300);
@@ -2606,24 +2629,57 @@
         function handleProductClick(productId, category) {
             searchResults.classList.remove('active');
             searchInput.value = '';
-            let targetId = '';
-            switch (category) {
-                case 'Cake': targetId = 'cake'; break;
-                case 'Bread': targetId = 'bresd'; break;
-                case 'Abon': targetId = 'Abon'; break;
-                case 'Cookie Kering': targetId = 'Cookiekering'; break;
-                case 'Bolu': targetId = 'Cookiebasah'; break;
-                case 'Paket Hampers': targetId = 'paket'; break;
-                case 'Nastar': targetId = 'paketnas'; break;
-            }
-            if (targetId) {
-                const element = document.getElementById(targetId);
+            const product = productsDatabase.find(p => p.id == productId);
+            if (!product) return;
+
+            if (category === 'Section') {
+                // Scroll to section
+                const element = document.getElementById(product.name.toLowerCase().replace(/\s+/g, ''));
                 if (element) {
-                    const productElement = element.querySelector(`.product-card[data-product-id="${productId}"]`);
-                    if (productElement) {
-                        productElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        productElement.style.boxShadow = '0 0 20px rgba(232, 93, 117, 0.7)';
-                        setTimeout(() => { productElement.style.boxShadow = ''; }, 2000);
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            } else if (category === 'Package') {
+                // Scroll to section and activate tab
+                const sectionElement = document.getElementById(product.sectionId);
+                if (sectionElement) {
+                    sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Activate the specific tab
+                    const tabBtn = sectionElement.querySelector(`.paket-tab-btn[data-tab="${product.tabId}"]`);
+                    if (tabBtn) {
+                        // Remove active from all tabs in this section
+                        const allTabBtns = sectionElement.querySelectorAll('.paket-tab-btn');
+                        const allTabContents = sectionElement.querySelectorAll('.paket-tab-content');
+                        allTabBtns.forEach(btn => btn.classList.remove('active'));
+                        allTabContents.forEach(content => content.classList.remove('active'));
+                        // Activate the specific tab
+                        tabBtn.classList.add('active');
+                        const targetContent = sectionElement.querySelector(`#${product.tabId}`);
+                        if (targetContent) {
+                            targetContent.classList.add('active');
+                        }
+                    }
+                }
+            } else {
+                // Handle regular products
+                let targetId = '';
+                switch (category) {
+                    case 'Cake': targetId = 'cake'; break;
+                    case 'Bread': targetId = 'bresd'; break;
+                    case 'Abon': targetId = 'Abon'; break;
+                    case 'Cookie Kering': targetId = 'Cookiekering'; break;
+                    case 'Bolu': targetId = 'Cookiebasah'; break;
+                    case 'Paket Hampers': targetId = 'paket'; break;
+                    case 'Nastar': targetId = 'paketnas'; break;
+                }
+                if (targetId) {
+                    const element = document.getElementById(targetId);
+                    if (element) {
+                        const productElement = element.querySelector(`.product-card[data-product-id="${productId}"]`);
+                        if (productElement) {
+                            productElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            productElement.style.boxShadow = '0 0 20px rgba(232, 93, 117, 0.7)';
+                            setTimeout(() => { productElement.style.boxShadow = ''; }, 2000);
+                        }
                     }
                 }
             }
