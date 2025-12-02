@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ... existing styles ... */
+        /* ...existing styles ... */
         * {
             margin: 0;
             padding: 0;
@@ -976,7 +976,9 @@
             .product-grid {
                 grid-template-columns: 1fr;
             }
-
+            .search-section{
+                width: 400px;
+            }
             .blog-grid {
                 grid-template-columns: 1fr;
             }
@@ -1086,7 +1088,7 @@
 
         /* Modal */
         .modal {
-            background: rgba(39,69,86,0.48) !important;
+            background: rgba(39,69,86,0.75) !important;
         }
         .modal-content { background: #fff !important; color: var(--color-text) !important; }
         .modal-close:hover { background: var(--color-cta) !important; color: #fff !important; }
@@ -1182,6 +1184,81 @@
         .double-nastar-checkbox:checked + label:after {
             opacity: 1;
         }
+
+        /* ========== THEME SWITCH / DARK MODE OVERRIDES ========== */
+        /* Ensure the site uses CSS variables; provide sensible defaults already in :root above.
+           When html gets class "dark" we override the variables to dark-theme values. */
+        html.dark {
+            --color-primary: #9ad3ff;
+            --color-accent:  #7fb2d9;
+            --color-hover:   #6aa7c7;
+            --color-bg:      #071025;    /* very dark navy */
+            --color-text:    #e6f3fb;    /* very light text */
+            --color-cta:     #0ea5a4;    /* teal-ish CTA on dark */
+        }
+
+        /* Apply base background/text colors using variables */
+        body {
+            background: var(--color-bg) !important;
+            color: var(--color-text) !important;
+            transition: background .2s ease, color .2s ease;
+        }
+
+        /* Header & search overlay adjustments for dark mode */
+        html.dark header {
+            background: linear-gradient(180deg, rgba(7,16,37,0.96), rgba(7,16,37,0.95)) !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.6) !important;
+        }
+        html.dark .search-section {
+            background: rgba(10,20,40,0.85) !important;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6) !important;
+            color: var(--color-text);
+        }
+        html.dark .search-results {
+            background: #071025 !important;
+            color: var(--color-text) !important;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.6) !important;
+        }
+        html.dark .search-result-item { border-bottom: 1px solid rgba(255,255,255,0.04); }
+        html.dark .search-result-info .category { color: rgba(230,243,251,0.7) !important; }
+
+        /* Sidebar & cards */
+        html.dark .sidebar-section { background: rgba(10,20,40,0.9) !important; color: var(--color-text) !important; }
+        html.dark .product-card { background: rgba(10,18,30,0.6) !important; border: 1px solid rgba(255,255,255,0.04) !important; }
+        html.dark .product-details h3 { color: var(--color-text) !important; }
+        html.dark .product-price .price { color: var(--color-cta) !important; }
+
+        /* Modal */
+        html.dark .modal { background: rgba(0,0,0,0.75) !important; }
+        html.dark .modal-content { background: linear-gradient(180deg, rgba(8,14,24,0.95), rgba(12,20,34,0.95)) !important; color: var(--color-text) !important; }
+
+        /* Scroll top button */
+        html.dark .scroll-top-btn { background: var(--color-cta) !important; box-shadow: 0 4px 15px rgba(14,165,164,0.15) !important; }
+
+        /* Theme switch button (top-right) */
+        #theme-switch {
+            position: fixed;
+            top: 14px;
+            right: 14px;
+            z-index: 99999;                /* ensure it's above everything */
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: none;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-cta);
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            font-size: 18px;
+            transition: transform .12s ease, background .12s ease, opacity .12s ease;
+            pointer-events: auto;
+            visibility: visible;
+        }
+        #theme-switch:hover { transform: translateY(-2px); }
+        html.dark #theme-switch { background: #1f2937; color: #fff; }
     </style>
 </head>
 
@@ -1209,11 +1286,9 @@
         <div class="bar"></div>
     </button>
 
-    <!-- Tombol Darkmode -->
-    <button id="theme-switch">🌙</button>
-
     <!-- Navbar -->
     <div class="nav-container" id="navContainer">
+        <button id="theme-switch" aria-label="Toggle theme">☀</button>
         <nav class="navbar" id="navbar">
             <div class="menu-grid">
                 <div class="nav-item home">
@@ -2002,6 +2077,7 @@
 
         // Navigation mapping
         function navigateToSection(sectionClass) {
+
             let targetId = '';
             switch (sectionClass) {
                 case 'home':
@@ -2049,7 +2125,6 @@
                 scrollTopBtn.classList.remove('show');
             }
         });
-
         // Scroll to top function
         function scrollToTop() {
             window.scrollTo({
@@ -2121,18 +2196,18 @@
             { id: 106, name: 'Paket Regular', category: 'Section', image: 'gambar/nastar.jpg', description: 'Paket regular dengan pilihan lengkap' },
             { id: 107, name: 'Paket Puas', category: 'Section', image: 'gambar/beseler.jpg', description: 'Paket puas untuk acara spesial' },
             // Packages
-            { id: 200, name: 'Hemat 1', category: 'Package', sectionId: 'paket-hemat', tabId: 'hemat1', image: 'gambar/nastar.jpg', description: 'Paket hemat dengan 5 jenis cookies' },
-            { id: 201, name: 'Hemat 2', category: 'Package', sectionId: 'paket-hemat', tabId: 'hemat2', image: 'gambar/nastar.jpg', description: 'Paket hemat dengan variasi cookies' },
-            { id: 202, name: 'Hemat 3', category: 'Package', sectionId: 'paket-hemat', tabId: 'hemat3', image: 'gambar/nastar.jpg', description: 'Paket hemat pilihan terbaik' },
-            { id: 203, name: 'Ekonomis 1', category: 'Package', sectionId: 'ekonomis', tabId: 'ekonomis1', image: 'gambar/nastar.jpg', description: 'Paket ekonomis dengan 3 jenis cookies' },
-            { id: 204, name: 'Ekonomis 2', category: 'Package', sectionId: 'ekonomis', tabId: 'ekonomis2', image: 'gambar/nastar.jpg', description: 'Paket ekonomis pilihan populer' },
-            { id: 205, name: 'Ekonomis 3', category: 'Package', sectionId: 'ekonomis', tabId: 'ekonomis3', image: 'gambar/nastar.jpg', description: 'Paket ekonomis untuk semua kalangan' },
-            { id: 206, name: 'Reguler 1', category: 'Package', sectionId: 'paket-regular', tabId: 'reguler1', image: 'gambar/nastar.jpg', description: 'Paket regular dengan 4 jenis cookies' },
-            { id: 207, name: 'Reguler 2', category: 'Package', sectionId: 'paket-regular', tabId: 'reguler2', image: 'gambar/nastar.jpg', description: 'Paket regular pilihan lengkap' },
-            { id: 208, name: 'Reguler 3', category: 'Package', sectionId: 'paket-regular', tabId: 'reguler3', image: 'gambar/nastar.jpg', description: 'Paket regular untuk acara spesial' },
-            { id: 209, name: 'Puas 1', category: 'Package', sectionId: 'paket-puas', tabId: 'puas1', image: 'gambar/nastar.jpg', description: 'Paket puas dengan 3 jenis cookies' },
-            { id: 210, name: 'Puas 2', category: 'Package', sectionId: 'paket-puas', tabId: 'puas2', image: 'gambar/nastar.jpg', description: 'Paket puas pilihan premium' },
-            { id: 211, name: 'Puas 3', category: 'Package', sectionId: 'paket-puas', tabId: 'puas3', image: 'gambar/nastar.jpg', description: 'Paket puas untuk kepuasan maksimal' },
+            { id: 200, name: 'Hemat 1', price: 135000, category: 'Paket', sectionId: 'paket-hemat', tabId: 'hemat1', image: 'gambar/nastar.jpg', description: 'Paket hemat dengan 5 jenis cookies' },
+            { id: 201, name: 'Hemat 2', price: 135000, category: 'Paket', sectionId: 'paket-hemat', tabId: 'hemat2', image: 'gambar/nastar.jpg', description: 'Paket hemat dengan variasi cookies' },
+            { id: 202, name: 'Hemat 3', price: 135000, category: 'Paket', sectionId: 'paket-hemat', tabId: 'hemat3', image: 'gambar/nastar.jpg', description: 'Paket hemat pilihan terbaik' },
+            { id: 203, name: 'Ekonomis 1', price: 100000, category: 'Paket Hampers', sectionId: 'ekonomis', tabId: 'ekonomis1', image: 'gambar/nastar.jpg', description: 'Paket ekonomis dengan 3 jenis cookies' },
+            { id: 204, name: 'Ekonomis 2', price: 100000, category: 'Paket Hampers', sectionId: 'ekonomis', tabId: 'ekonomis2', image: 'gambar/nastar.jpg', description: 'Paket ekonomis pilihan populer' },
+            { id: 205, name: 'Ekonomis 3', price: 100000, category: 'Paket Hampers', sectionId: 'ekonomis', tabId: 'ekonomis3', image: 'gambar/nastar.jpg', description: 'Paket ekonomis untuk semua kalangan' },
+            { id: 206, name: 'Reguler 1', price: 130000, category: 'Paket Hampers', sectionId: 'paket-regular', tabId: 'reguler1', image: 'gambar/nastar.jpg', description: 'Paket regular dengan 4 jenis cookies' },
+            { id: 207, name: 'Reguler 2', price: 130000, category: 'Paket Hampers', sectionId: 'paket-regular', tabId: 'reguler2', image: 'gambar/nastar.jpg', description: 'Paket regular pilihan lengkap' },
+            { id: 208, name: 'Reguler 3', price: 130000, category: 'Paket Hampers', sectionId: 'paket-regular', tabId: 'reguler3', image: 'gambar/nastar.jpg', description: 'Paket regular untuk acara spesial' },
+            { id: 209, name: 'Puas 1', price: 135000, category: 'Paket', sectionId: 'paket-puas', tabId: 'puas1', image: 'gambar/nastar.jpg', description: 'Paket puas dengan 3 jenis cookies' },
+            { id: 210, name: 'Puas 2', price: 135000, category: 'Paket', sectionId: 'paket-puas', tabId: 'puas2', image: 'gambar/nastar.jpg', description: 'Paket puas pilihan premium' },
+            { id: 211, name: 'Puas 3', price: 135000, category: 'Paket', sectionId: 'paket-puas', tabId: 'puas3', image: 'gambar/nastar.jpg', description: 'Paket puas untuk kepuasan maksimal' },
             // Cake
             { id: 1, name: 'Bolu Vanilla Original', price: 25000, category: 'Cake', image: 'gambar/BOLUFINAL/bolu/vanillaori.jpg', description: 'Cake lembut dengan krim vanilla yang creamy dan lezat. Cocok untuk berbagai acara spesial.' },
             { id: 2, name: 'Bolu Vanilla Keju', price: 20000, category: 'Cake', image: 'gambar/BOLUFINAL/bolu/vanillakeju.jpg', description: 'Cake dengan topping blueberry segar yang manis dan asam. Perpaduan sempurna antara cake lembut dan buah segar.' },
@@ -2177,6 +2252,7 @@
 
         // Fungsi format Rupiah
         function formatRupiah(amount) {
+            if (amount == null || isNaN(amount)) return 'Harga belum ditentukan';
             return 'Rp ' + amount.toLocaleString('id-ID');
         }
 
@@ -2554,10 +2630,10 @@
             renderProductsByCategory('Bread', 'bread-products');
             renderProductsByCategory('Abon', 'abon-products');
             renderProductsByCategory('Cookie Kering', 'cookiekering-products');
-            renderProductsByCategory('Bolu', 'paket-hemat-products');
+            renderProductsByCategory('Paket', 'paket-hemat-products');
             renderProductsByCategory('Paket Hampers', 'ekonomis-products');
             renderProductsByCategory('Paket Hampers', 'paket-regular-products');
-            renderProductsByCategory('Nastar', 'paket-puas-products');
+            renderProductsByCategory('Paket', 'paket-puas-products');
         }
 
         // === SEARCH FUNCTIONALITY (unchanged) ===
@@ -2638,8 +2714,8 @@
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
-            } else if (category === 'Package') {
-                // Scroll to section and activate tab
+            } else if (product.sectionId) {
+                // Scroll to section and activate tab for packages
                 const sectionElement = document.getElementById(product.sectionId);
                 if (sectionElement) {
                     sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2667,9 +2743,6 @@
                     case 'Bread': targetId = 'bresd'; break;
                     case 'Abon': targetId = 'Abon'; break;
                     case 'Cookie Kering': targetId = 'Cookiekering'; break;
-                    case 'Bolu': targetId = 'Cookiebasah'; break;
-                    case 'Paket Hampers': targetId = 'paket'; break;
-                    case 'Nastar': targetId = 'paketnas'; break;
                 }
                 if (targetId) {
                     const element = document.getElementById(targetId);
@@ -2755,6 +2828,39 @@
                 });
             });
         });
+
+        /* ========== THEME TOGGLE SCRIPT ========== */
+        (function() {
+            const themeSwitch = document.getElementById('theme-switch');
+            if (!themeSwitch) return;
+
+            function setTheme(theme) {
+                const isDark = theme === 'dark';
+                document.documentElement.classList.toggle('dark', isDark);
+                // update button icon and label
+                themeSwitch.textContent = isDark ? '☀️' : '🌙';
+                themeSwitch.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                themeSwitch.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+                localStorage.setItem('apcake-theme', theme);
+            }
+
+            themeSwitch.addEventListener('click', () => {
+                const currentlyDark = document.documentElement.classList.contains('dark');
+                setTheme(currentlyDark ? 'light' : 'dark');
+            });
+
+            // initialize on load: respect saved preference or OS preference
+            document.addEventListener('DOMContentLoaded', () => {
+                const saved = localStorage.getItem('apcake-theme');
+                if (saved) {
+                    setTheme(saved);
+                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    setTheme('dark');
+                } else {
+                    setTheme('light');
+                }
+            });
+        })();
     </script>
 </body>
 </html>
