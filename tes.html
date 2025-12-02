@@ -1238,31 +1238,48 @@
         /* Theme switch button (top-right) */
         #theme-switch {
             position: fixed;
-            top: 14px;
-            right: 14px;
-            z-index: 99999;                /* ensure it's above everything */
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: none;
-            display: flex !important;
-            align-items: center;
-            justify-content: center;
-            background: var(--color-cta);
-            color: #fff;
+            top: 20px;
+            right: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 30px;
+            background: var(--c1);
+            color: white;
+            border: 2px solid var(--border);
+            box-shadow: 0 4px 0px -1px var(--border);
+            font-size: var(--fontS);
+            font-weight: 500;
             cursor: pointer;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-            font-size: 18px;
-            transition: transform .12s ease, background .12s ease, opacity .12s ease;
-            pointer-events: auto;
-            visibility: visible;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
         }
-        #theme-switch:hover { transform: translateY(-2px); }
-        html.dark #theme-switch { background: #1f2937; color: #fff; }
+
+        #theme-switch.show {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease 0.5s, visibility 0.5s ease 0.5s;
+        }
+
+        #theme-switch:hover {
+            background-color: var(--c2);
+            box-shadow: 0 6px 0px -1px var(--border);
+            transform: translateY(-2px);
+        }
+
+        #theme-switch:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0px -1px var(--border);
+        }
     </style>
 </head>
 
 <body>
+
+    <button id="theme-switch" class="show">☀</button>
+
+
     <!-- Search Bar -->
     <div class="search-section">
         <div class="search-bar">
@@ -2829,7 +2846,6 @@
             });
         });
 
-        /* ========== THEME TOGGLE SCRIPT ========== */
         (function() {
             const themeSwitch = document.getElementById('theme-switch');
             if (!themeSwitch) return;
