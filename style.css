@@ -227,13 +227,14 @@ body {
     display: inline-block;
     padding: 10px 20px;
     border-radius: 30px;
-    font-size: var(--fontS);
-    font-weight: 500;
-    color: var(--text);
-    cursor: pointer;
-    transition: all 0.3s ease;
+    background: var(--c1);
+    color: white;
     border: 2px solid var(--border);
     box-shadow: 0 4px 0px -1px var(--border);
+    font-size: var(--fontS);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
     z-index: 1001;
     opacity: 0;
     visibility: hidden;
@@ -246,9 +247,9 @@ body {
 }
 
 #theme-switch:hover {
+    background-color: var(--c2);
     box-shadow: 0 6px 0px -1px var(--border);
     transform: translateY(-2px);
-    color: var(--c1);
 }
 
 #theme-switch:active {
@@ -1032,6 +1033,8 @@ body {
     margin-top: 120px;
     border-radius: 8px;
     overflow: hidden;
+    padding-bottom: 100px;
+    min-height: 850px;
 }
 
 .paket-spesial {

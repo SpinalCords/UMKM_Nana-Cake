@@ -76,7 +76,7 @@
             /* CRITICAL: This is the anchor for the search-results dropdown */
             display: flex;
             align-items: center;
-            width: 500px;
+            width: 400px;
             /* Or any width you prefer */
         }
 
@@ -315,6 +315,42 @@
             padding-left: 10px;
         }
 
+        
+        .sidebar-section {
+            background: var(--color-cta) !important;
+            color: #fff !important;
+        }
+        .sidebar-section ul li { border-bottom: 1px solid rgba(255,255,255,0.12) !important; }
+        html.dark .sidebar-section { background: rgba(10,20,40,0.9) !important; color: var(--color-text) !important; }
+
+        /* Dropdown base */
+        .dropdown-menu {
+            display: none; /* default hidden */
+        }
+
+        /* When opened */
+        .dropdown.open .dropdown-menu {
+            display: block;
+        }
+
+        /* Toggle cursor + arrow change */
+        .dropdown-toggle {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dropdown.open .dropdown-toggle::after {
+            content: "▴";
+        }
+
+        .dropdown-toggle::after {
+            content: "▾";
+            font-size: 14px;
+            margin-left: 8px;
+        }
+
         /* Button scrol ke atas */
         /* Scroll to Top Button */
         .scroll-top-btn {
@@ -430,6 +466,7 @@
             max-width: 400px;
             height: auto;
             border-radius: 20px;
+            margin: 0 auto;
         }
 
         /* Product Categories */
@@ -937,7 +974,16 @@
             }
 
             .sidebar {
-                width: 100%;
+                width: 82.5%;
+                position: fixed;
+                margin-top: -25px;
+                padding-bottom: 100px;
+                z-index: 9999 !important;
+            }
+
+
+            .scroll-top-btn{
+                visibility: hidden;
             }
 
             .product-grid {
@@ -970,6 +1016,41 @@
             .modal-actions {
                 flex-direction: column;
             }
+
+            #theme-switch {
+                width: 60px;
+                height: 60px;
+                padding: 0;
+                border-radius: 50%;
+                font-size: 26px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                top: 20px !important;
+                right: 20px !important;
+                bottom: unset !important;
+            }
+
+            .hero-image {
+                text-align: center;
+            }
+            
+            .hero-image img {
+              max-width: 200px;
+              height: auto;
+              padding-top: 10px;
+              border-radius: 20px;
+              margin: 0 auto;
+            }
+
+            .paket-menu-item{
+                max-width: 100%;
+            }
+
+            .paket-section-container {
+                width: 100%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -977,7 +1058,7 @@
                 grid-template-columns: 1fr;
             }
             .search-section{
-                width: 400px;
+                width: 85%;
             }
             .blog-grid {
                 grid-template-columns: 1fr;
@@ -990,7 +1071,27 @@
             .footer-content {
                 grid-template-columns: 1fr;
             }
-        }   
+            .paket-menu-item{
+                max-width: 61%;
+            }
+
+            .paket-item-details h4 {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .search-section{
+                width: 95%;
+            }
+
+            .paket-menu-item{
+                max-width: 55%;
+            }
+            .paket-menu-item{
+                max-width: 55%;
+            }
+        }
 
         /* WARNA: Dominan biru — override warna (HANYA ubah warna) */
         :root{
@@ -1033,12 +1134,6 @@
         .search-result-info .price { color: var(--color-cta) !important; }
         .search-result-info .category { color: rgba(39,69,86,0.6) !important; }
 
-        /* Sidebar */
-        .sidebar-section {
-            background: var(--color-cta) !important;
-            color: #fff !important;
-        }
-        .sidebar-section ul li { border-bottom: 1px solid rgba(255,255,255,0.12) !important; }
 
         /* Scroll top button */
         .scroll-top-btn {
@@ -1222,8 +1317,6 @@
         html.dark .search-result-item { border-bottom: 1px solid rgba(255,255,255,0.04); }
         html.dark .search-result-info .category { color: rgba(230,243,251,0.7) !important; }
 
-        /* Sidebar & cards */
-        html.dark .sidebar-section { background: rgba(10,20,40,0.9) !important; color: var(--color-text) !important; }
         html.dark .product-card { background: rgba(10,18,30,0.6) !important; border: 1px solid rgba(255,255,255,0.04) !important; }
         html.dark .product-details h3 { color: var(--color-text) !important; }
         html.dark .product-price .price { color: var(--color-cta) !important; }
@@ -1272,6 +1365,26 @@
             transform: translateY(2px);
             box-shadow: 0 2px 0px -1px var(--border);
         }
+
+        @media (max-width: 768px) {
+        #theme-switch {
+            position: fixed !important;
+            right: 20px !important;
+            bottom: 20px !important;
+            top: unset !important;
+
+            width: 60px !important;
+            height: 60px !important;
+            padding: 0 !important;
+            border-radius: 50% !important;
+
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+
+            font-size: 26px !important;
+        }
+}
     </style>
 </head>
 
@@ -1305,7 +1418,6 @@
 
     <!-- Navbar -->
     <div class="nav-container" id="navContainer">
-        <button id="theme-switch" aria-label="Toggle theme">☀</button>
         <nav class="navbar" id="navbar">
             <div class="menu-grid">
                 <div class="nav-item home">
@@ -1357,9 +1469,10 @@
     <div class="main-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3>Vertical menu</h3>
-                <ul>
+            <div class="sidebar-section dropdown">
+                <h3 class="dropdown-toggle">Vertical menu ▾</h3>
+
+                <ul class="dropdown-menu">
                     <li><a href="#cake">Cake</a></li>
                     <li><a href="#bresd">Bread</a></li>
                     <li><a href="#Abon">Abon</a></li>
@@ -2034,6 +2147,13 @@
     </div>
 
     <script>
+        document
+        .querySelector('.dropdown-toggle')
+        .addEventListener('click', function () {
+            this.parentElement.classList.toggle('open');
+        });
+        
+
         // Show navbar elements on page load
         document.addEventListener('DOMContentLoaded', function () {
             const toggleBtn = document.getElementById('toggleBtn');
