@@ -1,117 +1,105 @@
-console.log('JS loaded');
-const carousel = document.querySelector('.circle-carousel');
-const circles = document.querySelectorAll('.outer-circle');
-console.log('Carousel:', carousel);
-console.log('Circles:', circles);
+// Image carousel functionality with swipe support
+const images = [
+    'gambar/cake.png',
+    'gambar/Header (5).png',
+    'gambar/nastar.jpg',
+    'gambar/Putri Salju.jpg'
+];
 
-const radius = 250;
-let angleStep = (2 * Math.PI) / circles.length;
-let currentRotation = Math.PI;
+let currentIndex = 0;
+const carouselImage = document.getElementById('carousel-image');
+const carousel = document.querySelector('.carousel');
 
-function smoothstep(x) {
-  return x * x * (3 - 2 * x);
-}
+// Touch variables for swipe detection
+let touchStartX = 0;
+let touchEndX = 0;
+let isSwiping = false;
 
-function positionCircles() {
-  circles.forEach((circle, index) => {
-    const angle = index * angleStep + currentRotation;
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
+// Function to update the carousel image
+function updateCarousel(direction) {
+    // Remove any existing animation classes
+    carouselImage.classList.remove('slide-in-left', 'slide-in-right');
 
-    circle.style.left = `${50 + (x / radius) * 50}%`;
-    circle.style.top = `${50 + (y / radius) * 50}%`;
+    // Force reflow to restart animation
+    void carouselImage.offsetWidth;
 
-    // Reset to normal scale
-    circle.style.transform = `translate(-50%, -50%) scale(1)`;
-  });
-}
-
-
-
-
-
-circles.forEach(circle => {
-  circle.style.transition = "all 1s ease";
-});
-
-positionCircles();
-
-let isAnimating = false;
-
-function highlightLeftCircle() {
-  circles.forEach((circle, index) => {
-    const angle = index * angleStep + currentRotation;
-    let normalizedAngle = (angle % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
-    const diffFromLeft = Math.abs(normalizedAngle - Math.PI);
-
-    if (diffFromLeft < Math.PI / 6) { // If close to left position, highlight
-      circle.style.transform = `translate(-50%, -50%) scale(1.5)`;
-    } else {
-      circle.style.transform = `translate(-50%, -50%) scale(1)`;
+    // Add the appropriate animation class
+    if (direction === 'next') {
+        carouselImage.classList.add('slide-in-left');
+    } else if (direction === 'prev') {
+        carouselImage.classList.add('slide-in-right');
     }
-  });
+
+    // Update the image source
+    carouselImage.src = images[currentIndex];
+
+    // Remove the animation class after animation completes
+    setTimeout(() => {
+        carouselImage.classList.remove('slide-in-left', 'slide-in-right');
+    }, 500); // Match the animation duration
 }
 
-function animateRotation() {
-  console.log('Animating rotation');
-  if (isAnimating) return;
-  isAnimating = true;
 
-  // Rotate by one step
-  currentRotation += angleStep;
 
-  // Position circles to new positions
-  positionCircles();
-
-  // After animation, highlight and wait
-  setTimeout(() => {
-    highlightLeftCircle();
-    setTimeout(() => {
-      // Reset highlight
-      circles.forEach(circle => {
-        circle.style.transform = `translate(-50%, -50%) scale(1)`;
-      });
-      isAnimating = false;
-    }, 2500); // 2.5 seconds highlight
-  }, 1000); // Wait for position animation to finish
-}
-
-// Start automatic animation every 5 seconds
-setInterval(animateRotation, 5000);
-
-// Modal functionality
-const modal = document.getElementById('image-modal');
-const modalTitle = document.getElementById('modal-title');
-const modalDescription = document.getElementById('modal-description');
-const closeBtn = document.getElementsByClassName('close')[0];
-
-circles.forEach(circle => {
-  circle.addEventListener('click', () => {
-    const title = circle.getAttribute('data-title');
-    const description = circle.getAttribute('data-description');
-    modalTitle.textContent = title;
-    modalDescription.textContent = description;
-    modal.style.display = 'flex';
-    // Trigger animation after display
-    setTimeout(() => {
-      modal.classList.add('show');
-    }, 10);
-  });
+// Touch event handlers for swipe functionality
+carousel.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+    isSwiping = true;
 });
 
-closeBtn.onclick = () => {
-  modal.classList.remove('show');
-  setTimeout(() => {
-    modal.style.display = 'none';
-  }, 300);
-};
+carousel.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
+    e.preventDefault(); // Prevent scrolling while swiping
+});
 
-window.onclick = (event) => {
-  if (event.target === modal) {
-    modal.classList.remove('show');
-    setTimeout(() => {
-      modal.style.display = 'none';
-    }, 300);
-  }
-};
+carousel.addEventListener('touchend', (e) => {
+    if (!isSwiping) return;
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+    isSwiping = false;
+});
 
+// Function to handle swipe gestures
+function handleSwipe() {
+    const swipeThreshold = 50; // Minimum distance for swipe recognition
+    const swipeDistance = touchStartX - touchEndX;
+
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+        if (swipeDistance > 0) {
+            // Swipe left - next image
+            nextImage();
+        } else {
+            // Swipe right - previous image
+            prevImage();
+        }
+    }
+}
+
+// Function to update dots
+function updateDots() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+    });
+}
+
+// Function to go to next image
+function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateCarousel('next');
+    updateDots();
+}
+
+// Function to go to previous image
+function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateCarousel('prev');
+    updateDots();
+}
+
+// Initialize carousel
+updateCarousel();
+updateDots();
+
+// Auto-cycle every 3 seconds
+setInterval(nextImage, 3000);

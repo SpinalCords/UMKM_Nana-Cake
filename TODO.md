@@ -1,11 +1,7 @@
-- [x] Modify renderProductsByCategory function to disable S button for "Bolu Vanilla Original"
-- [x] Set default size to M for this product
-- [x] Add CSS styling for disabled size buttons
-- [x] Test the changes in the browser
-- [x] Disable S button in modal popup for "Bolu Vanilla Original"
-- [x] Enable S button for "Bolu Vanilla Original" in both card and modal
-- [x] Disable S button for "Bolu Coklat" and "Brownies Kukus" in both card and modal
-- [x] Disable S and L buttons for "Roll Cake (Bolu Gulung)" in both card and modal
-- [x] Fix default size bug in showProductDetail for Cookie Kering
-- [x] Add size options and modal popup to popular menu cards in index.html
-- [x] Implement synchronization between card and modal in index.html
+# Add Image Carousel to About Us Page
+
+## Tasks
+- [x] Edit index.html to add carousel HTML in about-container after text-container
+- [x] Create about_us/about_us.css to add carousel styles and animations
+- [x] Create about_us/about_us.js to add carousel logic with swipe support
+- [x] Add swiping animation for mobile devices

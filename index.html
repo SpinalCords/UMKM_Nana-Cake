@@ -173,13 +173,7 @@
             <div class="corner-deco bottom-right"></div>
             <img src="https://images.unsplash.com/photo-1587241321921-91a834d6d191?w=500" alt="Cupcake">
             <h3>Yummy Cupcake</h3>
-            <div class="size-options">
-                <button class="size-btn active" data-size="S">S</button>
-                <button class="size-btn" data-size="M">M</button>
-                <button class="size-btn" data-size="L">L</button>
-            </div>
             <p class="price">Rp15.000</p>
-            <button class="detail-btn" data-product-id="1">Lihat Detail</button>
         </div>
 
         <div class="card" data-product-id="2">
@@ -188,13 +182,7 @@
             <div class="corner-deco bottom-right"></div>
             <img src="https://images.unsplash.com/photo-1617196034796-73f7b9e0aabb?w=500" alt="Donat">
             <h3>Donat Lumer</h3>
-            <div class="size-options">
-                <button class="size-btn active" data-size="S">S</button>
-                <button class="size-btn" data-size="M">M</button>
-                <button class="size-btn" data-size="L">L</button>
-            </div>
             <p class="price">Rp10.000</p>
-            <button class="detail-btn" data-product-id="2">Lihat Detail</button>
         </div>
 
         <div class="card" data-product-id="3">
@@ -203,13 +191,7 @@
             <div class="corner-deco bottom-right"></div>
             <img src="https://images.unsplash.com/photo-1590080875831-2cf4eeab3bda?w=500" alt="Macaron">
             <h3>Sweet Macaron</h3>
-            <div class="size-options">
-                <button class="size-btn active" data-size="S">S</button>
-                <button class="size-btn" data-size="M">M</button>
-                <button class="size-btn" data-size="L">L</button>
-            </div>
             <p class="price">Rp18.000</p>
-            <button class="detail-btn" data-product-id="3">Lihat Detail</button>
         </div>
     </div>
 
@@ -219,46 +201,25 @@
     <div id="aboutUsPage" class="about-page">
         <section class="about-container">
             <!-- Left side text/content -->
-            <div class="text-container">
-                <div id="welcome-text">
-                    <h1>Selamat Datang Di Website Nana Cake</h1>
-                    <p>Test</p>
-                    <button class="more-btn">MORE</button>
-                </div>
-
-
+        <div class="text-container">
+            <div id="welcome-text">
+                <h1>Selamat Datang Di Website Nana Cake</h1>
+                <p>Test</p>
+                <button class="more-btn">MORE</button>
             </div>
+        </div>
 
-            <div class="lingk">
-                <!-- Right side circles -->
-                <div class="center-circle">
-                    <img src="gambar/logo.png" alt="logo">
-                </div>
-
-                <!-- Circle Carousel -->
-                <div class="circle-carousel">
-                    <div class="outer-circle" data-title="Image 1" data-description="Description 1">
-                        <img src="gambar/placeholder.jpg" alt="Image 1">
-                    </div>
-                    <div class="outer-circle" data-title="Image 2" data-description="Description 2">
-                        <img src="gambar/placeholder.jpg" alt="Image 2">
-                    </div>
-                    <div class="outer-circle" data-title="Image 3" data-description="Description 3">
-                        <img src="gambar/placeholder.jpg" alt="Image 3">
-                    </div>
-                    <div class="outer-circle" data-title="Image 4" data-description="Description 4">
-                        <img src="gambar/placeholder.jpg" alt="Image 4">
-                    </div>
-                    <div class="outer-circle" data-title="Image 5" data-description="Description 5">
-                        <img src="gambar/placeholder.jpg" alt="Image 5">
-                    </div>
-                    <div class="outer-circle" data-title="Image 6" data-description="Description 6">
-                        <img src="gambar/placeholder.jpg" alt="Image 6">
-                    </div>
-                </div>
+        <!-- Image Carousel -->
+        <div class="carousel">
+            <img id="carousel-image" src="gambar/cake.png" alt="Cake">
+            <div class="dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+                <span class="dot" data-index="3"></span>
             </div>
-
-        </section>
+        </div>
+    </section>
 
         <!-- Modal for Image Information -->
         <div id="image-modal" class="modal">
@@ -852,55 +813,6 @@
             </div>
         </div>
     </section>
-
-    <!-- === MODAL DETAIL PRODUK === -->
-    <div id="productModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
-            <div class="modal-body">
-                <div class="modal-image-section">
-                    <img id="modalImage" src="" alt="" class="modal-main-image">
-                </div>
-                <div class="modal-info-section">
-                    <span id="modalCategory" class="modal-category">Popular Menu</span>
-                    <h2 id="modalTitle"></h2>
-                    <div class="modal-rating">
-                        <div class="modal-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="modal-rating-text">(4.5/5 - 128 reviews)</span>
-                    </div>
-                    <div id="modalPrice" class="modal-price"></div>
-                    <div class="modal-sizes" role="group" aria-label="Pilih ukuran">
-                        <button class="size-btn active" data-size="S">S</button>
-                        <button class="size-btn" data-size="M">M</button>
-                        <button class="size-btn" data-size="L">L</button>
-                    </div>
-                    <p id="modalDescription" class="modal-description"></p>
-                    <div class="modal-quantity">
-                        <label>Jumlah:</label>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
-                            <input type="number" class="quantity-input" id="quantityInput" value="1" min="1">
-                            <button class="quantity-btn" onclick="increaseQuantity()">+</button>
-                        </div>
-                    </div>
-                    <div class="modal-actions">
-                        <button class="btn-add-cart" onclick="addToCart()">
-                            <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
-                        </button>
-                        <button class="btn-whatsapp" onclick="orderWhatsApp()">
-                            <i class="fab fa-whatsapp"></i> Pesan via WA
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer Section -->
     <footer class="footer">
