@@ -50,8 +50,6 @@ html.dark {
     --color-accent: #7fb2d9;
 }
 
-
-
 * {
     margin: 0;
     padding: 0;
@@ -806,7 +804,6 @@ body {
   color: #F5F5F5;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
-
 .text-container p {
   font-size: 1.1em;
   text-align: left;
@@ -1124,7 +1121,6 @@ body {
     margin: 0 20px;
     border-radius: 8px;
 }
-
 .paket-spesial h2 {
     text-align: center;
     font-size: 2.5rem;
@@ -1144,6 +1140,7 @@ body {
     opacity: 0.6;
     margin: 10px auto 0;
 }
+
 
 .paket-tab-nav {
     display: flex;
