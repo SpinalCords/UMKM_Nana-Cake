@@ -1138,7 +1138,7 @@
         /* Scroll top button */
         .scroll-top-btn {
             background: var(--color-cta) !important;
-            box-shadow: 0 4px 15px rgba(59,130,181,0.2) !important;
+            box-shadow: 0 4px 15px rgba(59, 130, 181, 0.2) !important;
         }
         .scroll-top-btn:hover { background: var(--color-accent) !important; }
 
@@ -1817,9 +1817,9 @@
                                     </div>
                                     <!-- Item -->
                                     <div class="paket-menu-item">
-                                        <img src="" class="paket-item-img">
+                                        <img src="gambar/Putri Salju.jpg" class="paket-item-img">
                                         <div class="paket-item-details">
-                                            <h4>Cookies Susu</h4>
+                                            <h4>Putri Salju</h4>
                                         </div>
                                     </div>
                                     <!-- Item -->
@@ -1939,6 +1939,10 @@
                                     <span class="paket-total-price-label">Total Reguler 2:</span>
                                     <span class="paket-total-price-amount">Rp 130.000</span>
                                 </div>
+                                <div class="double-nastar-option">
+                                    <input type="checkbox" id="double-nastar-reguler2" class="double-nastar-checkbox" data-tab="reguler2">
+                                    <label for="double-nastar-reguler2">tambah double nastar</label>
+                                </div>
                             </div>
                             <div id="reguler3" class="paket-tab-content">
                                 <div class="paket-item-list">
@@ -1974,6 +1978,10 @@
                                 <div class="paket-total-price-container">
                                     <span class="paket-total-price-label">Total Reguler 3:</span>
                                     <span class="paket-total-price-amount">Rp 130.000</span>
+                                </div>
+                                <div class="double-nastar-option">
+                                    <input type="checkbox" id="double-nastar-reguler3" class="double-nastar-checkbox" data-tab="reguler3">
+                                    <label for="double-nastar-reguler3">tambah double nastar</label>
                                 </div>
                             </div>
                         </div>
@@ -2029,6 +2037,10 @@
                                     <span class="paket-total-price-label">Total Puas 1:</span>
                                     <span class="paket-total-price-amount">Rp 135.000</span>
                                 </div>
+                                <div class="double-nastar-option">
+                                    <input type="checkbox" id="double-nastar-puas1" class="double-nastar-checkbox" data-tab="puas1">
+                                    <label for="double-nastar-puas1">tambah double nastar</label>
+                                </div>
                             </div>
                             <div id="puas2" class="paket-tab-content">
                                 <div class="paket-item-list">
@@ -2057,6 +2069,10 @@
                                 <div class="paket-total-price-container">
                                     <span class="paket-total-price-label">Total Puas 2:</span>
                                     <span class="paket-total-price-amount">Rp 135.000</span>
+                                </div>
+                                <div class="double-nastar-option">
+                                    <input type="checkbox" id="double-nastar-puas2" class="double-nastar-checkbox" data-tab="puas2">
+                                    <label for="double-nastar-puas2">tambah double nastar</label>
                                 </div>
                             </div>
                             <div id="puas3" class="paket-tab-content">
@@ -2087,6 +2103,10 @@
                                     <span class="paket-total-price-label">Total Puas 3:</span>
                                     <span class="paket-total-price-amount">Rp 135.000</span>
                                 </div>
+                                <div class="double-nastar-option">
+                                    <input type="checkbox" id="double-nastar-puas3" class="double-nastar-checkbox" data-tab="puas3">
+                                    <label for="double-nastar-puas3">tambah double nastar</label>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -2098,7 +2118,7 @@
     <!-- === MODAL DETAIL PRODUK === -->
     <div id="productModal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <button class="modal-close" onclick="closeModal()">&
             <div class="modal-body">
                 <div class="modal-image-section">
                     <img id="modalImage" src="" alt="" class="modal-main-image">
@@ -2145,6 +2165,56 @@
             </div>
         </div>
     </div>
+
+    <!-- New: Modal untuk pemesanan paket (ganti menjadi layout sama seperti product modal) -->
+    <div id="packageOrderModal" class="modal" aria-hidden="true" role="dialog">
+	<div class="modal-content">
+		<button class="modal-close" id="packageModalClose">&times;</button>
+		<div class="modal-body">
+			<div class="modal-image-section">
+				<img id="pkgModalImage" src="" alt="" class="modal-main-image">
+			</div>
+			<div class="modal-info-section">
+				<span id="pkgModalCategory" class="modal-category">Paket</span>
+				<h2 id="pkgModalTitle">Nama Paket</h2>
+
+				<div class="modal-rating">
+					<div class="modal-stars">
+						<i class="fas fa-star"></i>
+						<i class="fas fa-star"></i>
+						<i class="fas fa-star"></i>
+						<i class="fas fa-star"></i>
+						<i class="fas fa-star-half-alt"></i>
+					</div>
+					<span class="modal-rating-text">(4.5/5 - 128 reviews)</span>
+				</div>
+
+				<div id="pkgModalPrice" class="modal-price">Rp -</div>
+				<p id="pkgModalDescription" class="modal-description">Deskripsi paket.</p>
+
+				<ul id="pkgModalDetails" class="modal-details-list"></ul>
+
+				<div class="modal-quantity">
+					<label>Jumlah:</label>
+					<div class="quantity-controls">
+						<button class="quantity-btn" id="pkgQtyMinus">-</button>
+						<input type="number" class="quantity-input" id="pkgQtyInput" value="1" min="1">
+						<button class="quantity-btn" id="pkgQtyPlus">+</button>
+					</div>
+				</div>
+
+				<div class="modal-actions">
+					<button class="btn-add-cart" id="pkgAddCartBtn">
+						<i class="fas fa-shopping-cart"></i> Tambah ke Keranjang
+					</button>
+					<button class="btn-whatsapp" id="pkgConfirmWaBtn">
+						<i class="fab fa-whatsapp"></i> Pesan via WA
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
     <script>
         document
@@ -2966,37 +3036,189 @@
             });
         });
 
-        (function() {
-            const themeSwitch = document.getElementById('theme-switch');
-            if (!themeSwitch) return;
+        // ==== REPLACE: initPaketBuyButtons & orderPackageWhatsApp with popup flow ====
+        // ...existing code prior to previous initPaketBuyButtons ...
+        // remove/override previous implementations by defining new functions below
 
-            function setTheme(theme) {
-                const isDark = theme === 'dark';
-                document.documentElement.classList.toggle('dark', isDark);
-                // update button icon and label
-                themeSwitch.textContent = isDark ? '☀️' : '🌙';
-                themeSwitch.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-                themeSwitch.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-                localStorage.setItem('apcake-theme', theme);
-            }
+        function initPaketBuyButtons() {
+            const waNumber = '6281234567890'; // ganti jika perlu
+            document.querySelectorAll('.paket-tab-content').forEach(container => {
+                // jangan duplikat tombol kalau sudah ada
+                if (container.querySelector('.btn-whatsapp-paket')) return;
 
-            themeSwitch.addEventListener('click', () => {
-                const currentlyDark = document.documentElement.classList.contains('dark');
-                setTheme(currentlyDark ? 'light' : 'dark');
-            });
+                // cari product di database berdasarkan tabId
+                const tabId = container.id;
+                const pkg = productsDatabase.find(p => p.tabId === tabId);
 
-            // initialize on load: respect saved preference or OS preference
-            document.addEventListener('DOMContentLoaded', () => {
-                const saved = localStorage.getItem('apcake-theme');
-                if (saved) {
-                    setTheme(saved);
-                } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    setTheme('dark');
+                const btn = document.createElement('button');
+                btn.className = 'btn-whatsapp btn-whatsapp-paket';
+                btn.type = 'button';
+                btn.textContent = 'Beli via WA';
+                if (pkg) btn.dataset.packageId = pkg.id;
+
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openPackageModal(container, pkg ? pkg.id : null, waNumber);
+                });
+
+                // tempatkan tombol sebelum checkbox "tambah double nastar" jika ada,
+                // otherwise append ke akhir kontainer
+                const insertBeforeEl = container.querySelector('.double-nastar-option');
+                if (insertBeforeEl) {
+                    container.insertBefore(btn, insertBeforeEl);
                 } else {
-                    setTheme('light');
+                    container.appendChild(btn);
                 }
             });
-        })();
+        }
+
+        function openPackageModal(containerElement, packageId = null, waNumber = '6281234567890') {
+	const modal = document.getElementById('packageOrderModal');
+	const titleEl = document.getElementById('pkgModalTitle');
+	const priceEl = document.getElementById('pkgModalPrice');
+	const descEl = document.getElementById('pkgModalDescription');
+	const imgEl = document.getElementById('pkgModalImage');
+	const detailsEl = document.getElementById('pkgModalDetails');
+	const qtyInput = document.getElementById('pkgQtyInput');
+	const categoryEl = document.getElementById('pkgModalCategory');
+
+	// get package info from DB when available
+	let packageName = '';
+	let priceText = '';
+	let descText = '';
+	let imgSrc = '';
+	if (packageId) {
+		const pkg = productsDatabase.find(p => p.id == packageId);
+		if (pkg) {
+			packageName = pkg.name;
+			descText = pkg.description || '';
+			priceText = formatRupiah(pkg.price);
+			imgSrc = pkg.image || '';
+		}
+	}
+
+	// fallback read from DOM (harga bisa berubah setelah double-nastar)
+	const labelEl = containerElement ? containerElement.querySelector('.paket-total-price-label') : null;
+	const priceDomEl = containerElement ? containerElement.querySelector('.paket-total-price-amount') : null;
+	if (!packageName && labelEl) packageName = labelEl.textContent.replace(':','').trim();
+	if (priceDomEl) priceText = priceDomEl.textContent.trim();
+
+	// populate modal
+	titleEl.textContent = packageName || 'Paket';
+	priceEl.textContent = priceText || 'Rp -';
+	descEl.textContent = descText || '';
+	categoryEl.textContent = 'Paket';
+	if (imgSrc) {
+		imgEl.src = imgSrc;
+		imgEl.alt = packageName || 'Paket';
+	} else {
+		// jika tidak ada gambar, gunakan first item gambar dari container jika ada
+		const firstImg = containerElement ? containerElement.querySelector('img') : null;
+		if (firstImg) {
+			imgEl.src = firstImg.src;
+			imgEl.alt = packageName || firstImg.alt || 'Paket';
+		} else {
+			imgEl.src = '';
+			imgEl.alt = '';
+		}
+	}
+
+	// details: ambil dari productsDatabase jika ada, atau kosong
+	detailsEl.innerHTML = '';
+	if (packageId) {
+		const pkg = productsDatabase.find(p => p.id == packageId);
+		if (pkg && pkg.details && pkg.details.length) {
+			pkg.details.forEach(d => {
+				const li = document.createElement('li');
+				li.innerHTML = `<i class="fas fa-check-circle"></i> ${d}`;
+				detailsEl.appendChild(li);
+			});
+		}
+	}
+
+	qtyInput.value = 1;
+	modal.dataset.packageId = packageId || '';
+	modal.dataset.waNumber = waNumber;
+	modal.dataset.containerId = containerElement ? containerElement.id : '';
+	modal.classList.add('active');
+	document.body.style.overflow = 'hidden';
+}
+
+function closePackageModal() {
+	const modal = document.getElementById('packageOrderModal');
+	modal.classList.remove('active');
+	document.body.style.overflow = 'auto';
+}
+
+function confirmPackageOrder() {
+	const modal = document.getElementById('packageOrderModal');
+	const packageId = modal.dataset.packageId;
+	const containerId = modal.dataset.containerId;
+	const waNumber = modal.dataset.waNumber || '6281234567890';
+	const qty = parseInt(document.getElementById('pkgQtyInput').value, 10) || 1;
+
+	// determine package name & price (prefer DOM live price)
+	let packageName = document.getElementById('pkgModalTitle').textContent;
+	let priceText = document.getElementById('pkgModalPrice').textContent;
+
+	if (containerId) {
+		const container = document.getElementById(containerId);
+		const priceDomEl = container ? container.querySelector('.paket-total-price-amount') : null;
+		if (priceDomEl) priceText = priceDomEl.textContent.trim();
+		const labelEl = container ? container.querySelector('.paket-total-price-label') : null;
+		if (!packageName && labelEl) packageName = labelEl.textContent.replace(':','').trim();
+	} else if (packageId) {
+		const pkg = productsDatabase.find(p => p.id == packageId);
+		if (pkg) {
+			packageName = packageName || pkg.name;
+			priceText = priceText || formatRupiah(pkg.price);
+		}
+	}
+
+	const numeric = parseInt((priceText || '').replace(/[^\d]/g,''), 10) || 0;
+	const total = numeric * qty;
+	const totalText = numeric ? formatRupiah(total) : 'Rp -';
+
+	const message = `Halo, saya ingin memesan:%0AProduk: ${packageName}%0AJumlah: ${qty}%0AHarga per paket: ${priceText}%0ATotal: ${totalText}%0ATerima kasih!`;
+	const waUrl = `https://wa.me/${waNumber}?text=${message}`;
+	window.open(waUrl, '_blank');
+	closePackageModal();
+}
+
+// inisialisasi kontrol modal paket (tutup, +/-, confirm, add to cart)
+document.addEventListener('DOMContentLoaded', function() {
+	// init buy buttons (pastikan dipanggil setelah produk dirender)
+	initPaketBuyButtons();
+
+	const modalClose = document.getElementById('packageModalClose');
+	if (modalClose) modalClose.addEventListener('click', closePackageModal);
+
+	const plus = document.getElementById('pkgQtyPlus');
+	const minus = document.getElementById('pkgQtyMinus');
+	const qtyInput = document.getElementById('pkgQtyInput');
+	const confirmBtn = document.getElementById('pkgConfirmWaBtn');
+	const addCartBtn = document.getElementById('pkgAddCartBtn');
+
+	if (plus) plus.addEventListener('click', () => { qtyInput.value = parseInt(qtyInput.value || 1) + 1; });
+	if (minus) minus.addEventListener('click', () => { if (parseInt(qtyInput.value) > 1) qtyInput.value = parseInt(qtyInput.value) -1; });
+	if (confirmBtn) confirmBtn.addEventListener('click', confirmPackageOrder);
+
+	if (addCartBtn) addCartBtn.addEventListener('click', () => {
+		const modal = document.getElementById('packageOrderModal');
+		const packageName = document.getElementById('pkgModalTitle').textContent;
+		const qty = document.getElementById('pkgQtyInput').value;
+		alert(`${packageName} (${qty} pcs) ditambahkan ke keranjang (simulasi).`);
+		closePackageModal();
+	});
+
+	// close modal when clicking background
+	const pkgModal = document.getElementById('packageOrderModal');
+	if (pkgModal) {
+		pkgModal.addEventListener('click', function(e){
+			if (e.target === this) closePackageModal();
+		});
+	}
+});
     </script>
 </body>
 </html>
