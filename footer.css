@@ -8,6 +8,12 @@
     position: relative;
     overflow: hidden;
 }
+html.dark .footer-section{
+    background: #2a2a40;
+}
+html.dark .footer{
+    background: #212235;
+}
 
 .footer::before {
     content: '';
@@ -174,6 +180,9 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
     background: linear-gradient(135deg, var(--c2), var(--c1));
+}
+html.dark .social-link{
+    background: #1f2153;
 }
 
 .social-links {

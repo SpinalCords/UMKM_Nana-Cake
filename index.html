@@ -52,6 +52,62 @@
             box-shadow: 0 6px 18px rgba(0,0,0,0.12);
         }
         html.dark #theme-switch { background: #1f2937; color: #fff; }
+
+        /* ===== Footer dark-mode overrides ===== */
+        html.dark .footer {
+            background: linear-gradient(180deg, rgba(8,14,24,0.96), rgba(6,12,20,0.92));
+            color: var(--color-text);
+            transition: background 0.28s ease, color 0.28s ease;
+        }
+
+        /* Keep footer container transparent in dark */
+        html.dark .footer .footer-container {
+            background: transparent;
+        }
+
+        /* Headings and labels */
+        html.dark .footer-section h3,
+        html.dark .footer-section h4 {
+            color: var(--color-cta);
+        }
+
+        /* Paragraphs, stats, small labels */
+        html.dark .footer-section p,
+        html.dark .footer-section .stat-label,
+        html.dark .footer-section .stat-number {
+            color: rgba(230,243,251,0.92);
+        }
+
+        /* Contact CTA button */
+        html.dark .contact-cta .contact-btn {
+            background: linear-gradient(135deg, var(--color-cta), var(--color-accent));
+            color: #fff;
+            border: none;
+            box-shadow: 0 6px 18px rgba(14,165,164,0.12);
+            transition: background .25s ease, transform .15s ease, box-shadow .25s ease;
+        }
+        html.dark .contact-cta .contact-btn:hover { transform: translateY(-2px); }
+
+        /* Social icons color */
+        html.dark .social-link svg { color: rgba(230,243,251,0.9); }
+
+        /* Footer bottom text */
+        html.dark .footer-bottom p,
+        html.dark .footer-bottom .footer-quote {
+            color: rgba(230,243,251,0.75);
+        }
+
+        /* Decorative floating items in footer */
+        html.dark .footer-floating-item {
+            opacity: 0.95;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.65));
+            transition: filter .28s ease, opacity .22s ease;
+        }
+
+        /* Ensure smooth transitions for footer children */
+        .footer, .footer * {
+            transition: color .22s ease, background .22s ease, border-color .22s ease, box-shadow .22s ease;
+        }
     </style>
 </head>
 
@@ -99,27 +155,20 @@
                     </a>
                 </div>
                 <div class="nav-item about">
-                    <a href="#menupop">
+                    <a href="#shop">
                         <span class="icon">🥇</span>
                         <h3>Menu Populer</h3>
                         <p>Lihat menu populer kami</p>
                     </a>
                 </div>
                 <div class="nav-item paket">
-                    <a href="#shop">
+                    <a href="#paket">
                         <span class="icon">🎁</span>
                         <h3>Paket Regular</h3>
                         <p>Paket regular dengan berbagai pilihan</p>
                     </a>
                 </div>
                 <div class="nav-item album">
-                    <a href="#paket">
-                        <span class="icon">🎁</span>
-                        <h3>Paket</h3>
-                        <p>Satu paket, sejuta rasa manis</p>
-                    </a>
-                </div>
-                <div class="nav-item meet">
                     <a href="#meetus">
                         <span class="icon">📞</span>
                         <h3>Meet Us At</h3>
@@ -164,7 +213,7 @@
                 <h1>Selamat Datang Di Website Nana Cake</h1>
                 <p>Nana Cake and Cookies menghadirkan aneka kue rumahan berkualitas seperti kue kering, bolu, abon, dan bolu gambung sebagai best seller kami. Dibuat dari bahan pilihan, higienis, dan selalu fresh untuk menemani momen spesial Anda.
 </p>
-                <button class="more-btn">MORE</button>
+                <button class="more-btn"><a href="#shop" style="text-decoration:none; color:white;">MORE</a></button>
             </div>
         </div>
 
@@ -189,48 +238,6 @@
             </div>
         </div>
     </div>
-    <!-- MENU POPULER -->
-    <div class="cart" id="cart">
-        <h2>Keranjang Belanja</h2>
-        <div id="cart-items"></div>
-        <div class="total">Total: Rp<span id="total">0</span></div>
-    </div>
-
-    <header class="top_three">3 Most Popular</header>
-
-    <div class="container">
-        <div class="card" data-product-id="1">
-            <div class="corner-deco"></div>
-            <div class="corner-deco top-right"></div>
-            <div class="corner-deco bottom-right"></div>
-            <img src="https://images.unsplash.com/photo-1587241321921-91a834d6d191?w=500" alt="Cupcake">
-            <h3>Yummy Cupcake</h3>
-            <p class="price">Rp15.000</p>
-        </div>
-
-        <div class="card" data-product-id="2">
-            <div class="corner-deco"></div>
-            <div class="corner-deco top-right"></div>
-            <div class="corner-deco bottom-right"></div>
-            <img src="https://images.unsplash.com/photo-1617196034796-73f7b9e0aabb?w=500" alt="Donat">
-            <h3>Donat Lumer</h3>
-            <p class="price">Rp10.000</p>
-        </div>
-
-        <div class="card" data-product-id="3">
-            <div class="corner-deco"></div>
-            <div class="corner-deco top-right"></div>
-            <div class="corner-deco bottom-right"></div>
-            <img src="https://images.unsplash.com/photo-1590080875831-2cf4eeab3bda?w=500" alt="Macaron">
-            <h3>Sweet Macaron</h3>
-            <p class="price">Rp18.000</p>
-        </div>
-    </div>
-
-
-
-
-    <br><br><br><br><br>
 
 
 
@@ -241,14 +248,13 @@
             <!-- Product 1 -->
             <div class="product-card" onclick="goToShop('product1')">
                 <div class="product-image">
-                    <img src="gambar/gambar ilang.jpg" alt="Sepatu Sneakers Premium">
+                    <img src="gambar/BOLUFINAL/roti/bolugambungsrikaya.jpg" alt="Sepatu Sneakers Premium">
                 </div>
                 <div class="product-info">
-                    <h2 class="product-title">Sepatu Sneakers Premium</h2>
-                    <p class="product-description">Sepatu sneakers dengan desain modern dan nyaman untuk aktivitas
-                        sehari-hari.</p>
+                    <h2 class="product-title">Gambung Kuah Srikaya</h2>
+                    <p class="product-description">Bolu gambung lembut dengan kuah srikaya manis yang bikin nagih.</p>
                     <div class="product-footer">
-                        <div class="product-price">Rp </div>
+                        <div class="product-price">Rp20.000</div>
                         <a href="tes.html">
                             <button class="btn-buy">Lihat Detail</button>
                         </a>
@@ -259,14 +265,13 @@
             <!-- Product 2 -->
             <div class="product-card" onclick="goToShop('product2')">
                 <div class="product-image">
-                    <img src="gambar/gambar ilang.jpg" alt="Headphone Wireless">
+                    <img src="gambar/BOLUFINAL/cookies/sagukeju (1).jpg" alt="Headphone Wireless">
                 </div>
                 <div class="product-info">
-                    <h2 class="product-title">Headphone Wireless</h2>
-                    <p class="product-description">Headphone berkualitas tinggi dengan noise cancelling dan baterai
-                        tahan lama.</p>
+                    <h2 class="product-title">Sagu Keju Pandan/Ori</h2>
+                    <p class="product-description">Kue sagu keju varian original dan pandan dengan rasa gurih, manis, dan tekstur lumer yang cocok untuk camilan sehari-hari.</p>
                     <div class="product-footer">
-                        <div class="product-price">Rp </div>
+                        <div class="product-price">Rp35.000</div>
                         <a href="tes.html">
                             <button class="btn-buy">Lihat Detail</button>
                         </a>
@@ -277,15 +282,13 @@
             <!-- Product 3 -->
             <div class="product-card" onclick="goToShop('product3')">
                 <div class="product-image">
-                    <img src="gambar/gambar ilang.jpg" alt="Tas Ransel Canvas">
+                    <img src="gambar/BOLUFINAL/bolu/bolumarmer (2).jpg" alt="Tas Ransel Canvas">
                 </div>
                 <div class="product-info">
-                    <h2 class="product-title">Tas Ransel Canvas</h2>
-                    <p class="product-description">Tas ransel stylish dengan banyak kompartemen untuk kebutuhan
-                        harian
-                        Anda.</p>
+                    <h2 class="product-title">Marmer/Bolu Zebra</h2>
+                    <p class="product-description">Bolu zebra dengan motif marmer yang cantik, tekstur lembut, dan rasa manis legit yang pas untuk dinikmati sehari-hari.</p>
                     <div class="product-footer">
-                        <div class="product-price">Rp </div>
+                        <div class="product-price">Rp25.000</div>
                         <a href="tes.html">
                             <button class="btn-buy">Lihat Detail</button>
                         </a>
@@ -296,73 +299,72 @@
     </div>
     <!-- Paket section -->
     <section class="paket-section-container" id="paket">
+        <!-- corrected: ensure proper opening tag and wrapper -->
         <section class="paket-spesial">
-
             <h2>Paket Ramadhan</h2>
-
             <div class="paket-tab-nav paket-main-nav">
-                <button class="paket-tab-btn active" data-tab="paket1">Paket Super Hemat</button>
-                <button class="paket-tab-btn" data-tab="paket2">Paket Ekonomis</button>
-                <button class="paket-tab-btn" data-tab="paket3">Paket Reguler</button>
-                <button class="paket-tab-btn" data-tab="paket4">Paket Puas</button>
-            </div>
-
-            <div class="paket-tab-content-wrapper">
-
-                <!-- Paket hemat -->
-                <div id="paket1" class="paket-tab-content active">
-
-                    <div class="paket-tab-nav paket-sub-nav">
-                        <button class="paket-tab-btn active" data-tab="hemat1">Hemat 1</button>
-                        <button class="paket-tab-btn" data-tab="hemat2">Hemat 2</button>
-                        <button class="paket-tab-btn" data-tab="hemat3">Hemat 3</button>
-                    </div>
-
-                    <div class="paket-tab-content-wrapper">
-
-                        <div id="hemat1" class="paket-tab-content active">
-                            <div class="paket-item-list">
-                                <!-- Item -->
-                                <div class="paket-menu-item">
-                                    <img src="gambar/nastar.jpg" class="paket-item-img">
-                                    <div class="paket-item-details">
-                                        <h4>Nastar</h4>
-                                    </div>
-                                </div>
-                                <!-- Item -->
-                                <div class="paket-menu-item">
-                                    <img src="gambar/lidah kucing.jpg" class="paket-item-img">
-                                    <div class="paket-item-details">
-                                        <h4>Lidah Kucing</h4>
-                                    </div>
-                                </div>
-                                <!-- Item -->
-                                <div class="paket-menu-item">
-                                    <img src="gambar/Putri Salju.jpg" class="paket-item-img">
-                                    <div class="paket-item-details">
-                                        <h4>Putri Salju</h4>
-                                    </div>
-                                </div>
-                                <!-- Item -->
-                                <div class="paket-menu-item">
-                                    <img src="gambar/nastar keju.jpg" class="paket-item-img">
-                                    <div class="paket-item-details">
-                                        <h4>Kastengel</h4>
-                                    </div>
-                                </div>
-                                <!-- Item -->
-                                <div class="paket-menu-item">
-                                    <img src="gambar/palm suger cheese.jpg" class="paket-item-img">
-                                    <div class="paket-item-details">
-                                        <h4>Palm Sugar Cheese</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="paket-total-price-container">
-                                <span class="paket-total-price-label">Total Hemat 1:</span>
-                                <span class="paket-total-price-amount">Rp 135.000</span>
-                            </div>
-                        </div>
+                 <button class="paket-tab-btn active" data-tab="paket1">Paket Super Hemat</button>
+                 <button class="paket-tab-btn" data-tab="paket2">Paket Ekonomis</button>
+                 <button class="paket-tab-btn" data-tab="paket3">Paket Reguler</button>
+                 <button class="paket-tab-btn" data-tab="paket4">Paket Puas</button>
+             </div>
+ 
+             <div class="paket-tab-content-wrapper">
+ 
+                 <!-- Paket hemat -->
+                 <div id="paket1" class="paket-tab-content active">
+ 
+                     <div class="paket-tab-nav paket-sub-nav">
+                         <button class="paket-tab-btn active" data-tab="hemat1">Hemat 1</button>
+                         <button class="paket-tab-btn" data-tab="hemat2">Hemat 2</button>
+                         <button class="paket-tab-btn" data-tab="hemat3">Hemat 3</button>
+                     </div>
+ 
+                     <div class="paket-tab-content-wrapper">
+ 
+                         <div id="hemat1" class="paket-tab-content active">
+                             <div class="paket-item-list">
+                                 <!-- Item -->
+                                 <div class="paket-menu-item">
+                                     <img src="gambar/nastar.jpg" class="paket-item-img">
+                                     <div class="paket-item-details">
+                                         <h4>Nastar</h4>
+                                     </div>
+                                 </div>
+                                 <!-- Item -->
+                                 <div class="paket-menu-item">
+                                     <img src="gambar/lidah kucing.jpg" class="paket-item-img">
+                                     <div class="paket-item-details">
+                                         <h4>Lidah Kucing</h4>
+                                     </div>
+                                 </div>
+                                 <!-- Item -->
+                                 <div class="paket-menu-item">
+                                     <img src="gambar/Putri Salju.jpg" class="paket-item-img">
+                                     <div class="paket-item-details">
+                                         <h4>Putri Salju</h4>
+                                     </div>
+                                 </div>
+                                 <!-- Item -->
+                                 <div class="paket-menu-item">
+                                     <img src="gambar/nastar keju.jpg" class="paket-item-img">
+                                     <div class="paket-item-details">
+                                         <h4>Kastengel</h4>
+                                     </div>
+                                 </div>
+                                 <!-- Item -->
+                                 <div class="paket-menu-item">
+                                     <img src="gambar/palm suger cheese.jpg" class="paket-item-img">
+                                     <div class="paket-item-details">
+                                         <h4>Palm Sugar Cheese</h4>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="paket-total-price-container">
+                                 <span class="paket-total-price-label">Total Hemat 1:</span>
+                                 <span class="paket-total-price-amount">Rp 135.000</span>
+                             </div>
+                         </div>
 
                         <div id="hemat2" class="paket-tab-content">
                             <div class="paket-item-list">
@@ -888,9 +890,9 @@
 <script>
     // Product data for popular menu
     const popularProducts = [
-        { id: 1, name: 'Yummy Cupcake', price: 15000, image: 'https://images.unsplash.com/photo-1587241321921-91a834d6d191?w=500', description: 'Cupcake lembut dengan topping krim yang creamy dan lezat.' },
-        { id: 2, name: 'Donat Lumer', price: 10000, image: 'https://images.unsplash.com/photo-1617196034796-73f7b9e0aabb?w=500', description: 'Donat renyah dengan isian coklat yang lumer di mulut.' },
-        { id: 3, name: 'Sweet Macaron', price: 18000, image: 'https://images.unsplash.com/photo-1590080875831-2cf4eeab3bda?w=500', description: 'Macaron Prancis dengan berbagai rasa dan tekstur yang renyah.' }
+        { id: 1, name: 'Yummy Cupcake', price: 20000, image: 'https://images.unsplash.com/photo-1587241321921-91a834d6d191?w=500', description: 'Cupcake lembut dengan topping krim yang creamy dan lezat.' },
+        { id: 2, name: 'Donat Lumer', price: 25000, image: 'https://images.unsplash.com/photo-1617196034796-73f7b9e0aabb?w=500', description: 'Donat renyah dengan isian coklat yang lumer di mulut.' },
+        { id: 3, name: 'Sweet Macaron', price: 35000, image: 'https://images.unsplash.com/photo-1590080875831-2cf4eeab3bda?w=500', description: 'Macaron Prancis dengan berbagai rasa dan tekstur yang renyah.' }
     ];
 
     // Pricing for sizes (S: base, M: +5000, L: +10000)

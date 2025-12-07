@@ -1,9 +1,9 @@
 // Image carousel functionality with swipe support
 const images = [
-    'gambar/cake.png',
-    'gambar/Header (5).png',
-    'gambar/nastar.jpg',
-    'gambar/Putri Salju.jpg'
+    'gambar/BOLUFINAL/bolu/bolumarmer (2).jpg',
+    'gambar/BOLUFINAL/cookies/cookiessusu.jpg',
+    'gambar/BOLUFINAL/roti/bolugambungsrikaya.jpg',
+    'gambar/BOLUFINAL/lainnya/rabukayam.jpg'
 ];
 
 let currentIndex = 0;
