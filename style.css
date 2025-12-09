@@ -796,6 +796,14 @@ html.dark .intro-header h1 {
   animation: slideInLeft 1.2s ease-out;
 }
 
+.about-container h4{
+    text-align: left;
+    margin-bottom: 3rem;
+    color: #ff6b6b;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 
 .text-container h1 {
   font-size: 2em;
@@ -868,7 +876,11 @@ html.dark .intro-header h1 {
     margin-bottom: 40px;
     z-index: 12223;
 }
+.cta-button a{
+    text-decoration: none;
+        color: white;
 
+}
 .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
@@ -1431,7 +1443,17 @@ h1 {
     margin-bottom: 50px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
+.container-shop h1 {
+    text-align: center;
+    color: #ff6b6b;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
 
+html.dark .container-shop h1{
+    color: #0ea5a4;
+}
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
