@@ -328,11 +328,13 @@ html.dark .intro-header h1 {
     display: grid;
     grid-template-areas:
         "home about paket"
-        "home sajian album";
+        "shop sajian album";
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 15px;
 }
-
+.shop{
+    grid-area: shop;
+}
 /* Item nav */
 .nav-item {
     background: var(--bg2);
@@ -876,14 +878,9 @@ html.dark .intro-header h1 {
     margin-bottom: 40px;
     z-index: 12223;
 }
-.cta-button a{
-    text-decoration: none;
-        color: white;
-
-}
 .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+    box-shadow:rgb(248, 227, 227)x 20px rgba(255, 105, 180, 0.4);
     cursor: pointer;
 }
 
