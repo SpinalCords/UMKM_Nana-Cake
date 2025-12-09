@@ -2075,3 +2075,42 @@ html.dark .contact-form-left .social-links-contact p {
 .contact-us-section * {
     transition: color 0.22s ease, background 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, transform 0.18s ease;
 }
+
+/* Perbaikan responsive untuk section "Tentang Kami" agar carousel tidak terpotong di layar HP */
+@media (max-width: 768px) {
+    /* beri lebih banyak ruang vertikal pada about-container saat layar kecil */
+    .about-container {
+        height: auto;          /* biarkan konten menentukan tinggi */
+        min-height: 800px;     /* lebih tinggi dari desktop agar carousel tidak terpotong */
+        padding: 30px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* pastikan carousel menyesuaikan dan tidak memotong gambar */
+    .carousel {
+        width: 100%;
+        max-width: 100%;
+    }
+    .carousel img#carousel-image {
+        width: 100%;
+        height: auto;
+        max-height: 420px;    /* batas tinggi supaya tidak meluber keluar layar */
+        object-fit: cover;
+        display: block;
+        border-radius: 12px;
+    }
+}
+
+/* Pada layar sangat kecil, tambah sedikit lagi tinggi agar aman */
+@media (max-width: 480px) {
+    .about-container {
+        min-height: 920px;
+        padding: 20px 12px;
+    }
+
+    .carousel img#carousel-image {
+        max-height: 520px;
+    }
+}
