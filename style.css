@@ -1423,6 +1423,84 @@ html.dark .contact-form-right{
     .contact-form-right {
         order: -1;
     }
+
+    /* Pastikan item paket bisa mengecil dan teks membungkus */
+	.paket-item-list {
+		box-sizing: border-box;
+		width: 100%;
+	}
+
+	.paket-menu-item {
+		/* biarkan kolom internal menyusut agar tidak mendorong melebihi parent */
+		min-width: 0;
+		box-sizing: border-box;
+		grid-template-columns: auto 1fr;
+		gap: 12px;
+	}
+
+	.paket-item-img {
+		flex: 0 0 auto;
+		width: 60px;
+		height: 60px;
+		max-width: 60px;
+		max-height: 60px;
+		object-fit: cover;
+	}
+
+	.paket-item-details {
+		/* IZinkan teks menurun ke baris berikutnya – penting agar tidak membuat overflow */
+		min-width: 0;
+		word-break: break-word;
+		overflow-wrap: anywhere;
+		hyphens: auto;
+	}
+
+	.paket-item-details h4,
+	.paket-item-details p,
+	.paket-item-ingredients {
+		margin: 0;
+		/* pastikan teks panjang wrap dan tidak memicu overflow horizontal */
+		white-space: normal;
+	}
+
+	/* Jika ada label atau list panjang, biarkan menumpuk kebawah */
+	.paket-item-ingredients ul {
+		flex-wrap: wrap;
+	}
+
+	/* Contact us: pastikan paragraf/links membungkus pada screen kecil */
+	.contact-form-left .social-links-contact p,
+	.contact-form-left .social-links-contact a,
+	.contact-form-left .social-links-contact .stat-label,
+	.contact-form-left .social-links-contact .stat-number {
+		word-break: break-word;
+		overflow-wrap: anywhere;
+		white-space: normal;
+	}
+}
+
+/* Tambahan untuk layar sangat kecil agar lebih aman */
+@media (max-width: 480px) {
+	.paket-menu-item {
+		grid-template-columns: auto 1fr;
+		padding: 10px;
+        margin-right: 10rem;
+	}
+
+	.paket-item-img {
+		width: 56px;
+		height: 56px;
+	}
+
+	.paket-item-details h4 {
+		font-size: 1rem;
+	}
+
+	/* Contact us: tekst panjang lebih agresif wrap */
+	.contact-form-left .social-links-contact p {
+		font-size: 0.98rem;
+		line-height: 1.3;
+	}
 }
 
 /* Halaman untuk shop */
