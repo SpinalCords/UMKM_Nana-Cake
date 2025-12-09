@@ -1156,7 +1156,7 @@
             background: linear-gradient(135deg, rgba(110,193,228,0.12) 0%, rgba(240,250,255,0.6) 100%) !important;
         }
         .hero-text h1 { color: var(--color-primary) !important; }
-        .hero-text p { color: rgba(39,69,86,0.8) !important; }
+        .hero-text p { color: rgba(14, 16, 78, 0.8) !important; }
 
         .btn-primary {
             background: #fff !important;
@@ -1198,9 +1198,6 @@
         .modal-close:hover { background: var(--color-cta) !important; color: #fff !important; }
 
         /* Small global link/txt tweaks */
-        a { color: var(--color-primary) !important; }
-        a:hover { color: var(--color-accent) !important; }
-
         /* Highlight class for search results — responsive to theme */
         .search-highlight { color: var(--color-cta); font-weight: 700; }
 
@@ -1288,7 +1285,9 @@
         .double-nastar-checkbox:checked + label:after {
             opacity: 1;
         }
-
+        html.dark .hero-text p {
+            color: rgba(230,243,251,0.8) !important;
+        }
         /* ========== THEME SWITCH / DARK MODE OVERRIDES ========== */
         /* Ensure the site uses CSS variables; provide sensible defaults already in :root above.
            When html gets class "dark" we override the variables to dark-theme values. */
@@ -1489,7 +1488,7 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-section dropdown">
-                <h3 class="dropdown-toggle">Vertical menu ▾</h3>
+                <h3 class="dropdown-toggle">Vertical menu</h3>
 
                 <ul class="dropdown-menu">
                     <li><a href="#cake">Kue</a></li>
